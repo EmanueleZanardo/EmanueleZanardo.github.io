@@ -5727,7 +5727,7 @@
         // (la striscia torna 'disponibile' solo se ancora 'prenotato').
         async function annullaOrdineCloud(idOrdine) {
             if (!cloudCfgValida) return false;
-            const ord = await sb('orto_ordini?select=*&id=eq.' + encodeURIComponent(idOrdine));
+            const ord = await sb('orto_ordini?select=id,righe,stato&id=eq.' + encodeURIComponent(idOrdine));
             if (ord && ord.length) {
                 const righe = ord[0].righe || [];
                 for (const r of righe) {

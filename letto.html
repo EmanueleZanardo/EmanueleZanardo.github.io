@@ -56,9 +56,10 @@
     <main class="max-w-3xl mx-auto px-4 py-6 space-y-5">
         <div id="admin-login-box" class="hidden bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 p-5 space-y-3">
             <p class="font-bold text-lg">Accesso admin</p>
-            <p class="text-slate-500 dark:text-slate-400 text-sm">Inserisci il PIN (lo stesso del pannello admin del sito) per modificare il contenuto del letto da qui, direttamente in campo.</p>
+            <p class="text-slate-500 dark:text-slate-400 text-sm">Entra con email e password del pannello admin del sito per modificare il contenuto del letto da qui, direttamente in campo.</p>
+            <input type="email" id="admin-email" placeholder="Email" aria-label="Email" autocomplete="username" class="w-full text-xl border dark:border-slate-600 dark:bg-slate-700 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500">
             <div class="flex gap-2">
-                <input type="password" id="admin-pin" placeholder="PIN" aria-label="PIN" onkeydown="if(event.key==='Enter')effettuaLoginLetto()" class="flex-1 min-w-0 text-xl border dark:border-slate-600 dark:bg-slate-700 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500">
+                <input type="password" id="admin-pin" placeholder="Password" aria-label="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')effettuaLoginLetto()" class="flex-1 min-w-0 text-xl border dark:border-slate-600 dark:bg-slate-700 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500">
                 <button onclick="effettuaLoginLetto()" class="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white text-xl px-6 py-3 rounded-2xl font-bold shadow-md">Entra</button>
             </div>
         </div>
@@ -124,7 +125,9 @@
         }
         const codiceLetto = codiceDaUrl();
         let righeLetto = [];
-        let isAdmin = false; try { isAdmin = sessionStorage.getItem('albelort_admin') === '1'; } catch (e) { /* archivio bloccato */ }
+        // Admin = sessione Supabase (stesso login del pannello admin del sito; token condiviso in sessionStorage).
+        let adminToken = null; try { adminToken = sessionStorage.getItem('orto_admin_token'); } catch (e) { /* archivio bloccato */ }
+        let isAdmin = !!adminToken;
 
         function escapeHtml(s) {
             return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -134,10 +137,17 @@
                 const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, Object.assign({}, opts, {
                     headers: Object.assign({
                         'apikey': SUPABASE_ANON_KEY,
-                        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+                        'Authorization': 'Bearer ' + (adminToken || SUPABASE_ANON_KEY),
                         'Content-Type': 'application/json'
                     }, (opts && opts.headers) || {})
                 }));
+                if (res.status === 401 && adminToken) {
+                    // Sessione scaduta: si torna visitatori, serve rientrare.
+                    adminToken = null; isAdmin = false;
+                    try { sessionStorage.removeItem('orto_admin_token'); } catch (e) { /* archivio bloccato */ }
+                    showToast('Sessione admin scaduta: rientra', false);
+                    return null;
+                }
                 if (!res.ok) return null;
                 const txt = await res.text();
                 return txt ? JSON.parse(txt) : null;
@@ -160,29 +170,42 @@
             return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
         }
 
-        // ===== Admin (stesso PIN del pannello principale; controllo client-side
-        // come nel resto del sito statico) =====
+        // ===== Admin: login Supabase (email + password del pannello admin).
+        // Le scritture sul DB sono permesse solo con il token admin (RLS). =====
         function toggleAdmin() {
             if (isAdmin) { document.getElementById('admin-bar').scrollIntoView({ behavior: 'smooth' }); return; }
             document.getElementById('admin-login-box').classList.toggle('hidden');
-            document.getElementById('admin-pin').focus();
+            document.getElementById('admin-email').focus();
         }
-        function effettuaLoginLetto() {
-            const v = document.getElementById('admin-pin').value;
-            if (v === 'admin123') {
-                isAdmin = true;
-                try { sessionStorage.setItem('albelort_admin', '1'); } catch (e) { /* archivio bloccato */ }
+        async function effettuaLoginLetto() {
+            const email = (document.getElementById('admin-email').value || '').trim();
+            const password = document.getElementById('admin-pin').value;
+            if (!email || !password) { showToast('Inserisci email e password', false); return; }
+            try {
+                const res = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
+                    method: 'POST',
+                    headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, password: password })
+                });
+                const data = await res.json().catch(function() { return {}; });
+                if (!res.ok || !data.access_token) {
+                    document.getElementById('admin-pin').value = '';
+                    showToast('Login fallito: controlla email e password', false);
+                    return;
+                }
+                adminToken = data.access_token; isAdmin = true;
+                try { sessionStorage.setItem('orto_admin_token', adminToken); } catch (e) { /* archivio bloccato */ }
+                document.getElementById('admin-pin').value = '';
                 document.getElementById('admin-login-box').classList.add('hidden');
                 applicaModoAdmin();
                 showToast('Accesso admin sbloccato', true);
-            } else {
-                document.getElementById('admin-pin').value = '';
-                showToast('PIN errato', false);
+            } catch (e) {
+                showToast('Login fallito: rete non disponibile', false);
             }
         }
         function logoutAdmin() {
-            isAdmin = false;
-            try { sessionStorage.removeItem('albelort_admin'); } catch (e) { /* archivio bloccato */ }
+            isAdmin = false; adminToken = null;
+            try { sessionStorage.removeItem('orto_admin_token'); } catch (e) { /* archivio bloccato */ }
             applicaModoAdmin();
         }
         function applicaModoAdmin() {
