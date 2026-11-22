@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="QR dei letti — Al Bel Ort: genera, scarica e stampa i QR da mettere sui paletti dei 14 letti.">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#56653a">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icona-al-bel-ort-32.png">
+    <link rel="apple-touch-icon" href="/icona-al-bel-ort-180.png">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <title>QR dei letti · Al Bel Ort</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { emerald: { 50:'#f3f4ea',100:'#e4e7d0',200:'#cbd1a8',300:'#aab47b',400:'#8a9758',500:'#6f7d44',600:'#56653a',700:'#47542f',800:'#3a4428',850:'#303823',900:'#2a311e',950:'#1a1f12' }, slate: { 50:'#faf3eb',100:'#f3e8dc',200:'#e6d8c7',300:'#d2bfa8',400:'#a8937a',500:'#7a6752',600:'#625242',700:'#4b3f33',800:'#362e26',900:'#262019',950:'#17130f' }, amber: { 50:'#fdf3ea',100:'#fbe3cf',200:'#f6c69f',300:'#f0a46e',400:'#e88c4c',500:'#e07b37',600:'#c4632a',700:'#a04e23',800:'#7e3e20',900:'#66341d',950:'#3a1a0d' }, rose: { 50:'#fbf0ec',100:'#f6dcd3',200:'#edb9a8',300:'#e09378',400:'#d07052',500:'#bc5838',600:'#a3472c',700:'#863a25',800:'#6e3122',900:'#5c2b1f',950:'#33140d' }, red: { 50:'#fbf0ec',100:'#f6dcd3',200:'#edb9a8',300:'#e09378',400:'#d07052',500:'#bc5838',600:'#a3472c',700:'#863a25',800:'#6e3122',900:'#5c2b1f',950:'#33140d' }, orto: { crema:'#f9efe6', terra:'#7e5a38' } } } } };
+        var temaSalvato = null; try { temaSalvato = localStorage.getItem('theme'); } catch (e) { /* archivio bloccato */ }
+            if (temaSalvato === 'dark' || (!temaSalvato && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <style>
+        .plate { break-inside: avoid; }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: #fff !important; }
+            #griglia { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10mm !important; }
+            .plate { border: 2px solid #3a4428 !important; box-shadow: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-emerald-50 dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-100 antialiased">
+    <header class="bg-emerald-700 dark:bg-emerald-900 text-white shadow-lg no-print">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
+            <a href="/" class="text-3xl" aria-label="Al Bel Ort — home">🥬</a>
+            <div class="flex-1 min-w-0">
+                <p class="font-black text-xl leading-tight">Al Bel Ort</p>
+                <p class="text-emerald-100 text-sm leading-tight">QR dei letti · piastre per i paletti</p>
+            </div>
+            <a href="/" class="bg-white/15 hover:bg-white/25 transition font-bold px-3 py-2 rounded-xl text-sm">🏠 Sito</a>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-6 space-y-5">
+        <div id="login-box" class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 p-5 space-y-3 no-print">
+            <p class="font-bold text-lg">🔑 Accesso admin</p>
+            <p class="text-slate-500 dark:text-slate-400 text-sm">Inserisci il PIN (lo stesso del pannello admin) per generare i QR dei 14 letti.</p>
+            <div class="flex gap-2">
+                <input type="password" id="admin-pin" placeholder="PIN" aria-label="PIN" onkeydown="if(event.key==='Enter')effettuaLoginQR()" class="flex-1 min-w-0 text-xl border dark:border-slate-600 dark:bg-slate-700 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500">
+                <button onclick="effettuaLoginQR()" class="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white text-xl px-6 py-3 rounded-2xl font-bold shadow-md">Entra</button>
+            </div>
+        </div>
+
+        <div id="contenuto" class="hidden space-y-5">
+            <section class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 p-5 sm:p-6 space-y-3 no-print">
+                <h1 class="text-2xl font-black text-emerald-700 dark:text-emerald-400">🔳 QR dei 14 letti</h1>
+                <p class="text-slate-600 dark:text-slate-300">Ogni QR apre la scheda del suo letto: il cliente vede cosa cresce e può ordinare su WhatsApp; con il PIN admin, dalla stessa pagina si modifica il contenuto del letto (dopo aver piantato, sradicato o raccolto).</p>
+                <div class="bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 rounded-2xl p-4 space-y-2">
+                    <label for="base-url" class="block font-bold">Dominio usato nei QR</label>
+                    <div class="flex gap-2 flex-wrap">
+                        <input id="base-url" type="text" class="flex-1 min-w-[220px] border rounded-xl px-3 py-2 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500 font-mono text-sm">
+                        <button onclick="generaQR()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl">Rigenera QR</button>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Di base è il dominio su cui sei adesso. <strong>Se in futuro compri un dominio nuovo</strong>: collegalo allo stesso sito e lascia attivo anche il vecchio — i QR già stampati continueranno a funzionare, perché ogni dominio collegato mostra le stesse pagine. Scrivi qui il dominio nuovo solo quando stampi piastre nuove.</p>
+                </div>
+                <div class="flex gap-2 flex-wrap">
+                    <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl">🖨 Stampa tutte le piastre</button>
+                    <span class="text-sm text-slate-500 dark:text-slate-400 self-center">Per la stampa su Dibond: scarica il PNG del singolo letto (512 px) o dai al tipografo l'indirizzo corto scritto sotto ogni QR.</span>
+                </div>
+            </section>
+
+            <div id="griglia" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
+    </main>
+
+    <div id="toast" class="hidden fixed left-1/2 -translate-x-1/2 bottom-6 z-50 px-5 py-3 rounded-2xl font-bold shadow-2xl text-white"></div>
+
+    <script>
+        const LETTI = ['L1','L2','L3','L4','L5','L6','L7','R1','R2','R3','R4','R5','R6','R7'];
+        let isAdmin = false; try { isAdmin = sessionStorage.getItem('albelort_admin') === '1'; } catch (e) { /* archivio bloccato */ }
+
+        function showToast(msg, ok) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = 'fixed left-1/2 -translate-x-1/2 bottom-6 z-50 px-5 py-3 rounded-2xl font-bold shadow-2xl text-white ' + (ok ? 'bg-emerald-600' : 'bg-rose-600');
+            clearTimeout(t._h);
+            t._h = setTimeout(() => t.classList.add('hidden'), 3200);
+        }
+        function effettuaLoginQR() {
+            const v = document.getElementById('admin-pin').value;
+            if (v === 'admin123') {
+                isAdmin = true;
+                try { sessionStorage.setItem('albelort_admin', '1'); } catch (e) { /* archivio bloccato */ }
+                mostraContenuto();
+                showToast('Accesso admin sbloccato', true);
+            } else {
+                document.getElementById('admin-pin').value = '';
+                showToast('PIN errato', false);
+            }
+        }
+        function mostraContenuto() {
+            document.getElementById('login-box').classList.add('hidden');
+            document.getElementById('contenuto').classList.remove('hidden');
+            document.getElementById('base-url').value = location.origin;
+            generaQR();
+        }
+        function basePulita() {
+            let b = (document.getElementById('base-url').value || location.origin).trim().replace(/\/+$/, '');
+            if (!/^https?:\/\//i.test(b)) b = 'https://' + b;
+            return b;
+        }
+        function generaQR() {
+            const base = basePulita();
+            const host = base.replace(/^https?:\/\//i, '');
+            const griglia = document.getElementById('griglia');
+            griglia.innerHTML = '';
+            LETTI.forEach(codice => {
+                const url = base + '/l/' + codice;
+                const card = document.createElement('div');
+                card.className = 'plate bg-white text-slate-800 rounded-3xl shadow-xl border-4 border-emerald-700 p-5 text-center space-y-3';
+                card.innerHTML =
+                    '<p class="text-3xl font-black tracking-wide text-emerald-800">LETTO ' + codice + '</p>' +
+                    '<p class="text-sm font-bold text-slate-500 -mt-2">' + (codice[0] === 'L' ? 'Lato sinistro' : 'Lato destro') + '</p>' +
+                    '<div class="qr-slot flex justify-center" role="img" aria-label="QR letto ' + codice + '"></div>' +
+                    '<p class="font-bold text-emerald-700">Inquadra per vedere cosa cresce in questo letto</p>' +
+                    '<p class="font-mono text-xs text-slate-500 break-all">' + host + '/l/' + codice + '</p>' +
+                    '<p class="font-black tracking-widest text-slate-700">🥬 AL BEL ORT</p>' +
+                    '<div class="no-print flex gap-2 justify-center pt-1">' +
+                    '<button class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl text-sm" onclick="scaricaPNG(this, \'' + codice + '\')">⬇ PNG</button>' +
+                    '<a class="bg-slate-200 hover:bg-slate-300 font-bold px-3 py-2 rounded-xl text-sm text-slate-700" target="_blank" rel="noopener" href="' + base + '/letti/' + codice + '">Apri scheda</a>' +
+                    '</div>';
+                griglia.appendChild(card);
+                const slot = card.querySelector('.qr-slot');
+                if (typeof QRCode !== 'undefined') {
+                    new QRCode(slot, { text: url, width: 512, height: 512, correctLevel: QRCode.CorrectLevel.M });
+                    // Mostra il QR a misura piastra, tenendo il PNG a piena risoluzione per il download
+                    const img = slot.querySelector('img');
+                    const canvas = slot.querySelector('canvas');
+                    if (img) { img.style.width = '180px'; img.style.height = '180px'; }
+                    if (canvas) { canvas.style.width = '180px'; canvas.style.height = '180px'; }
+                } else {
+                    slot.innerHTML = '<p class="font-bold text-rose-600 text-sm">Libreria QR non caricata: ricarica la pagina. L\'indirizzo sotto il QR basta al tipografo per generarlo.</p>';
+                }
+            });
+        }
+        function scaricaPNG(btn, codice) {
+            const card = btn.closest('.plate');
+            const canvas = card.querySelector('canvas');
+            const img = card.querySelector('img');
+            let href = null;
+            if (canvas) href = canvas.toDataURL('image/png');
+            else if (img && img.src) href = img.src;
+            if (!href) { showToast('QR non ancora pronto', false); return; }
+            const a = document.createElement('a');
+            a.href = href;
+            a.download = 'qr-letto-' + codice + '.png';
+            a.click();
+        }
+        document.addEventListener('DOMContentLoaded', () => { if (isAdmin) mostraContenuto(); });
+    </script>
+</body>
+</html>

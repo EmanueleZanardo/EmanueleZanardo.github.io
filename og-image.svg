@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Al Bel Ort — ordina frutta e verdura a KM 0 via WhatsApp">
+  <defs>
+    <radialGradient id="softGlow" cx="0.85" cy="0.15" r="0.9">
+      <stop offset="0" stop-color="#d1fae5" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#f7f5ef" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="1200" height="630" fill="#f7f5ef"/>
+  <rect width="1200" height="630" fill="url(#softGlow)"/>
+  <rect width="1200" height="10" fill="#059669"/>
+  <circle cx="1090" cy="90" r="190" fill="#d1fae5" opacity="0.45"/>
+  <circle cx="30" cy="650" r="150" fill="#a7f3d0" opacity="0.35"/>
+  <circle cx="640" cy="90" r="10" fill="#a7f3d0" opacity="0.8"/>
+  <circle cx="680" cy="130" r="6" fill="#6ee7b7" opacity="0.8"/>
+  <circle cx="600" cy="140" r="5" fill="#a7f3d0" opacity="0.7"/>
+  <circle cx="1150" cy="560" r="8" fill="#6ee7b7" opacity="0.7"/>
+
+  <!-- ===== Colonna testo (sinistra) ===== -->
+  <g font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+    <!-- germoglio -->
+    <path d="M82 178 C82 162 92 150 108 146 C104 162 94 174 82 178 Z" fill="#059669"/>
+    <path d="M82 178 C98 176 110 166 114 152 C100 156 88 164 82 178 Z" fill="#10b981"/>
+    <!-- eyebrow -->
+    <text x="130" y="186" font-size="27" font-weight="700" letter-spacing="6" fill="#059669">DIRETTAMENTE DALL'ORTO</text>
+    <!-- titolo -->
+    <text x="78" y="302" font-size="84" font-weight="800" fill="#064e3b">Al Bel Ort</text>
+    <!-- sottotitolo -->
+    <text x="80" y="368" font-size="44" font-weight="600" fill="#065f46">Frutta e verdura a KM 0,</text>
+    <text x="80" y="424" font-size="44" font-weight="600" fill="#065f46">ordini via WhatsApp</text>
+    <!-- badge prezzo -->
+    <rect x="80" y="458" width="470" height="94" rx="24" fill="#059669"/>
+    <rect x="80" y="458" width="470" height="94" rx="24" fill="#065f46" opacity="0.12"/>
+    <text x="315" y="521" text-anchor="middle" font-size="42" font-weight="800" fill="#ffffff">390 CHF una tantum</text>
+    <!-- riga contatto WhatsApp -->
+    <circle cx="106" cy="600" r="27" fill="#064e3b"/>
+    <rect x="91" y="586" width="30" height="21" rx="7" fill="#ffffff"/>
+    <polygon points="97,605 92,616 106,606" fill="#ffffff"/>
+    <text x="148" y="613" font-size="36" font-weight="600" fill="#065f46">Contatto via WhatsApp</text>
+  </g>
+
+  <!-- ===== Illustrazione: cassetta di legno con verdure (destra) ===== -->
+  <g>
+    <!-- ombra -->
+    <ellipse cx="905" cy="556" rx="178" ry="17" fill="#064e3b" opacity="0.12"/>
+
+    <!-- carota sdraiata davanti -->
+    <g>
+      <ellipse cx="628" cy="512" rx="11" ry="26" fill="#16a34a" transform="rotate(-35 628 512)"/>
+      <ellipse cx="640" cy="506" rx="10" ry="24" fill="#22c55e" transform="rotate(-15 640 506)"/>
+      <polygon points="646,496 646,532 748,514" fill="#f97316"/>
+      <line x1="668" y1="502" x2="668" y2="524" stroke="#c2410c" stroke-width="3"/>
+      <line x1="694" y1="504" x2="694" y2="522" stroke="#c2410c" stroke-width="3"/>
+      <line x1="720" y1="507" x2="720" y2="520" stroke="#c2410c" stroke-width="3"/>
+    </g>
+
+    <!-- faccia laterale -->
+    <polygon points="1030,400 1070,368 1070,508 1030,540" fill="#a97c50"/>
+    <line x1="1032" y1="437" x2="1068" y2="406" stroke="#7c4f2e" stroke-width="6"/>
+    <line x1="1032" y1="482" x2="1068" y2="451" stroke="#7c4f2e" stroke-width="6"/>
+
+    <!-- faccia frontale: base scura + doghe -->
+    <rect x="740" y="400" width="290" height="140" fill="#8b5e3c"/>
+    <rect x="740" y="404" width="290" height="38" fill="#d2a06e"/>
+    <rect x="740" y="449" width="290" height="38" fill="#d2a06e"/>
+    <rect x="740" y="494" width="290" height="38" fill="#d2a06e"/>
+    <rect x="740" y="396" width="20" height="148" fill="#7c4f2e"/>
+    <rect x="1010" y="396" width="20" height="148" fill="#7c4f2e"/>
+    <!-- venature legno -->
+    <line x1="800" y1="420" x2="900" y2="420" stroke="#8b5e3c" stroke-width="3" opacity="0.35"/>
+    <line x1="860" y1="466" x2="960" y2="466" stroke="#8b5e3c" stroke-width="3" opacity="0.35"/>
+    <line x1="790" y1="512" x2="890" y2="512" stroke="#8b5e3c" stroke-width="3" opacity="0.35"/>
+
+    <!-- bordo superiore -->
+    <polygon points="740,400 780,368 1070,368 1030,400" fill="#e3b981"/>
+    <!-- interno scuro -->
+    <polygon points="772,392 796,374 1056,374 1032,392" fill="#4a341f"/>
+
+    <!-- insalata -->
+    <g>
+      <circle cx="770" cy="330" r="16" fill="#22c55e"/>
+      <circle cx="800" cy="315" r="16" fill="#22c55e"/>
+      <circle cx="828" cy="330" r="16" fill="#22c55e"/>
+      <circle cx="824" cy="360" r="16" fill="#22c55e"/>
+      <circle cx="794" cy="372" r="16" fill="#22c55e"/>
+      <circle cx="768" cy="362" r="16" fill="#22c55e"/>
+      <circle cx="798" cy="343" r="34" fill="#22c55e"/>
+      <path d="M780 335 Q798 320 816 335 Q810 352 798 352 Q786 352 780 335 Z" fill="#15803d" opacity="0.55"/>
+      <ellipse cx="788" cy="332" rx="10" ry="7" fill="#86efac" opacity="0.7" transform="rotate(-20 788 332)"/>
+    </g>
+
+    <!-- carota A -->
+    <g>
+      <ellipse cx="882" cy="212" rx="10" ry="28" fill="#16a34a" transform="rotate(-25 882 212)"/>
+      <ellipse cx="898" cy="206" rx="10" ry="28" fill="#22c55e"/>
+      <ellipse cx="912" cy="214" rx="10" ry="26" fill="#16a34a" transform="rotate(25 912 214)"/>
+      <polygon points="880,240 904,240 892,350" fill="#f97316"/>
+      <line x1="887" y1="270" x2="896" y2="270" stroke="#c2410c" stroke-width="3"/>
+      <line x1="889" y1="298" x2="895" y2="298" stroke="#c2410c" stroke-width="3"/>
+    </g>
+
+    <!-- carota B -->
+    <g>
+      <ellipse cx="942" cy="196" rx="10" ry="28" fill="#16a34a" transform="rotate(-20 942 196)"/>
+      <ellipse cx="956" cy="192" rx="10" ry="28" fill="#22c55e"/>
+      <ellipse cx="970" cy="200" rx="10" ry="26" fill="#16a34a" transform="rotate(22 970 200)"/>
+      <polygon points="940,226 962,226 951,344" fill="#ea580c"/>
+      <line x1="946" y1="258" x2="956" y2="258" stroke="#c2410c" stroke-width="3"/>
+      <line x1="948" y1="288" x2="955" y2="288" stroke="#c2410c" stroke-width="3"/>
+    </g>
+
+    <!-- pomodoro 1 -->
+    <g>
+      <circle cx="1006" cy="322" r="32" fill="#dc2626"/>
+      <ellipse cx="995" cy="310" rx="9" ry="13" fill="#ffffff" opacity="0.35" transform="rotate(-15 995 310)"/>
+      <polygon points="1006,284 1012,298 1027,298 1015,307 1019,321 1006,312 993,321 997,307 985,298 1000,298" fill="#15803d"/>
+    </g>
+
+    <!-- pomodoro 2 -->
+    <g>
+      <circle cx="1052" cy="352" r="24" fill="#ef4444"/>
+      <ellipse cx="1044" cy="343" rx="7" ry="10" fill="#ffffff" opacity="0.35" transform="rotate(-15 1044 343)"/>
+      <polygon points="1052,322 1057,333 1068,333 1059,340 1062,351 1052,344 1042,351 1045,340 1036,333 1047,333" fill="#15803d"/>
+    </g>
+  </g>
+</svg>

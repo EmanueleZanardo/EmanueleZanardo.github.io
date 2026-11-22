@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Al Bel Ort — il gestionale per il tuo orto: ordini dei clienti scritti sul tuo WhatsApp, pannello vendite con statistiche e grafici, catalogo prodotti. 390 CHF una tantum, zero commissioni.">
+    <link rel="canonical" href="https://emanuelezanardo.github.io/per-coltivatori.html">
+    <meta property="og:title" content="Al Bel Ort — Il gestionale per il tuo orto">
+    <meta property="og:description" content="I tuoi clienti ordinano da soli sul sito e l'ordine arriva scritto sul tuo WhatsApp. 390 CHF una tantum, poi zero: niente canone, niente commissioni.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://emanuelezanardo.github.io/per-coltivatori.html">
+    <meta property="og:site_name" content="Al Bel Ort">
+    <meta property="og:image" content="https://emanuelezanardo.github.io/og-image.png">
+    <meta property="og:image:alt" content="Al Bel Ort — il gestionale per il tuo orto">
+    <meta property="og:locale" content="it_IT">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Al Bel Ort — Il gestionale per il tuo orto">
+    <meta name="twitter:description" content="I tuoi clienti ordinano da soli sul sito e l'ordine arriva scritto sul tuo WhatsApp. 390 CHF una tantum, poi zero: niente canone, niente commissioni.">
+    <meta name="twitter:image" content="https://emanuelezanardo.github.io/og-image.png">
+    <meta name="theme-color" content="#f9efe6">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icona-al-bel-ort-32.png">
+    <link rel="apple-touch-icon" href="/icona-al-bel-ort-180.png">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap">
+    <title>Il gestionale per il tuo orto — Al Bel Ort</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { colors: { emerald: { 50:'#f3f4ea',100:'#e4e7d0',200:'#cbd1a8',300:'#aab47b',400:'#8a9758',500:'#6f7d44',600:'#56653a',700:'#47542f',800:'#3a4428',850:'#303823',900:'#2a311e',950:'#1a1f12' }, slate: { 50:'#faf3eb',100:'#f3e8dc',200:'#e6d8c7',300:'#d2bfa8',400:'#a8937a',500:'#7a6752',600:'#625242',700:'#4b3f33',800:'#362e26',900:'#262019',950:'#17130f' }, amber: { 50:'#fdf3ea',100:'#fbe3cf',200:'#f6c69f',300:'#f0a46e',400:'#e88c4c',500:'#e07b37',600:'#c4632a',700:'#a04e23',800:'#7e3e20',900:'#66341d',950:'#3a1a0d' }, rose: { 50:'#fbf0ec',100:'#f6dcd3',200:'#edb9a8',300:'#e09378',400:'#d07052',500:'#bc5838',600:'#a3472c',700:'#863a25',800:'#6e3122',900:'#5c2b1f',950:'#33140d' }, red: { 50:'#fbf0ec',100:'#f6dcd3',200:'#edb9a8',300:'#e09378',400:'#d07052',500:'#bc5838',600:'#a3472c',700:'#863a25',800:'#6e3122',900:'#5c2b1f',950:'#33140d' }, orto: { crema:'#f9efe6', terra:'#7e5a38' } } }
+            }
+        }
+    </script>
+    <style>
+        /* Titoli con un serif in tinta con il logo (Fraunces) */
+        h1, h2, h3, h4, .titolo-serif { font-family: "Fraunces", Georgia, "Times New Roman", serif; letter-spacing: -0.01em; }
+        h2.font-black, h3.font-black, h4.font-black { font-weight: 800; }
+        :focus-visible { outline: 3px solid #8a9758; outline-offset: 2px; border-radius: 4px; }
+        /* Nessuno scroll orizzontale: la pagina fitta sempre la viewport.
+           'clip' (non 'hidden') non crea uno scroll-container, quindi lo sticky header continua a funzionare. */
+        html, body { overflow-x: clip; }
+    </style>
+    <script>
+        // Allinea il tema con la pagina principale (stessa chiave localStorage)
+        (function () {
+            try {
+                var t = localStorage.getItem('theme');
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            try {
+                localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+                document.getElementById('dark-mode-icon').innerText = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+            } catch (e) {}
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            var el = document.getElementById('dark-mode-icon');
+            if (el && document.documentElement.classList.contains('dark')) el.innerText = '☀️';
+        });
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Al Bel Ort — Gestionale per il tuo orto",
+        "description": "Sito gestionale per orticoltori: i clienti ordinano da soli online e l'ordine arriva scritto su WhatsApp. Pannello vendite con statistiche e grafici, catalogo prodotti gestibile dal telefono. Nessun canone, nessuna commissione.",
+        "brand": { "@type": "Brand", "name": "Al Bel Ort" },
+        "offers": {
+            "@type": "Offer",
+            "price": "390",
+            "priceCurrency": "CHF",
+            "availability": "https://schema.org/InStock",
+            "url": "https://emanuelezanardo.github.io/per-coltivatori.html"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "E se non so usare il computer?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Non serve: il pannello di gestione funziona dal telefono con un PIN personale. La prova la facciamo insieme il giorno della consegna." } },
+            { "@type": "Question", "name": "Quando pago i 390 CHF?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Alla consegna del sito finito, non prima. Vedi la bozza, dai l'ok, e paghi solo quando il sito è tuo e online." } },
+            { "@type": "Question", "name": "Quanto costa Al Bel Ort per i coltivatori?",
+              "acceptedAnswer": { "@type": "Answer", "text": "390 CHF una tantum, pagati alla consegna del sito finito. Nessun canone mensile, nessuna commissione sugli ordini." } },
+            { "@type": "Question", "name": "Quanto tempo mi fa risparmiare ogni settimana?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Gli ordini arrivano già scritti (prodotti, quantità, nome del cliente) invece di telefonate dettate nei campi, e i clienti vedono le disponibilità sul sito. Per un orto con qualche decina di clienti a settimana sono facilmente 1-2 ore risparmiate." } },
+            { "@type": "Question", "name": "Cosa succede se un prodotto finisce?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Dal pannello sul telefono, con un PIN personale, segnali il prodotto esaurito in meno di un minuto: non è più ordinabile. Stessa cosa per cambiare un prezzo." } },
+            { "@type": "Question", "name": "Vedo le vendite del mese?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Sì: il pannello admin ha una sezione Vendite con totale incassato, numero di vendite, scontrino medio, prodotto più venduto, grafici per giorno e per prodotto, filtro per periodo ed export CSV." } },
+            { "@type": "Question", "name": "Lavoro da solo: è troppo per me?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Il sito è pensato per i piccoli produttori che vendono diretto: gestione quotidiana di pochi minuti dal telefono, prova guidata insieme alla consegna." } },
+            { "@type": "Question", "name": "E se dopo la demo non mi convince?",
+              "acceptedAnswer": { "@type": "Answer", "text": "La demo è gratuita e senza impegno. Il pagamento avviene solo alla consegna del sito finito, dopo che hai approvato la bozza." } }
+        ]
+    }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 font-sans antialiased transition-colors duration-300 text-xl">
+
+    <!-- Header -->
+    <header class="bg-orto-crema text-emerald-800 border-b border-emerald-200 dark:bg-slate-900 dark:text-emerald-100 dark:border-slate-700 shadow-md sticky top-0 z-50 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+            <a href="index.html" class="leading-none"><img src="/logo-al-bel-ort-chiaro.png" alt="Al Bel Ort — Sapori dal nostro orto" width="634" height="218" class="h-11 sm:h-14 w-auto dark:hidden"><img src="/logo-al-bel-ort-scuro.png" alt="Al Bel Ort — Sapori dal nostro orto" width="634" height="218" class="h-11 sm:h-14 w-auto hidden dark:block"></a>
+            <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                <button onclick="toggleDarkMode()" class="p-2.5 rounded-full hover:bg-emerald-100 dark:hover:bg-slate-800 transition" aria-label="Dark Mode">
+                    <span id="dark-mode-icon" class="text-2xl">🌙</span>
+                </button>
+                <a href="corsi.html" class="text-lg px-4 py-2 rounded-xl border border-emerald-300 dark:border-slate-600 hover:bg-emerald-100 dark:hover:bg-slate-800 transition font-bold">📚 Corsi</a>
+                <a href="index.html" class="text-lg px-4 py-2 rounded-xl border border-emerald-300 dark:border-slate-600 hover:bg-emerald-100 dark:hover:bg-slate-800 transition font-bold">Vai al sito</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-8 pb-16">
+
+        <!-- Hero -->
+        <div class="bg-gradient-to-br from-emerald-600 to-emerald-800 text-white rounded-3xl p-8 sm:p-12 shadow-xl relative overflow-hidden text-center">
+            <h1 class="text-4xl sm:text-5xl font-black mb-4">Il gestionale per il tuo orto</h1>
+            <p class="text-xl text-emerald-100 leading-relaxed max-w-2xl mx-auto mb-6">
+                I tuoi clienti ordinano da soli sul sito e l'ordine arriva <strong>scritto sul tuo WhatsApp</strong> — prodotti, quantità e ora, nero su bianco. Niente più telefonate perse nei campi.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="https://wa.me/393451114337?text=Ciao!%20Vorrei%20una%20demo%20gratuita%20del%20gestionale%20per%20il%20mio%20orto" target="_blank" rel="noopener" class="bg-[#25D366] hover:bg-[#1fb857] text-white font-black text-lg px-8 py-4 rounded-2xl shadow-lg transition transform hover:scale-105">
+                    💬 Richiedi la demo gratuita
+                </a>
+            </div>
+            <p class="mt-6 text-emerald-100 text-lg">
+                <strong class="text-3xl font-black text-white">390 CHF</strong> una tantum — poi zero: niente canone, niente commissioni.
+            </p>
+        </div>
+
+        <!-- Corsi: accanto al gestionale -->
+        <section aria-label="Corsi per coltivare" class="bg-amber-50 dark:bg-amber-950/40 rounded-3xl p-6 sm:p-8 shadow-md border border-amber-200 dark:border-amber-800 text-center">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">📚 Oltre al gestionale: impara a coltivare</h2>
+            <p class="text-slate-600 dark:text-slate-300 mb-5 max-w-2xl mx-auto">Il pacchetto base per principianti è <strong>gratuito</strong>: suolo, letti, semine, acqua, prime colture e calendario. Poi corsi a pagamento per tipo di pianta, serra, letti, acqua, suolo e dispensa — pacchetto completo 149 €.</p>
+            <a href="corsi.html" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-bold py-3.5 px-8 rounded-2xl shadow-lg transition">Vedi tutti i corsi</a>
+        </section>
+
+        <!-- Benefici -->
+        <section aria-label="Benefici" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-6">Cosa ti porti a casa</h2>
+            <ul class="space-y-6">
+                <li class="flex gap-4 items-start">
+                    <span class="text-4xl leading-none" aria-hidden="true">💬</span>
+                    <div>
+                        <p class="font-black text-slate-900 dark:text-white text-xl">Ordini WhatsApp automatici</p>
+                        <p class="text-slate-500 dark:text-slate-400">Il cliente compone l'ordine sul sito e preme "Ordina": arriva sul tuo WhatsApp già scritto. Si paga alla consegna o al ritiro, come fai già oggi.</p>
+                    </div>
+                </li>
+                <li class="flex gap-4 items-start">
+                    <span class="text-4xl leading-none" aria-hidden="true">📊</span>
+                    <div>
+                        <p class="font-black text-slate-900 dark:text-white text-xl">Pannello vendite con statistiche e grafici</p>
+                        <p class="text-slate-500 dark:text-slate-400">Vedi vendite, prodotti e andamenti dal pannello admin, in chiaro, anche dal telefono.</p>
+                    </div>
+                </li>
+                <li class="flex gap-4 items-start">
+                    <span class="text-4xl leading-none" aria-hidden="true">🧺</span>
+                    <div>
+                        <p class="font-black text-slate-900 dark:text-white text-xl">Catalogo prodotti</p>
+                        <p class="text-slate-500 dark:text-slate-400">I tuoi prodotti online con foto, prezzi e disponibilità. Cambi un prezzo o segnali un prodotto esaurito dal telefono con un PIN personale, in un minuto, senza chiamare nessuno.</p>
+                    </div>
+                </li>
+                <li class="flex gap-4 items-start">
+                    <span class="text-4xl leading-none" aria-hidden="true">💰</span>
+                    <div>
+                        <p class="font-black text-slate-900 dark:text-white text-xl">Zero commissioni</p>
+                        <p class="text-slate-500 dark:text-slate-400">Ogni franco dell'ordine resta a te, non a un marketplace. Paghi una volta sola, poi il sito è tuo e non devi più niente a nessuno.</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Prezzo -->
+        <section aria-label="Prezzo" class="bg-emerald-600 dark:bg-emerald-850 text-white rounded-3xl p-8 sm:p-10 shadow-xl text-center">
+            <h2 class="text-2xl font-black mb-2">Quanto costa?</h2>
+            <p class="text-6xl font-black mb-4">390 CHF</p>
+            <p class="text-xl text-emerald-100 max-w-2xl mx-auto leading-relaxed">
+                Una volta sola, pagati alla <strong>consegna del sito finito</strong>. Poi zero per sempre: nessun canone mensile, nessuna commissione sugli ordini. Il sito è tuo e resta tuo.
+            </p>
+        </section>
+
+        <!-- Calcolatore ROI: stima ricavi e rientro dei 390 CHF -->
+        <section aria-label="Calcolatore ricavi stimati" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">💰 Quanto ti fa rientrare?</h2>
+            <p class="text-slate-500 dark:text-slate-400 mb-6">Trascina i cursori: vedi una stima dei ricavi e in quante settimane rientri dei 390 CHF.</p>
+            <div class="space-y-6">
+                <div>
+                    <label for="roi-kg" class="block font-bold mb-1">Verdura venduta a settimana: <output id="roi-kg-val" for="roi-kg" class="text-emerald-700 dark:text-emerald-400">40 kg</output></label>
+                    <input id="roi-kg" type="range" min="5" max="200" step="5" value="40" oninput="calcolaROI()" class="w-full accent-emerald-600">
+                </div>
+                <div>
+                    <label for="roi-prezzo" class="block font-bold mb-1">Prezzo medio al kg: <output id="roi-prezzo-val" for="roi-prezzo" class="text-emerald-700 dark:text-emerald-400">6.00 €</output></label>
+                    <input id="roi-prezzo" type="range" min="2" max="20" step="0.5" value="6" oninput="calcolaROI()" class="w-full accent-emerald-600">
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                <div class="bg-emerald-50 dark:bg-emerald-900/30 rounded-2xl p-4 text-center">
+                    <p class="text-sm text-slate-500 dark:text-slate-400 font-bold">RICAVO STIMATO / MESE</p>
+                    <p id="roi-mese" class="text-3xl font-black text-emerald-700 dark:text-emerald-400">—</p>
+                </div>
+                <div class="bg-amber-50 dark:bg-amber-900/30 rounded-2xl p-4 text-center">
+                    <p class="text-sm text-slate-500 dark:text-slate-400 font-bold">RIENTRO DEI 390 CHF IN</p>
+                    <p id="roi-payback" class="text-3xl font-black text-amber-700 dark:text-amber-400">—</p>
+                </div>
+            </div>
+            <p class="text-sm text-slate-400 mt-4">Stima indicativa: presuppone che tu venda queste quantità ai prezzi indicati. Il sito ti aiuta a non perdere ordini e clienti, ma i ricavi dipendono dalla tua produzione e dai tuoi prezzi.</p>
+        </section>
+
+        <!-- Come funziona: 3 step -->
+        <section aria-label="Come funziona" class="space-y-4">
+            <h2 class="text-2xl font-black text-slate-800 dark:text-slate-200 tracking-wide px-1">Come funziona: in 3 passi</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-md border border-slate-200 dark:border-slate-700 text-center">
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-600 text-white text-lg font-black" aria-hidden="true">1</span>
+                    <div class="text-4xl my-3" aria-hidden="true">📩</div>
+                    <p class="font-black text-slate-900 dark:text-white mb-2">Mandi i materiali</p>
+                    <p class="text-slate-500 dark:text-slate-400">Nome azienda, orari, numero per gli ordini, listino e qualche foto dal telefono: tutto su WhatsApp.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-md border border-slate-200 dark:border-slate-700 text-center">
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-600 text-white text-lg font-black" aria-hidden="true">2</span>
+                    <div class="text-4xl my-3" aria-hidden="true">👀</div>
+                    <p class="font-black text-slate-900 dark:text-white mb-2">Controlli la bozza</p>
+                    <p class="text-slate-500 dark:text-slate-400">In 2–3 giorni ti mostriamo il sito con i tuoi prodotti, prezzi e foto: verifichi che tutto sia giusto.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-md border border-slate-200 dark:border-slate-700 text-center">
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-600 text-white text-lg font-black" aria-hidden="true">3</span>
+                    <div class="text-4xl my-3" aria-hidden="true">🚀</div>
+                    <p class="font-black text-slate-900 dark:text-white mb-2">Online con il PIN</p>
+                    <p class="text-slate-500 dark:text-slate-400">Consegna del PIN personale e prova guidata insieme: cambi un prezzo dal telefono e il sito va online.</p>
+                </div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 px-1">In <strong>5 giorni dal via</strong> sei online. Tempo richiesto a te in totale: circa 30–60 minuti. Al resto pensiamo noi, passo passo.</p>
+        </section>
+
+        <!-- FAQ -->
+        <section aria-label="Domande frequenti" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-6">Domande frequenti</h2>
+            <div class="space-y-6">
+                <div>
+                    <p class="font-black text-slate-900 dark:text-white text-xl mb-1">E se non so usare il computer?</p>
+                    <p class="text-slate-500 dark:text-slate-400">Non serve saperlo usare. Il pannello di gestione funziona dal telefono: entri con un PIN personale e cambi un prezzo o segnali un prodotto esaurito, come cambieresti il nome di un contatto in rubrica. La prova la facciamo insieme il giorno della consegna e hai una guida semplice inclusa.</p>
+                </div>
+                <div>
+                    <p class="font-black text-slate-900 dark:text-white text-xl mb-1">I miei clienti sono anziani…</p>
+                    <p class="text-slate-500 dark:text-slate-400">Appunto per questo non devono installare niente e non devono imparare niente di nuovo: aprono il sito, scelgono, premono "Ordina". L'ordine arriva sul tuo WhatsApp. Per loro è quasi come mandarti un messaggio.</p>
+                </div>
+                <div>
+                    <p class="font-black text-slate-900 dark:text-white text-xl mb-1">Non ho tempo per gestire un'altra cosa.</p>
+                    <p class="text-slate-500 dark:text-slate-400">Il sito non aggiunge lavoro, ne toglie: gli ordini arrivano già scritti invece che dettati per telefono, e i clienti smettono di chiamarti per chiedere "avete ancora le zucchine?". La gestione è pochi minuti al giorno dal telefono.</p>
+                </div>
+                <div>
+                    <p class="font-black text-slate-900 dark:text-white text-xl mb-1">Quando pago i 390 CHF?</p>
+                    <p class="text-slate-500 dark:text-slate-400">Alla consegna del sito finito, non prima. Vedi la bozza, dai l'ok, e paghi solo quando il sito è tuo e online.</p>
+                </div>
+                <div>
+                    <p class="font-black text-slate-900 dark:text-white text-xl mb-1">E dopo chi mi aiuta?</p>
+                    <p class="text-slate-500 dark:text-slate-400">Il sito è tuo: paghi una volta e non devi niente a nessuno. Prodotti, prezzi e disponibilità li cambi da solo con il PIN. Se qualcosa si rompe o serve una modifica che non sai fare dal pannello, ci scrivi su WhatsApp.</p>
+                </div>
+                <div>
+                    <p class="font-black text-slate-900 dark:text-white text-xl mb-1">Quanto tempo mi fa risparmiare ogni settimana?</p>
+                    <p class="text-slate-500 dark:text-slate-400">Gli ordini arrivano già scritti — prodotti, quantità e nome del cliente — invece di telefonate dettate mentre sei nei campi. E i clienti smettono di chiamarti per chiedere le disponibilità, perché le vedono sul sito. Per un orto con qualche decina di clienti a settimana sono facilmente 1–2 ore risparmiate.</p>
+                </div>
+                <div>
+                    <p class="font-black text-slate-900 dark:text-white text-xl mb-1">Cosa succede se un prodotto finisce?</p>
+                    <p class="text-slate-500 dark:text-slate-400">Entri nel pannello dal telefono con il PIN e lo segnali esaurito in meno di un minuto: non è più ordinabile e non ricevi più ordini per quel prodotto. Stessa cosa per cambiare un prezzo: un minuto, dal telefono, senza chiamare nessuno.</p>
+                </div>
+                <div>
+                    <p class="font-black text-slate-900 dark:text-white text-xl mb-1">Vedo le vendite del mese?</p>
+                    <p class="text-slate-500 dark:text-slate-400">Sì: il pannello admin ha una sezione Vendite con totale incassato, numero di vendite, scontrino medio, prodotto più venduto e grafici per giorno e per prodotto. Puoi filtrare per periodo ed esportare tutto in CSV per la contabilità.</p>
+                </div>
+                <div>
+                    <p class="font-black text-slate-900 dark:text-white text-xl mb-1">Lavoro da solo: è troppo per me?</p>
+                    <p class="text-slate-500 dark:text-slate-400">Il sito è pensato proprio per i piccoli produttori che vendono diretto: non serve personale dedicato né tempo da ufficio. La gestione quotidiana sono pochi minuti dal telefono, e la prova guidata la facciamo insieme alla consegna.</p>
+                </div>
+                <div>
+                    <p class="font-black text-slate-900 dark:text-white text-xl mb-1">E se dopo la demo non mi convince?</p>
+                    <p class="text-slate-500 dark:text-slate-400">La demo è gratuita e senza impegno: se non ti piace, non succede niente e non devi niente a nessuno. Il pagamento avviene solo alla consegna del sito finito, dopo che hai visto e approvato la bozza.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA finale -->
+        <section aria-label="Contatti" class="bg-gradient-to-br from-emerald-600 to-emerald-800 text-white rounded-3xl p-8 sm:p-10 shadow-xl text-center">
+            <h2 class="text-2xl font-black mb-3">Vedi come viene con i TUOI prodotti</h2>
+            <p class="text-emerald-100 text-lg mb-6 max-w-2xl mx-auto">Ti preparo una demo in 2–3 giorni, senza impegno. Scrivimi su WhatsApp al <strong>+39 345 111 4337</strong> con nome dell'azienda e numero per gli ordini.</p>
+            <a href="https://wa.me/393451114337?text=Ciao!%20Vorrei%20una%20demo%20gratuita%20del%20gestionale%20per%20il%20mio%20orto" target="_blank" rel="noopener" class="inline-block bg-[#25D366] hover:bg-[#1fb857] text-white font-black text-lg px-8 py-4 rounded-2xl shadow-lg transition transform hover:scale-105">
+                💬 Scrivici su WhatsApp
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto px-6 pb-28 md:pb-10 text-center">
+        <p class="text-slate-400 dark:text-slate-500 text-base">🌱 Al Bel Ort — <a href="index.html" class="underline hover:text-emerald-600">torna al sito</a></p>
+    </footer>
+
+    <script>
+        function calcolaROI() {
+            var kg = parseFloat(document.getElementById('roi-kg').value) || 0;
+            var prezzo = parseFloat(document.getElementById('roi-prezzo').value) || 0;
+            document.getElementById('roi-kg-val').textContent = kg + ' kg';
+            document.getElementById('roi-prezzo-val').textContent = prezzo.toFixed(2) + ' \u20AC';
+            var settimanaEUR = kg * prezzo;
+            var meseEUR = settimanaEUR * 4.33;
+            var settimanaCHF = settimanaEUR * 0.94; // cambio indicativo EUR -> CHF
+            document.getElementById('roi-mese').textContent = '\u2248 ' + Math.round(meseEUR) + ' \u20AC';
+            var settimane = settimanaCHF > 0 ? Math.ceil(390 / settimanaCHF) : 0;
+            document.getElementById('roi-payback').textContent = settimane > 0
+                ? settimane + (settimane === 1 ? ' settimana' : ' settimane')
+                : '\u2014';
+        }
+        document.addEventListener('DOMContentLoaded', function () { calcolaROI(); });
+    </script>
+
+    <!-- CTA sticky mobile: sempre visibile durante la lettura -->
+    <div class="fixed bottom-0 inset-x-0 z-40 md:hidden bg-white/95 dark:bg-slate-800/95 backdrop-blur border-t border-slate-200 dark:border-slate-700 p-3">
+        <a href="https://wa.me/393451114337?text=Ciao!%20Vorrei%20una%20demo%20gratuita%20del%20gestionale%20per%20il%20mio%20orto" target="_blank" rel="noopener" class="block text-center bg-[#25D366] hover:bg-[#1fb857] text-white font-black text-lg px-6 py-3.5 rounded-2xl shadow-lg">
+            💬 Demo gratuita su WhatsApp
+        </a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,2664 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chiossa Luigi a Lungavilla (PV): ordina online frutta e verdura fresca a KM 0. DEMO dimostrativa, nessun ordine reale.">
+    <link rel="canonical" href="https://emanuelezanardo.github.io/demo/chiossa/">
+    <meta property="og:title" content="L'Orto Digitale — Il tuo Orto a KM 0">
+    <meta property="og:description" content="Scegli i prodotti freschi dell'orto o esplora la dispensa con box e lavorati artigianali. Ordina in pochi click via WhatsApp.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://emanuelezanardo.github.io/">
+    <meta property="og:site_name" content="L'Orto Digitale">
+    <meta property="og:image" content="https://emanuelezanardo.github.io/og-image.png">
+    <meta property="og:image:alt" content="L'Orto Digitale — ordina frutta e verdura a KM 0 via WhatsApp">
+    <meta property="og:locale" content="it_IT">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="L'Orto Digitale — Il tuo Orto a KM 0">
+    <meta name="twitter:description" content="Scegli i prodotti freschi dell'orto o esplora la dispensa con box e lavorati artigianali. Ordina in pochi click via WhatsApp.">
+    <meta name="twitter:image" content="https://emanuelezanardo.github.io/og-image.png">
+    <meta name="theme-color" content="#059669">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥬</text></svg>">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "L'Orto Digitale",
+        "url": "https://emanuelezanardo.github.io/",
+        "description": "Ordina online frutta e verdura fresca a KM 0 e prodotti artigianali della dispensa. Ritiro in orto o consegna a domicilio, ordini via WhatsApp."
+    }
+    </script>
+    <title>Chiossa Luigi &mdash; Ordina online &middot; DEMO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { colors: { emerald: { 850: '#064e3b' } } }
+            }
+        }
+    </script>
+    <style>
+        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+        .toast-enter { animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .toast-exit { animation: fadeOut 0.3s ease-out forwards; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Accessibilità: focus tastiera sempre visibile (non altera il design per il mouse) */
+        :focus-visible { outline: 3px solid #10b981; outline-offset: 2px; border-radius: 4px; }
+        /* Il pinch a due dita sulla mappa è gestito via JS (zoomMapTo): il browser non deve zoomare la pagina.
+           Lo zoom resta ancorato al punto medio delle dita, non all'angolo in alto a sx. */
+        #map-scroll-container { touch-action: pan-x pan-y; }
+        /* Nessuno scroll orizzontale: la pagina fitta sempre la viewport.
+           'clip' (non 'hidden') non crea uno scroll-container, quindi lo sticky header continua a funzionare. */
+        html, body { overflow-x: clip; }
+    </style>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GroceryStore",
+  "name": "Chiossa Luigi",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lungavilla (PV)"
+  },
+  "telephone": "+39038376001",
+  "url": "https://emanuelezanardo.github.io/demo/chiossa/"
+}
+</script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Come ordino?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Scegli i prodotti sul sito e premi Ordina: l'ordine arriva sul WhatsApp del produttore, già scritto."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Questa pagina è una demo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì: è un sito dimostrativo generato per mostrare il gestionale. Nessun ordine reale viene inviato."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<div style="background:#f59e0b;color:#3a2a00;text-align:center;font-weight:800;padding:10px 12px;font-size:15px;position:sticky;top:0;z-index:9999;font-family:system-ui,sans-serif">&#9888;&#65039; DEMO &mdash; sito dimostrativo &middot; nessun ordine reale</div>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 font-sans antialiased pb-36 transition-colors duration-300 text-xl">
+
+    <a href="#view-home" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:bg-emerald-600 focus:text-white focus:font-bold focus:px-4 focus:py-2 focus:rounded-xl" data-i18n="skip_link">Vai al contenuto</a>
+
+    <!-- Toast Container -->
+    <div id="toast-container" aria-live="polite" aria-atomic="false" class="fixed top-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none w-80"></div>
+
+    <!-- Header -->
+    <header class="bg-emerald-600 dark:bg-emerald-850 text-white shadow-lg sticky top-0 z-50 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight cursor-pointer" onclick="mostraHome()">🌱 Chiossa Luigi</h1>
+            <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                <select id="lang-selector" onchange="cambiaLingua(this.value)" aria-label="Seleziona lingua" data-i18n-aria="lang_aria" class="bg-emerald-700 dark:bg-emerald-900 text-white text-lg font-bold rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500 border border-emerald-500 min-h-[48px]">
+                    <option value="it">🇮🇹 IT</option>
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="de">🇩🇪 DE</option>
+                </select>
+                <button onclick="toggleDarkMode()" class="p-2.5 rounded-full hover:bg-emerald-700 transition" aria-label="Dark Mode" data-i18n-aria="dark_toggle">
+                    <span id="dark-mode-icon" class="text-2xl">🌙</span>
+                </button>
+                <a href="per-coltivatori.html" class="text-lg px-4 py-2 rounded-xl border border-emerald-500 hover:bg-emerald-700 transition font-bold">Per i coltivatori</a>
+                <button onclick="toggleAdminLogin()" id="admin-btn" class="text-lg px-4 py-2 rounded-xl border border-emerald-500 hover:bg-emerald-700 transition font-bold">Admin</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-8">
+
+        <!-- Pannello Admin & Dashboard -->
+        <div id="admin-panel" class="hidden bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 p-6 space-y-6">
+            <div class="flex justify-between items-center border-b pb-4 dark:border-slate-700">
+                <h3 class="text-2xl font-black text-emerald-700 dark:text-emerald-400" data-i18n="admin_title">📊 Dashboard & Gestione Orto (Admin)</h3>
+                <button onclick="toggleAdminLogin()" aria-label="Chiudi" data-i18n-aria="close" class="text-xl text-slate-500 hover:text-slate-700 font-bold">✕</button>
+            </div>
+            
+            <div id="admin-auth-box" class="space-y-4">
+                <p class="text-lg text-slate-500 dark:text-slate-400" data-i18n="admin_pin_hint">Inserisci il PIN per sbloccare la gestione completa.</p>
+                <p class="text-base font-bold text-amber-600 dark:text-amber-400">&#128273; Demo: il PIN admin &egrave; <code class="bg-amber-100 dark:bg-amber-900 px-2 py-0.5 rounded">admin123</code></p>
+                <div class="flex gap-3">
+                    <input type="password" id="admin-pin" placeholder="PIN" onkeydown="if(event.key==='Enter')effettuaLogin()" class="flex-1 text-xl border dark:border-slate-600 dark:bg-slate-700 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500">
+                    <button id="admin-login-btn" onclick="effettuaLogin()" class="bg-emerald-600 text-white text-xl px-6 py-3 rounded-2xl font-bold shadow-md disabled:opacity-50" data-i18n="admin_enter">Entra</button>
+                </div>
+            </div>
+
+            <div id="admin-dashboard-content" class="hidden space-y-6 text-lg">
+                <div class="grid grid-cols-3 gap-4 text-center">
+                    <div class="bg-emerald-50 dark:bg-slate-700 p-4 rounded-2xl">
+                        <span class="block text-sm text-slate-400 font-bold" data-i18n="kpi_avail">Disponibili</span>
+                        <span id="kpi-libere" class="text-3xl font-black text-emerald-600">0</span>
+                    </div>
+                    <div class="bg-amber-50 dark:bg-slate-700 p-4 rounded-2xl">
+                        <span class="block text-sm text-slate-400 font-bold" data-i18n="kpi_booked">Prenotate</span>
+                        <span id="kpi-prenotate" class="text-3xl font-black text-amber-600">0</span>
+                    </div>
+                    <div class="bg-blue-50 dark:bg-slate-700 p-4 rounded-2xl">
+                        <span class="block text-sm text-slate-400 font-bold" data-i18n="kpi_yield">Resa Stimata</span>
+                        <span id="kpi-resa" class="text-3xl font-black text-blue-600">0 kg</span>
+                    </div>
+                </div>
+
+                <!-- Gestione Box Orto -->
+                <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-2xl space-y-3 border dark:border-slate-600">
+                    <h4 class="font-black text-emerald-700 dark:text-emerald-400" data-i18n="box_edit_title">📦 Modifica Contenuto Box Orto</h4>
+                    <div>
+                        <label class="block text-sm text-slate-400 font-bold mb-1" data-i18n="box_edit_label">Cosa contiene il box:</label>
+                        <input type="text" id="admin-box-content" class="w-full text-lg border dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500" value="Porri, Carote, Cipolle, Patate">
+                    </div>
+                    <button onclick="salvaBoxOrto()" class="bg-emerald-600 text-white text-base font-bold px-4 py-2 rounded-xl shadow" data-i18n="box_save">Salva Contenuto Box</button>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <button onclick="esportaCSV()" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 font-bold py-3 px-4 rounded-2xl text-left flex justify-between items-center">
+                        <span data-i18n="export_csv">📥 Esporta Report CSV Orto</span> <span class="text-slate-400">→</span>
+                    </button>
+                    <button onclick="aggiungiStrisciaDinamica()" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 font-bold py-3 px-4 rounded-2xl text-left flex justify-between items-center">
+                        <span data-i18n="add_row">➕ Aggiungi Nuova Fila all'Orto (L/R)</span> <span class="text-slate-400">+</span>
+                    </button>
+                </div>
+
+                <!-- Vendite (solo admin) -->
+                <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-2xl space-y-4 border dark:border-slate-600">
+                    <h4 class="font-black text-emerald-700 dark:text-emerald-400" data-i18n="sales_title">💰 Vendite</h4>
+                    <p id="vendite-cloud-warning" class="hidden text-sm font-bold text-amber-600 dark:text-amber-400" data-i18n="sales_cloud_off">☁️ Dati cloud non disponibili: le vendite restano salvate solo su questo dispositivo.</p>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="date" id="v-data" class="text-base border dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500">
+                        <input type="text" id="v-prodotto" list="v-prodotti-list" onchange="suggerisciPrezzo()" data-i18n-ph="sales_product" placeholder="Prodotto" autocomplete="off" class="text-base border dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500">
+                        <datalist id="v-prodotti-list"></datalist>
+                        <input type="number" id="v-qta" data-i18n-ph="sales_qty" placeholder="Quantità" min="0" step="0.01" inputmode="decimal" class="text-base border dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500">
+                        <select id="v-unita" class="text-base border dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500">
+                            <option value="kg">kg</option>
+                            <option value="pz">pz</option>
+                        </select>
+                        <input type="number" id="v-prezzo" data-i18n-ph="sales_price" placeholder="Prezzo unitario (€)" min="0" step="0.01" inputmode="decimal" class="text-base border dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500">
+                        <input type="text" id="v-note" data-i18n-ph="sales_notes" placeholder="Note (facoltative)" class="text-base border dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                    <button onclick="aggiungiVendita(this)" class="w-full bg-emerald-600 text-white text-base font-bold py-3 rounded-2xl shadow disabled:opacity-50" data-i18n="sales_add">➕ Aggiungi vendita</button>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label for="v-filtro-da" class="block text-xs text-slate-400 font-bold mb-1" data-i18n="sales_filter_from">Filtra da</label>
+                            <input type="date" id="v-filtro-da" onchange="renderVendite()" class="w-full text-base border dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <div>
+                            <label for="v-filtro-a" class="block text-xs text-slate-400 font-bold mb-1" data-i18n="sales_filter_to">Filtra a</label>
+                            <input type="date" id="v-filtro-a" onchange="renderVendite()" class="w-full text-base border dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                    </div>
+                    <div class="flex gap-2 flex-wrap">
+                        <button onclick="filtroVenditeRapido(0)" class="bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 text-sm font-bold py-2 px-4 rounded-xl" data-i18n="sales_preset_today">Oggi</button>
+                        <button onclick="filtroVenditeRapido(7)" class="bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 text-sm font-bold py-2 px-4 rounded-xl" data-i18n="sales_preset_7d">7 giorni</button>
+                        <button onclick="filtroVenditeRapido(30)" class="bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 text-sm font-bold py-2 px-4 rounded-xl" data-i18n="sales_preset_30d">30 giorni</button>
+                        <button onclick="filtroVenditeRapido(null)" class="bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 text-sm font-bold py-2 px-4 rounded-xl" data-i18n="sales_preset_all">Tutto</button>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="esportaCSVVendite()" class="flex-1 bg-slate-600 hover:bg-slate-700 text-white text-base font-bold py-3 rounded-2xl shadow" data-i18n="sales_export_csv">📥 Esporta CSV vendite</button>
+                        <button onclick="azzeraFiltroVendite()" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-base font-bold py-3 px-4 rounded-2xl" data-i18n="sales_filter_reset">✕ Azzera</button>
+                    </div>
+                    <p id="v-filtro-info" aria-live="polite" class="text-sm text-slate-500 dark:text-slate-400"></p>
+
+                    <div class="grid grid-cols-2 gap-3 text-center">
+                        <div class="bg-emerald-50 dark:bg-slate-700 p-3 rounded-2xl">
+                            <span class="block text-xs text-slate-400 font-bold" data-i18n="sales_kpi_total">Ricavo totale</span>
+                            <span id="v-kpi-totale" class="text-2xl font-black text-emerald-600">0.00 €</span>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-slate-700 p-3 rounded-2xl">
+                            <span class="block text-xs text-slate-400 font-bold" data-i18n="sales_kpi_count">N. vendite</span>
+                            <span id="v-kpi-numero" class="text-2xl font-black text-blue-600">0</span>
+                        </div>
+                        <div class="bg-amber-50 dark:bg-slate-700 p-3 rounded-2xl">
+                            <span class="block text-xs text-slate-400 font-bold" data-i18n="sales_kpi_avg">Scontrino medio</span>
+                            <span id="v-kpi-medio" class="text-2xl font-black text-amber-600">0.00 €</span>
+                        </div>
+                        <div class="bg-purple-50 dark:bg-slate-700 p-3 rounded-2xl">
+                            <span class="block text-xs text-slate-400 font-bold" data-i18n="sales_kpi_top">Prodotto top</span>
+                            <span id="v-kpi-top" class="text-2xl font-black text-purple-600">—</span>
+                        </div>
+                        <div class="col-span-2 bg-teal-50 dark:bg-slate-700 p-3 rounded-2xl">
+                            <span class="block text-xs text-slate-400 font-bold" data-i18n="sales_kpi_month">Ricavo mese corrente</span>
+                            <span id="v-kpi-mese" class="text-2xl font-black text-teal-600">0.00 €</span>
+                            <span id="v-kpi-mese-delta" class="block text-sm font-bold text-slate-400"></span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 class="font-bold text-slate-600 dark:text-slate-300 mb-2" data-i18n="sales_chart_days">Ricavi per giorno (ultimi 30 giorni)</h5>
+                        <canvas id="chart-v-giorni"></canvas>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-slate-600 dark:text-slate-300 mb-2" data-i18n="sales_chart_products">Ricavi per prodotto</h5>
+                        <canvas id="chart-v-prodotti"></canvas>
+                    </div>
+
+                    <div>
+                        <h5 class="font-bold text-slate-600 dark:text-slate-300 mb-2" data-i18n="sales_chart_week">Ricavi per giorno della settimana</h5>
+                        <canvas id="chart-v-settimana"></canvas>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-slate-600 dark:text-slate-300 mb-2" data-i18n="sales_chart_top5">Top 5 prodotti per ricavo</h5>
+                        <canvas id="chart-v-top5"></canvas>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-slate-600 dark:text-slate-300 mb-2" data-i18n="sales_chart_months">Ricavi per mese (ultimi 12 mesi)</h5>
+                        <canvas id="chart-v-mesi"></canvas>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-slate-400">
+                                    <th class="px-3 py-2" data-i18n="sales_col_product">Prodotto</th>
+                                    <th class="px-3 py-2" data-i18n="sales_col_qty2">Q.tà tot.</th>
+                                    <th class="px-3 py-2" data-i18n="sales_col_revenue">Ricavo</th>
+                                    <th class="px-3 py-2" data-i18n="sales_col_share">Quota</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vendite-perprod-tbody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-slate-400">
+                                    <th class="px-3 py-2" data-i18n="sales_col_date">Data</th>
+                                    <th class="px-3 py-2" data-i18n="sales_col_product">Prodotto</th>
+                                    <th class="px-3 py-2" data-i18n="sales_col_qty">Q.tà</th>
+                                    <th class="px-3 py-2" data-i18n="sales_col_price">Prezzo</th>
+                                    <th class="px-3 py-2" data-i18n="sales_col_total">Totale</th>
+                                    <th class="px-3 py-2" data-i18n="sales_col_notes">Note</th>
+                                    <th class="px-3 py-2"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="vendite-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA HOME -->
+        <div id="view-home" class="space-y-8">
+            
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-br from-emerald-600 to-emerald-800 text-white rounded-3xl p-8 shadow-xl relative overflow-hidden">
+                <h2 id="txt-hero-title" class="text-3xl font-black mb-2" data-i18n="heroTitle">Il tuo Orto a KM 0</h2>
+                <p id="txt-hero-desc" class="text-lg text-emerald-100 leading-relaxed" data-i18n="heroDesc">Scegli i prodotti freschi o esplora la dispensa con box e lavorati artigianali.</p>
+            </div>
+
+            <!-- CTA B2B: rimanda alla pagina di vendita per i coltivatori -->
+            <section aria-label="Pagina per i coltivatori" class="bg-amber-50 dark:bg-amber-950/40 rounded-3xl p-6 shadow-md border border-amber-200 dark:border-amber-800 text-center">
+                <p class="text-xl font-black text-slate-900 dark:text-white mb-2">🌱 Hai un orto o un'azienda agricola?</p>
+                <p class="text-slate-600 dark:text-slate-300 mb-4">Ricevi gli ordini scritti su WhatsApp, gestisci catalogo e vendite dal telefono. 390 CHF una tantum, zero commissioni.</p>
+                <a href="per-coltivatori.html" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-bold py-3.5 px-8 rounded-2xl shadow-lg transition">Scopri il gestionale per coltivatori</a>
+            </section>
+
+            <!-- Benefici per il coltivatore (argomenti di vendita, copy serrato) -->
+            <section aria-label="Benefici per il coltivatore" class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-md border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-black text-slate-900 dark:text-white mb-4" data-i18n="grower_title">Perché funziona: zero sbatti, più ordini</h3>
+                <ul class="space-y-4">
+                    <li class="flex gap-3 items-start">
+                        <span class="text-3xl leading-none" aria-hidden="true">📵</span>
+                        <div>
+                            <p class="font-black text-slate-900 dark:text-white" data-i18n="grower_b1_t">Meno telefonate</p>
+                            <p class="text-slate-500 dark:text-slate-400" data-i18n="grower_b1_d">Gli ordini arrivano già scritti su WhatsApp: niente chiamate a orari impossibili.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <span class="text-3xl leading-none" aria-hidden="true">📝</span>
+                        <div>
+                            <p class="font-black text-slate-900 dark:text-white" data-i18n="grower_b2_t">Ordini chiari</p>
+                            <p class="text-slate-500 dark:text-slate-400" data-i18n="grower_b2_d">Ogni richiesta è una lista precisa: cosa, quanto, consegna o ritiro. Zero fraintendimenti.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <span class="text-3xl leading-none" aria-hidden="true">📲</span>
+                        <div>
+                            <p class="font-black text-slate-900 dark:text-white" data-i18n="grower_b3_t">Niente app da installare</p>
+                            <p class="text-slate-500 dark:text-slate-400" data-i18n="grower_b3_d">I clienti ordinano dal browser del telefono. Pagano a consegna o ritiro.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Come funziona per i tuoi clienti: 3 passi visivi -->
+            <section aria-label="Come funziona" class="space-y-4">
+                <h3 class="text-xl font-black text-slate-800 dark:text-slate-200 tracking-wide px-1" data-i18n="how_title">Come funziona per i tuoi clienti</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 shadow-md border border-slate-200 dark:border-slate-700 text-center">
+                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-600 text-white text-lg font-black" aria-hidden="true">1</span>
+                        <div class="text-4xl my-3" aria-hidden="true">🧺</div>
+                        <h4 class="font-black text-lg text-slate-900 dark:text-white" data-i18n="how_1_t">Scegli</h4>
+                        <p class="text-slate-500 dark:text-slate-400 mt-1" data-i18n="how_1_d">Sfoglia i prodotti freschi e la dispensa dal telefono, aggiungi al carrello.</p>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 shadow-md border border-slate-200 dark:border-slate-700 text-center">
+                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-600 text-white text-lg font-black" aria-hidden="true">2</span>
+                        <div class="text-4xl my-3" aria-hidden="true">💬</div>
+                        <h4 class="font-black text-lg text-slate-900 dark:text-white" data-i18n="how_2_t">Invia su WhatsApp</h4>
+                        <p class="text-slate-500 dark:text-slate-400 mt-1" data-i18n="how_2_d">L'ordine parte come messaggio chiaro su WhatsApp. Niente account, niente app.</p>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 shadow-md border border-slate-200 dark:border-slate-700 text-center">
+                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-600 text-white text-lg font-black" aria-hidden="true">3</span>
+                        <div class="text-4xl my-3" aria-hidden="true">💶</div>
+                        <h4 class="font-black text-lg text-slate-900 dark:text-white" data-i18n="how_3_t">Ritira e paga</h4>
+                        <p class="text-slate-500 dark:text-slate-400 mt-1" data-i18n="how_3_d">Ritiro in orto o consegna a domicilio: si paga a consegna o ritiro.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- I MIEI ORDINI (solo su questo dispositivo, nessun invio) -->
+            <section aria-label="I miei ordini" class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-md border border-slate-200 dark:border-slate-700">
+                <h3 class="text-xl font-black text-slate-900 dark:text-white mb-4" data-i18n="my_orders">📦 I miei ordini</h3>
+                <div id="miei-ordini-lista" class="space-y-3"></div>
+            </section>
+
+            <!-- Tabs -->
+            <div class="flex p-1.5 bg-slate-200 dark:bg-slate-800 rounded-2xl shadow-inner">
+                <button onclick="switchTab('orto')" id="tab-orto" data-i18n="tab_orto" class="flex-1 py-3 text-lg font-bold rounded-xl bg-white dark:bg-slate-700 text-emerald-700 dark:text-emerald-400 shadow-sm transition">🌱 Orto Fresco</button>
+                <button onclick="switchTab('dispensa')" id="tab-dispensa" data-i18n="tab_dispensa" class="flex-1 py-3 text-lg font-bold rounded-xl text-slate-500 dark:text-slate-400 transition">🍯 Dispensa & Lavorati</button>
+            </div>
+
+            <!-- Tab Orto -->
+            <div id="content-orto" class="space-y-6">
+                <div class="relative">
+                    <span class="absolute left-4 top-4 text-slate-400 text-xl">🔍</span>
+                    <input type="text" id="search-bar" onkeyup="handleSearch(event)" data-i18n-ph="search_ph" data-i18n-aria="search_ph" placeholder="Cerca ortaggi (es. porro, carota, cipolla, patata)..." class="w-full pl-12 pr-4 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-lg focus:ring-2 focus:ring-emerald-500 dark:text-white shadow-sm">
+                </div>
+
+                <div class="flex justify-between items-center px-1">
+                    <h3 id="txt-disp-title" class="text-xl font-black text-slate-800 dark:text-slate-200 tracking-wide" data-i18n="dispTitle">Disponibili in Campo</h3>
+                    <button onclick="mostraMappa()" class="text-lg text-emerald-600 dark:text-emerald-400 font-bold hover:underline" data-i18n="open_map">🗺️ Apri Mappa Interattiva →</button>
+                </div>
+
+                <div id="home-products-list" class="space-y-4"></div>
+            </div>
+
+            <!-- Tab Dispensa -->
+            <div id="content-dispensa" class="hidden space-y-6">
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Box Orto -->
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                        <div>
+                            <div class="text-4xl mb-3">📦</div>
+                            <h4 class="font-black text-xl dark:text-white" data-i18n="d_box_title">Box Orto</h4>
+                            <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-1" data-i18n="d_box_weight">Peso stimato: 1 kg</p>
+                            <p class="text-base text-slate-500 dark:text-slate-400 mt-2 bg-slate-50 dark:bg-slate-700/50 p-3 rounded-xl border dark:border-slate-600"><span data-i18n="contains_label">Contiene:</span> <span id="box-orto-desc">Zucca bio, Zucca bio intera, Crema di zucca, Semi di zucca tostati</span></p>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between">
+                            <span class="text-xl font-black dark:text-white">15 €</span>
+                            <button onclick="aggiungiDispensaAlCarrello('Box Orto')" class="bg-emerald-600 text-white text-base font-bold px-4 py-2.5 rounded-xl shadow" data-i18n="add_btn">Aggiungi</button>
+                        </div>
+                    </div>
+
+                    <!-- Passata Artigianale -->
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                        <div>
+                            <div class="text-4xl mb-3">🍅</div>
+                            <h4 class="font-black text-xl dark:text-white" data-i18n="d_passata_title">Passata Artigianale</h4>
+                            <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-1" data-i18n="d_passata_size">Vaso da 700g</p>
+                            <p class="text-base text-slate-500 dark:text-slate-400 mt-2 bg-slate-50 dark:bg-slate-700/50 p-3 rounded-xl border dark:border-slate-600" data-i18n="d_passata_desc">Pomodori freschi a km0 bolliti e imbottigliati.</p>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between">
+                            <span class="text-xl font-black dark:text-white">5 €</span>
+                            <button onclick="aggiungiDispensaAlCarrello('Passata Artigianale')" class="bg-emerald-600 text-white text-base font-bold px-4 py-2.5 rounded-xl shadow" data-i18n="add_btn">Aggiungi</button>
+                        </div>
+                    </div>
+
+                    <!-- Pesto -->
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                        <div>
+                            <div class="text-4xl mb-3">🌿</div>
+                            <h4 class="font-black text-xl dark:text-white" data-i18n="d_pesto_title">Pesto Genovese</h4>
+                            <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-1" data-i18n="d_pesto_size">Vasetto da 200g</p>
+                            <p class="text-base text-slate-500 dark:text-slate-400 mt-2 bg-slate-50 dark:bg-slate-700/50 p-3 rounded-xl border dark:border-slate-600" data-i18n="d_pesto_desc">Basilico fresco, olio extravergine e pinoli.</p>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between">
+                            <span class="text-xl font-black dark:text-white">6 €</span>
+                            <button onclick="aggiungiDispensaAlCarrello('Pesto Genovese')" class="bg-emerald-600 text-white text-base font-bold px-4 py-2.5 rounded-xl shadow" data-i18n="add_btn">Aggiungi</button>
+                        </div>
+                    </div>
+
+                    <!-- Miele -->
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                        <div>
+                            <div class="text-4xl mb-3">🍯</div>
+                            <h4 class="font-black text-xl dark:text-white" data-i18n="d_miele_title">Miele Millefiori</h4>
+                            <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-1" data-i18n="d_miele_size">Vasetto da 500g</p>
+                            <p class="text-base text-slate-500 dark:text-slate-400 mt-2 bg-slate-50 dark:bg-slate-700/50 p-3 rounded-xl border dark:border-slate-600" data-i18n="d_miele_desc">Miele artigianale locale di montagna.</p>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between">
+                            <span class="text-xl font-black dark:text-white">8 €</span>
+                            <button onclick="aggiungiDispensaAlCarrello('Miele Millefiori')" class="bg-emerald-600 text-white text-base font-bold px-4 py-2.5 rounded-xl shadow" data-i18n="add_btn">Aggiungi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Widget Meteo Arcisate -->
+            <div id="meteo-widget" class="bg-gradient-to-r from-sky-500 to-indigo-600 text-white rounded-3xl p-6 shadow-md flex items-center justify-between">
+                <div>
+                    <span class="text-sm font-bold uppercase tracking-wider opacity-90" data-i18n="meteo_label">Lungavilla (PV) • Meteo Orto</span>
+                    <h4 id="meteo-cond" class="text-xl font-bold mt-1" data-i18n="meteo_loading">Caricamento meteo...</h4>
+                </div>
+                <div id="meteo-icon" class="text-5xl">🌤️</div>
+            </div>
+        </div>
+
+        <!-- VISTA MAPPA -->
+        <div id="view-map" class="hidden space-y-6">
+            <div class="flex justify-between items-center">
+                <button onclick="mostraHome()" data-i18n="back_home" class="bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xl font-bold py-3 px-6 rounded-2xl shadow-sm">
+                    ← Torna alla Home
+                </button>
+                <div class="flex gap-3">
+                    <button onclick="zoomMapButton(0.15)" aria-label="Ingrandisci mappa" data-i18n-aria="zoom_in" class="w-12 h-12 bg-white dark:bg-slate-800 border rounded-full text-2xl font-bold dark:text-white shadow">+</button>
+                    <button onclick="zoomMapButton(-0.15)" aria-label="Riduci mappa" data-i18n-aria="zoom_out" class="w-12 h-12 bg-white dark:bg-slate-800 border rounded-full text-2xl font-bold dark:text-white shadow">-</button>
+                </div>
+            </div>
+
+            <section class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 p-6">
+                <div class="text-center pb-4">
+                    <h2 class="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-wider" data-i18n="map_title">Mappa Interattiva Orto</h2>
+                    <p class="text-lg text-slate-400" data-i18n="map_sub">Scorri liberamente con un dito e usa due dita per zoomare dove preferisci.</p>
+                </div>
+                
+                <div class="overflow-auto hide-scrollbar max-h-[65vh] rounded-2xl bg-slate-50 dark:bg-slate-900 border p-4 inline-block w-full" id="map-scroll-container">
+                    <div id="map-zoom-wrapper" class="inline-block" style="zoom: 1;">
+                        <div class="flex gap-8 min-w-max">
+                            <div class="w-72">
+                                <div id="map-side-l-label" class="text-base font-extrabold text-center text-slate-400 mb-2" data-i18n="side_l">LATO SINISTRO (L1 - L60)</div>
+                                <div id="grid-sinistra" class="grid grid-cols-2 gap-2"></div>
+                            </div>
+                            <div class="w-10 bg-amber-100/50 dark:bg-amber-900/20 rounded-xl flex items-center justify-center border-x border-amber-200">
+                                <span class="text-base text-amber-600/50 font-black uppercase tracking-widest [writing-mode:vertical-lr]" data-i18n="path">Sentiero Principale</span>
+                            </div>
+                            <div class="w-72">
+                                <div id="map-side-r-label" class="text-base font-extrabold text-center text-slate-400 mb-2" data-i18n="side_r">LATO DESTRO (R1 - R60)</div>
+                                <div id="grid-destra" class="grid grid-cols-2 gap-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- PANNELLO DETTAGLIO CARRELLO -->
+    <div id="cart-details-panel" role="region" aria-labelledby="cart-panel-title" class="hidden fixed bottom-48 sm:bottom-28 left-4 right-4 max-w-4xl mx-auto bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 p-6 z-50 max-h-[50vh] overflow-y-auto space-y-4">
+        <div class="flex justify-between items-center border-b pb-3 dark:border-slate-700">
+            <h3 id="cart-panel-title" class="text-xl font-black text-emerald-700 dark:text-emerald-400" data-i18n="cart_title">🛒 Riepilogo Carrello</h3>
+            <button onclick="toggleCartView()" aria-label="Chiudi" data-i18n-aria="close" class="text-xl font-bold text-slate-500 hover:text-slate-700">✕</button>
+        </div>
+        <div id="cart-items-list" class="space-y-3"></div>
+    </div>
+
+    <!-- CTA WhatsApp sempre visibile (nascosta quando il carrello e' attivo: la barra inferiore ha gia' il pulsante Ordina) -->
+    <a id="wa-float" href="https://wa.me/39038376001?text=Ciao!%20Vorrei%20fare%20un%20ordine" target="_blank" rel="noopener" data-i18n-aria="wa_float" aria-label="Ordina su WhatsApp" class="fixed bottom-6 right-4 z-40 flex items-center gap-2 bg-[#25D366] hover:bg-[#1fb857] text-white font-black text-lg pl-4 pr-5 py-3.5 rounded-full shadow-2xl transition transform hover:scale-105 min-h-[56px]">
+        <span class="text-2xl" aria-hidden="true">&#x1F4AC;</span><span data-i18n="wa_float">Ordina su WhatsApp</span>
+    </a>
+
+    <!-- CARRELLO FISSO (BARRA INFERIORE) — mobile-first: riepilogo sopra, CTA sotto su mobile, affiancati su desktop.
+         La logica di visibilità (updateCartUI) non è stata toccata: la barra appare quando il carrello è attivo. -->
+    <div id="cart-bar" role="region" data-i18n-aria="cart_active" aria-label="Carrello attivo" class="fixed bottom-0 left-0 w-full bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-700 shadow-2xl px-5 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] transform translate-y-full transition-transform duration-300 z-50">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row sm:items-center gap-3">
+            <div class="min-w-0 flex-1">
+                <span class="block text-sm font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-widest" data-i18n="cart_active">Carrello Attivo</span>
+                <p id="cart-summary" aria-live="polite" class="text-lg font-bold text-slate-800 dark:text-slate-100 truncate">0 elementi selezionati</p>
+            </div>
+            <div class="flex items-center gap-3 flex-shrink-0">
+                <button onclick="toggleCartView()" id="cart-toggle-btn" data-i18n="view_cart" class="flex-1 sm:flex-none min-h-[52px] bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-white text-base font-bold py-3 px-4 rounded-2xl shadow hover:bg-slate-200 transition">
+                    Visualizza carrello
+                </button>
+                <button onclick="apriModalDelivery()" data-i18n="order" class="flex-1 sm:flex-none min-h-[52px] bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-bold py-3.5 px-6 rounded-2xl shadow-lg transition flex items-center justify-center gap-2">
+                    Ordina 💬
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL RIEPILOGO ORDINE (checkout, prima della scelta consegna) -->
+    <div id="riepilogo-modal" class="hidden fixed inset-0 z-[120] bg-black/60 flex items-center justify-center p-6" role="dialog" aria-modal="true" aria-labelledby="riepilogo-title">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-md w-full shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+            <h3 id="riepilogo-title" class="text-2xl font-black text-emerald-700 dark:text-emerald-400" data-i18n="checkout_summary">📋 Riepilogo ordine</h3>
+            <div id="riepilogo-righe" class="space-y-2 text-lg"></div>
+            <p class="text-xl font-black"><span data-i18n="checkout_total">Totale</span>: <span id="riepilogo-totale">0.00 €</span></p>
+            <div class="space-y-3">
+                <div>
+                    <label for="co-nome" class="block text-sm font-bold mb-1" data-i18n="checkout_name">Nome e cognome *</label>
+                    <input id="co-nome" type="text" autocomplete="name" class="w-full text-base border rounded-xl px-4 py-2.5 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label for="co-tel" class="block text-sm font-bold mb-1" data-i18n="checkout_phone">Telefono *</label>
+                    <input id="co-tel" type="tel" autocomplete="tel" placeholder="+39 ..." class="w-full text-base border rounded-xl px-4 py-2.5 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label for="co-data" class="block text-sm font-bold mb-1" data-i18n="checkout_date">Data ritiro/consegna *</label>
+                    <input id="co-data" type="date" class="w-full text-base border rounded-xl px-4 py-2.5 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label for="co-note" class="block text-sm font-bold mb-1" data-i18n="checkout_notes">Note (facoltative)</label>
+                    <textarea id="co-note" rows="2" class="w-full text-base border rounded-xl px-4 py-2.5 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+                </div>
+            </div>
+            <p id="riepilogo-errori" role="alert" class="hidden text-rose-600 font-bold"></p>
+            <div class="flex gap-3">
+                <button onclick="confermaRiepilogo()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-bold py-3.5 rounded-2xl shadow" data-i18n="checkout_continue">Continua →</button>
+                <button onclick="chiudiRiepilogo()" class="bg-slate-200 dark:bg-slate-700 font-bold py-3 px-4 rounded-2xl" data-i18n="cancel">Annulla</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL SCELTA CONSEGNA A DOMICILIO -->
+    <div id="delivery-modal" class="hidden fixed inset-0 z-[120] bg-black/60 flex items-center justify-center p-6">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-md w-full shadow-2xl space-y-6 text-center">
+            <div class="text-5xl mb-2">🚚</div>
+            <h3 class="text-2xl font-black text-emerald-700 dark:text-emerald-400" data-i18n="delivery_title">Modalità di Consegna</h3>
+            <p class="text-lg text-slate-600 dark:text-slate-300" data-i18n="delivery_q">Desideri la consegna a domicilio per questo ordine?</p>
+            <div class="flex flex-col gap-3 pt-2">
+                <button onclick="confermaCheckout('Consegna a domicilio')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-bold py-3.5 rounded-2xl shadow" data-i18n="delivery_yes">Sì, Consegna a domicilio</button>
+                <button onclick="confermaCheckout('Ritiro in orto')" class="bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white text-lg font-bold py-3.5 rounded-2xl shadow" data-i18n="delivery_no">No, Ritiro direttamente in orto</button>
+                <button onclick="chiudiModalDelivery()" class="text-slate-400 font-bold py-2" data-i18n="cancel">Annulla</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Admin Modifica Zolla (Con Data Semina) -->
+    <div id="admin-modal" class="hidden fixed inset-0 z-[110] bg-black/60 flex items-center justify-center p-6">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-md w-full shadow-2xl space-y-6">
+            <h3 class="text-2xl font-black text-emerald-700 dark:text-emerald-400" id="modal-strip-title" data-i18n="manage_plot">Gestisci Postazione</h3>
+            <div class="space-y-4 text-lg">
+                <div>
+                    <label class="block text-sm text-slate-400 font-bold mb-1" data-i18n="m_product">Prodotto (Porri, Carote, Cipolle, Patate):</label>
+                    <input type="text" id="modal-product" class="w-full border rounded-xl px-4 py-2.5 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 font-bold mb-1" data-i18n="m_qty">Quantità (es. n° piante o kg):</label>
+                    <input type="text" id="modal-quantity" class="w-full border rounded-xl px-4 py-2.5 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Es. 15 piante o 2 kg" data-i18n-ph="m_qty_ph">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 font-bold mb-1" data-i18n="m_sow">Data di Semina:</label>
+                    <input type="date" id="modal-sowing-date" class="w-full border rounded-xl px-4 py-2.5 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 font-bold mb-1" data-i18n="m_status">Stato:</label>
+                    <select id="modal-status" class="w-full border rounded-xl px-4 py-2.5 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500">
+                        <option value="disponibile" data-i18n="st_avail">Disponibile</option>
+                        <option value="prenotato" data-i18n="st_booked">Prenotato</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="salvaZollaAdmin()" class="flex-1 bg-emerald-600 text-white font-bold py-3 rounded-xl shadow" data-i18n="save">Salva</button>
+                <button onclick="eliminaZollaAdmin()" class="bg-rose-500 text-white font-bold py-3 px-4 rounded-xl shadow" data-i18n="empty">Svuota</button>
+                <button onclick="chiudiModalAdmin()" class="bg-slate-200 dark:bg-slate-700 font-bold py-3 px-4 rounded-xl" data-i18n="close">Chiudi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script>
+        // Archivio del browser pieno o bloccato: non deve mai fermare la demo
+        const archivioLocale = {
+            leggi(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+            scrivi(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } },
+            togli(k) { try { localStorage.removeItem(k); } catch (e) { /* niente archivio */ } },
+            ha(k) { try { return k in localStorage; } catch (e) { return false; } }
+        };
+        let ortoData = {};
+        let cart = new Set();
+        let boxOrtoContent = "Porri, Carote, Cipolle, Patate";
+        let currentLang = 'it';
+        let currentMapScale = 1;
+        let searchTimeout;
+        let isAdminLoggedIn = false;
+        let currentEditingStrip = null;
+        let initialPinchDistance = null;
+        let isCartViewOpen = false;
+        let ultimoMeteo = null;
+
+        // ===== SUPABASE: fonte dati condivisa tra admin e clienti =====
+        // I placeholder vengono riempiti al deploy. Finche' sono placeholder
+        // o il cloud non risponde, il sito usa localStorage come prima.
+        const SUPABASE_URL = 'https://poyodlfqxoprmictvmaj.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBveW9kbGZxeG9wcm1pY3R2bWFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA5NzM2ODEsImV4cCI6MjEwNjU0OTY4MX0.pcOHsGfrQwEQ3XwldYOoqviw_BMg55aPsJ4R6lF_Ks0';
+        const cloudCfgValida = typeof SUPABASE_URL === 'string' && SUPABASE_URL.indexOf('https://') === 0
+            && typeof SUPABASE_ANON_KEY === 'string' && SUPABASE_ANON_KEY.indexOf('__') !== 0;
+        let cloudDisponibile = false; // true quando le tabelle Supabase rispondono
+        let cloudScritturaFallita = false; // true se un salvataggio cloud e' fallito: mostra il banner solo-locale
+        let vendite = [];             // cache vendite (cloud o locale)
+        let chartVenditeGiorni = null, chartVenditeProdotti = null;
+        let chartVenditeSettimana = null, chartVenditeTop5 = null;
+        let chartVenditeMesi = null;
+        let chartJsPromise = null;
+
+        async function sb(path, opts) {
+            if (!cloudCfgValida) return null;
+            try {
+                const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, Object.assign({}, opts, {
+                    headers: Object.assign({
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+                        'Content-Type': 'application/json'
+                    }, (opts && opts.headers) || {})
+                }));
+                if (!res.ok) return null;
+                const txt = await res.text();
+                return txt ? JSON.parse(txt) : null;
+            } catch (e) { return null; }
+        }
+
+        const dizionario = {
+            it: {
+                heroTitle: "Il tuo Orto a KM 0",
+                heroDesc: "Scegli i prodotti freschi o esplora la dispensa con box e lavorati artigianali.",
+                dispTitle: "Disponibili in Campo",
+                tab_orto: "🌱 Orto Fresco",
+                tab_dispensa: "🍯 Dispensa & Lavorati",
+                search_ph: "Cerca ortaggi (es. porro, carota, cipolla, patata)...",
+                open_map: "🗺️ Apri Mappa Interattiva →",
+                add_btn: "Aggiungi",
+                meteo_label: "Lungavilla (PV) • Meteo Orto",
+                meteo_fallback: "Arcisate: 22°C, Clima Ideale",
+                map_title: "Mappa Interattiva Orto",
+                map_sub: "Scorri liberamente con un dito e usa due dita per zoomare dove preferisci.",
+                side_l: "LATO SINISTRO (L1 - L60)",
+                side_r: "LATO DESTRO (R1 - R60)",
+                path: "Sentiero Principale",
+                back_home: "← Torna alla Home",
+                cart_title: "🛒 Riepilogo Carrello",
+                cart_active: "Carrello Attivo",
+                item_selected: "elemento selezionato",
+                items_selected: "elementi selezionati",
+                view_cart: "Visualizza carrello",
+                remove: "Rimuovi",
+                hide_cart: "Nascondi il tuo carrello",
+                order: "Invia ordine su WhatsApp 💬",
+                wa_float: "Ordina su WhatsApp",
+                grower_title: "Perché funziona: zero sbatti, più ordini",
+                grower_b1_t: "Meno telefonate",
+                grower_b1_d: "Gli ordini arrivano già scritti su WhatsApp: niente chiamate a orari impossibili.",
+                grower_b2_t: "Ordini chiari",
+                grower_b2_d: "Ogni richiesta è una lista precisa: cosa, quanto, consegna o ritiro. Zero fraintendimenti.",
+                grower_b3_t: "Niente app da installare",
+                grower_b3_d: "I clienti ordinano dal browser del telefono. Pagano a consegna o ritiro.",
+                how_title: "Come funziona per i tuoi clienti",
+                how_1_t: "Scegli",
+                how_1_d: "Sfoglia i prodotti freschi e la dispensa dal telefono, aggiungi al carrello.",
+                how_2_t: "Invia su WhatsApp",
+                how_2_d: "L'ordine parte come messaggio chiaro su WhatsApp. Niente account, niente app.",
+                how_3_t: "Ritira e paga",
+                how_3_d: "Ritiro in orto o consegna a domicilio: si paga a consegna o ritiro.",
+                lang_aria: "Seleziona lingua",
+                delivery_title: "Modalità di Consegna",
+                delivery_q: "Desideri la consegna a domicilio per questo ordine?",
+                delivery_yes: "Sì, Consegna a domicilio",
+                delivery_no: "No, Ritiro direttamente in orto",
+                cancel: "Annulla",
+                admin_title: "📊 Dashboard & Gestione Orto (Admin)",
+                admin_pin_hint: "Inserisci il PIN per sbloccare la gestione completa.",
+                admin_enter: "Entra",
+                kpi_avail: "Disponibili",
+                kpi_booked: "Prenotate",
+                kpi_yield: "Resa Stimata",
+                box_edit_title: "📦 Modifica Contenuto Box Orto",
+                box_edit_label: "Cosa contiene il box:",
+                box_save: "Salva Contenuto Box",
+                export_csv: "📥 Esporta Report CSV Orto",
+                add_row: "➕ Aggiungi Nuova Fila all'Orto (L/R)",
+                manage_plot: "Gestisci Postazione",
+                m_product: "Prodotto (Porri, Carote, Cipolle, Patate):",
+                m_qty: "Quantità (es. n° piante o kg):",
+                m_sow: "Data di Semina:",
+                m_status: "Stato:",
+                st_avail: "Disponibile",
+                st_booked: "Prenotato",
+                save: "Salva",
+                empty: "Svuota",
+                close: "Chiudi",
+                zoom_in: "Ingrandisci mappa",
+                zoom_out: "Riduci mappa",
+                no_products: "Nessun prodotto disponibile.",
+                sown: "Semina",
+                harvest_eta: "Pronto previsto il:",
+                maturation: "Maturazione Raccolto",
+                field_hint: "{p} disponibili in campo (Clicca per vedere sulla mappa)",
+                toast_added: "{p} aggiunto al carrello!",
+                toast_all_selected: "Hai già selezionato tutte le postazioni disponibili di {p}.",
+                toast_removed: "{p} rimosso dal carrello.",
+                toast_decremented: "{p}: quantità ridotta.",
+                toast_none_in_cart: "Nessun elemento di {p} presente nel carrello.",
+                toast_item_removed: "Elemento rimosso dal carrello",
+                toast_cart_empty: "Il carrello è vuoto.",
+                toast_whatsapp: "Apertura WhatsApp completata!",
+                toast_admin_ok: "Accesso Admin Sbloccato!",
+                toast_pin_wrong: "PIN errato!",
+                toast_box_saved: "Contenuto Box Orto salvato!",
+                toast_plot_saved: "Postazione aggiornata con successo!",
+                toast_plot_cleared: "Postazione svuotata e resa disponibile.",
+                toast_rows_added: "Nuove file aggiunte all’orto!",
+                toast_csv: "Report CSV scaricato!",
+                d_box_title: "Box Orto",
+                d_box_weight: "Peso stimato: 1 kg",
+                contains_label: "Contiene:",
+                d_passata_title: "Passata Artigianale",
+                d_passata_size: "Vaso da 700g",
+                d_passata_desc: "Pomodori freschi a km0 bolliti e imbottigliati.",
+                d_pesto_title: "Pesto Genovese",
+                d_pesto_size: "Vasetto da 200g",
+                d_pesto_desc: "Basilico fresco, olio extravergine e pinoli.",
+                d_miele_title: "Miele Millefiori",
+                d_miele_size: "Vasetto da 500g",
+                d_miele_desc: "Miele artigianale locale di montagna.",
+                plants: "piante",
+                standard_qty: "Standard",
+                cart_dispensa_label: "Dispensa:",
+                cart_dispensa_total: "Totale dispensa",
+                m_qty_ph: "Es. 15 piante o 2 kg",
+                plot_label: "Postazione",
+                matures_in: "Matura tra {d} giorni",
+                mature_now: "Pronta per la raccolta",
+                dark_toggle: "Attiva/disattiva modalità scura",
+                meteo_loading: "Caricamento meteo...",
+                sales_title: "💰 Vendite",
+                sales_cloud_off: "☁️ Dati cloud non disponibili: le vendite restano salvate solo su questo dispositivo.",
+                sales_product: "Prodotto",
+                sales_qty: "Quantità",
+                sales_price: "Prezzo unitario (€)",
+                sales_notes: "Note (facoltative)",
+                sales_add: "➕ Aggiungi vendita",
+                sales_kpi_total: "Ricavo totale",
+                sales_kpi_count: "N. vendite",
+                sales_kpi_avg: "Scontrino medio",
+                sales_kpi_top: "Prodotto top",
+                sales_kpi_month: "Ricavo mese corrente",
+                sales_kpi_month_vs: "vs mese scorso",
+                sales_kpi_month_new: "primo mese con vendite",
+                sales_chart_days: "Ricavi per giorno (ultimi 30 giorni)",
+                sales_chart_products: "Ricavi per prodotto",
+                sales_col_date: "Data",
+                sales_col_product: "Prodotto",
+                sales_col_qty: "Q.tà",
+                sales_col_price: "Prezzo",
+                sales_col_total: "Totale",
+                sales_col_notes: "Note",
+                sales_delete: "Elimina",
+                sales_empty: "Nessuna vendita registrata.",
+                sales_confirm_delete: "Eliminare questa vendita?",
+                sales_delete_failed: "Eliminazione non riuscita: riprova.",
+                sales_added: "Vendita registrata!",
+                sales_need_fields: "Inserisci prodotto, quantità e prezzo.",
+                sales_filter_from: "Filtra da",
+                sales_filter_to: "Filtra a",
+                sales_export_csv: "📥 Esporta CSV vendite",
+                sales_filter_reset: "✕ Azzera",
+                sales_preset_today: "Oggi",
+                sales_preset_7d: "7 giorni",
+                sales_preset_30d: "30 giorni",
+                sales_preset_all: "Tutto",
+                sales_filter_info: "Mostrate {p} vendite nel periodo",
+                sales_filter_info_all: "Mostrate tutte le vendite",
+                sales_chart_week: "Ricavi per giorno della settimana",
+                sales_chart_top5: "Top 5 prodotti per ricavo",
+                sales_chart_months: "Ricavi per mese (ultimi 12 mesi)",
+                sales_col_qty2: "Q.tà tot.",
+                sales_col_revenue: "Ricavo",
+                sales_col_share: "Quota",
+                sales_csv_done: "CSV vendite scaricato!",
+                sales_synced: "Vendite offline sincronizzate ☁️",
+                checkout_summary: "📋 Riepilogo ordine",
+                checkout_total: "Totale",
+                checkout_name: "Nome e cognome *",
+                checkout_phone: "Telefono *",
+                checkout_date: "Data ritiro/consegna *",
+                checkout_notes: "Note (facoltative)",
+                checkout_continue: "Continua →",
+                co_err_nome: "Inserisci il tuo nome (almeno 2 caratteri).",
+                co_err_tel: "Inserisci un numero di telefono valido.",
+                co_err_data: "Scegli una data di ritiro/consegna (da oggi in poi).",
+                my_orders: "📦 I miei ordini",
+                my_orders_empty: "Nessun ordine ancora. Gli ordini confermati appariranno qui.",
+                my_orders_cancel: "Annulla ordine",
+                my_orders_cancel_confirm: "Annullare questo ordine?",
+                my_orders_picked: "Ho ritirato l'ordine",
+                my_orders_status_note: "Lo stato viene aggiornato dal coltivatore.",
+                st_ricevuto: "Ricevuto",
+                st_preparazione: "In preparazione",
+                st_pronto: "Pronto per il ritiro",
+                st_completato: "Completato",
+                st_annullato: "Annullato",
+                skip_link: "Vai al contenuto",
+            },
+            en: {
+                heroTitle: "Your Local Farm",
+                heroDesc: "Choose fresh products or explore the pantry with veg boxes and artisanal preserves.",
+                dispTitle: "Available in Field",
+                tab_orto: "🌱 Fresh Produce",
+                tab_dispensa: "🍯 Pantry & Preserves",
+                search_ph: "Search vegetables (e.g. leek, carrot, onion, potato)...",
+                open_map: "🗺️ Open Interactive Map →",
+                add_btn: "Add",
+                meteo_label: "Lungavilla (PV) • Garden Weather",
+                meteo_fallback: "Arcisate: 22°C, Perfect Weather",
+                map_title: "Interactive Garden Map",
+                map_sub: "Scroll freely with one finger and pinch to zoom wherever you like.",
+                side_l: "LEFT SIDE (L1 - L60)",
+                side_r: "RIGHT SIDE (R1 - R60)",
+                path: "Main Path",
+                back_home: "← Back to Home",
+                cart_title: "🛒 Cart Summary",
+                cart_active: "Active Cart",
+                item_selected: "item selected",
+                items_selected: "items selected",
+                view_cart: "View cart",
+                remove: "Remove",
+                hide_cart: "Hide your cart",
+                order: "Send order via WhatsApp 💬",
+                wa_float: "Order via WhatsApp",
+                grower_title: "Why it works: zero hassle, more orders",
+                grower_b1_t: "Fewer phone calls",
+                grower_b1_d: "Orders arrive as written WhatsApp messages — no calls at impossible hours.",
+                grower_b2_t: "Clear orders",
+                grower_b2_d: "Every request is a precise list: what, how much, delivery or pickup. No misunderstandings.",
+                grower_b3_t: "Nothing to install",
+                grower_b3_d: "Customers order from their phone's browser. They pay on delivery or pickup.",
+                how_title: "How it works for your customers",
+                how_1_t: "Choose",
+                how_1_d: "Browse fresh produce and pantry goods from your phone, add them to the cart.",
+                how_2_t: "Send via WhatsApp",
+                how_2_d: "Your order goes out as a clear WhatsApp message. No accounts, no apps.",
+                how_3_t: "Pick up and pay",
+                how_3_d: "Pickup at the garden or home delivery: payment on collection or delivery.",
+                lang_aria: "Select language",
+                delivery_title: "Delivery Method",
+                delivery_q: "Would you like home delivery for this order?",
+                delivery_yes: "Yes, home delivery",
+                delivery_no: "No, I'll pick it up at the garden",
+                cancel: "Cancel",
+                admin_title: "📊 Dashboard & Garden Management (Admin)",
+                admin_pin_hint: "Enter the PIN to unlock full management.",
+                admin_enter: "Enter",
+                kpi_avail: "Available",
+                kpi_booked: "Booked",
+                kpi_yield: "Est. Yield",
+                box_edit_title: "📦 Edit Veg Box Contents",
+                box_edit_label: "What's in the box:",
+                box_save: "Save Box Contents",
+                export_csv: "📥 Export Garden CSV Report",
+                add_row: "➕ Add New Garden Row (L/R)",
+                manage_plot: "Manage Plot",
+                m_product: "Product (Leeks, Carrots, Onions, Potatoes):",
+                m_qty: "Quantity (e.g. no. of plants or kg):",
+                m_sow: "Sowing Date:",
+                m_status: "Status:",
+                st_avail: "Available",
+                st_booked: "Booked",
+                save: "Save",
+                empty: "Clear",
+                close: "Close",
+                zoom_in: "Zoom in map",
+                zoom_out: "Zoom out map",
+                no_products: "No products available.",
+                sown: "Sown",
+                harvest_eta: "Expected ready:",
+                maturation: "Crop Maturation",
+                field_hint: "{p} available in the field (click to view on map)",
+                toast_added: "{p} added to cart!",
+                toast_all_selected: "You've already selected all available {p} plots.",
+                toast_removed: "{p} removed from cart.",
+                toast_decremented: "{p}: quantity decreased.",
+                toast_none_in_cart: "No {p} in the cart.",
+                toast_item_removed: "Item removed from cart",
+                toast_cart_empty: "The cart is empty.",
+                toast_whatsapp: "Opening WhatsApp done!",
+                toast_admin_ok: "Admin Access Unlocked!",
+                toast_pin_wrong: "Wrong PIN!",
+                toast_box_saved: "Veg Box contents saved!",
+                toast_plot_saved: "Plot updated successfully!",
+                toast_plot_cleared: "Plot cleared and made available.",
+                toast_rows_added: "New rows added to the garden!",
+                toast_csv: "CSV report downloaded!",
+                d_box_title: "Veg Box",
+                d_box_weight: "Est. weight: 1 kg",
+                contains_label: "Contains:",
+                d_passata_title: "Artisan Tomato Passata",
+                d_passata_size: "700g jar",
+                d_passata_desc: "Fresh local tomatoes, boiled and bottled.",
+                d_pesto_title: "Genovese Pesto",
+                d_pesto_size: "200g jar",
+                d_pesto_desc: "Fresh basil, extra virgin olive oil and pine nuts.",
+                d_miele_title: "Wildflower Honey",
+                d_miele_size: "500g jar",
+                d_miele_desc: "Local artisanal mountain honey.",
+                plants: "plants",
+                standard_qty: "Standard",
+                cart_dispensa_label: "Pantry:",
+                cart_dispensa_total: "Pantry subtotal",
+                m_qty_ph: "E.g. 15 plants or 2 kg",
+                plot_label: "Plot",
+                matures_in: "Ripens in {d} days",
+                mature_now: "Ready to harvest",
+                dark_toggle: "Toggle dark mode",
+                meteo_loading: "Loading weather...",
+                sales_title: "💰 Sales",
+                sales_cloud_off: "☁️ Cloud data unavailable: sales stay saved on this device only.",
+                sales_product: "Product",
+                sales_qty: "Quantity",
+                sales_price: "Unit price (€)",
+                sales_notes: "Notes (optional)",
+                sales_add: "➕ Add sale",
+                sales_kpi_total: "Total revenue",
+                sales_kpi_count: "Sales count",
+                sales_kpi_avg: "Average ticket",
+                sales_kpi_top: "Top product",
+                sales_chart_days: "Revenue per day (last 30 days)",
+                sales_chart_products: "Revenue by product",
+                sales_col_date: "Date",
+                sales_col_product: "Product",
+                sales_col_qty: "Qty",
+                sales_col_price: "Price",
+                sales_col_total: "Total",
+                sales_col_notes: "Notes",
+                sales_delete: "Delete",
+                sales_empty: "No sales recorded.",
+                sales_confirm_delete: "Delete this sale?",
+                sales_delete_failed: "Delete failed: please retry.",
+                sales_added: "Sale recorded!",
+                sales_need_fields: "Enter product, quantity and price.",
+                sales_kpi_month: "Revenue this month",
+                sales_kpi_month_vs: "vs last month",
+                sales_kpi_month_new: "first month with sales",
+                sales_chart_months: "Revenue per month (last 12 months)",
+                sales_preset_today: "Today",
+                sales_preset_7d: "7 days",
+                sales_preset_30d: "30 days",
+                sales_preset_all: "All",
+                sales_synced: "Offline sales synced ☁️",
+            },
+            de: {
+                heroTitle: "Dein Frisches Gemüse",
+                heroDesc: "Wähle frische Produkte oder entdecke die Vorratskammer mit Gemüsekisten und hausgemachten Spezialitäten.",
+                dispTitle: "Im Feld verfügbar",
+                tab_orto: "🌱 Frisches Gemüse",
+                tab_dispensa: "🍯 Vorratskammer & Eingemachtes",
+                search_ph: "Gemüse suchen (z. B. Lauch, Karotte, Zwiebel, Kartoffel)...",
+                open_map: "🗺️ Interaktive Karte öffnen →",
+                add_btn: "Hinzufügen",
+                meteo_label: "Lungavilla (PV) • Gartenwetter",
+                meteo_fallback: "Arcisate: 22°C, ideales Wetter",
+                map_title: "Interaktive Gartenkarte",
+                map_sub: "Mit einem Finger frei scrollen und mit zwei Fingern zoomen.",
+                side_l: "LINKE SEITE (L1 - L60)",
+                side_r: "RECHTE SEITE (R1 - R60)",
+                path: "Hauptweg",
+                back_home: "← Zurück zur Startseite",
+                cart_title: "🛒 Warenkorb",
+                cart_active: "Aktiver Warenkorb",
+                item_selected: "Artikel ausgewählt",
+                items_selected: "Artikel ausgewählt",
+                view_cart: "Warenkorb ansehen",
+                remove: "Entfernen",
+                hide_cart: "Warenkorb ausblenden",
+                order: "Bestellung via WhatsApp senden 💬",
+                wa_float: "Per WhatsApp bestellen",
+                grower_title: "Warum es funktioniert: null Aufwand, mehr Bestellungen",
+                grower_b1_t: "Weniger Anrufe",
+                grower_b1_d: "Bestellungen kommen als WhatsApp-Nachricht an — keine Anrufe zu unmöglichen Zeiten.",
+                grower_b2_t: "Klare Bestellungen",
+                grower_b2_d: "Jede Anfrage ist eine präzise Liste: was, wie viel, Lieferung oder Abholung. Keine Missverständnisse.",
+                grower_b3_t: "Nichts zu installieren",
+                grower_b3_d: "Kunden bestellen im Handy-Browser. Bezahlt wird bei Lieferung oder Abholung.",
+                how_title: "So einfach geht's für deine Kunden",
+                how_1_t: "Wählen",
+                how_1_d: "Frisches Gemüse und Vorratsprodukte direkt vom Handy auswählen und in den Warenkorb legen.",
+                how_2_t: "Per WhatsApp senden",
+                how_2_d: "Die Bestellung geht als klare WhatsApp-Nachricht raus. Kein Konto, keine App.",
+                how_3_t: "Abholen und zahlen",
+                how_3_d: "Abholung im Garten oder Lieferung nach Hause: bezahlt wird bei Abholung oder Lieferung.",
+                lang_aria: "Sprache wählen",
+                delivery_title: "Lieferart",
+                delivery_q: "Möchten Sie diese Bestellung nach Hause geliefert bekommen?",
+                delivery_yes: "Ja, Lieferung nach Hause",
+                delivery_no: "Nein, Abholung im Garten",
+                cancel: "Abbrechen",
+                admin_title: "📊 Dashboard & Gartenverwaltung (Admin)",
+                admin_pin_hint: "PIN eingeben, um die Verwaltung freizuschalten.",
+                admin_enter: "Einloggen",
+                kpi_avail: "Verfügbar",
+                kpi_booked: "Reserviert",
+                kpi_yield: "Gesch. Ertrag",
+                box_edit_title: "📦 Gemüsekisten-Inhalt bearbeiten",
+                box_edit_label: "Inhalt der Kiste:",
+                box_save: "Kisteninhalt speichern",
+                export_csv: "📥 Garten-CSV-Bericht exportieren",
+                add_row: "➕ Neue Gartenreihe hinzufügen (L/R)",
+                manage_plot: "Parzelle verwalten",
+                m_product: "Produkt (Lauch, Karotten, Zwiebeln, Kartoffeln):",
+                m_qty: "Menge (z. B. Anzahl Pflanzen oder kg):",
+                m_sow: "Aussaatdatum:",
+                m_status: "Status:",
+                st_avail: "Verfügbar",
+                st_booked: "Reserviert",
+                save: "Speichern",
+                empty: "Leeren",
+                close: "Schließen",
+                zoom_in: "Karte vergrößern",
+                zoom_out: "Karte verkleinern",
+                no_products: "Keine Produkte verfügbar.",
+                sown: "Aussaat",
+                harvest_eta: "Voraussichtlich bereit:",
+                maturation: "Reifung",
+                field_hint: "{p} auf dem Feld verfügbar (klicken für Karte)",
+                toast_added: "{p} zum Warenkorb hinzugefügt!",
+                toast_all_selected: "Du hast bereits alle verfügbaren {p}-Parzellen ausgewählt.",
+                toast_removed: "{p} aus dem Warenkorb entfernt.",
+                toast_decremented: "{p}: Menge reduziert.",
+                toast_none_in_cart: "Keine {p} im Warenkorb.",
+                toast_item_removed: "Artikel aus dem Warenkorb entfernt",
+                toast_cart_empty: "Der Warenkorb ist leer.",
+                toast_whatsapp: "WhatsApp wird geöffnet!",
+                toast_admin_ok: "Admin-Zugang freigeschaltet!",
+                toast_pin_wrong: "Falscher PIN!",
+                toast_box_saved: "Gemüsekisten-Inhalt gespeichert!",
+                toast_plot_saved: "Parzelle erfolgreich aktualisiert!",
+                toast_plot_cleared: "Parzelle geleert und verfügbar gemacht.",
+                toast_rows_added: "Neue Reihen zum Garten hinzugefügt!",
+                toast_csv: "CSV-Bericht heruntergeladen!",
+                d_box_title: "Gemüsekiste",
+                d_box_weight: "Gesch. Gewicht: 1 kg",
+                contains_label: "Enthält:",
+                d_passata_title: "Hausgemachte Tomatenpassata",
+                d_passata_size: "700g Glas",
+                d_passata_desc: "Frische Tomaten aus der Region, eingekocht und abgefüllt.",
+                d_pesto_title: "Genovesisches Pesto",
+                d_pesto_size: "200g Glas",
+                d_pesto_desc: "Frisches Basilikum, natives Olivenöl extra und Pinienkerne.",
+                d_miele_title: "Blütenhonig",
+                d_miele_size: "500g Glas",
+                d_miele_desc: "Hausgemachter Berghonig aus der Region.",
+                plants: "Pflanzen",
+                standard_qty: "Standard",
+                cart_dispensa_label: "Vorratskammer:",
+                cart_dispensa_total: "Zwischensumme Vorratskammer",
+                m_qty_ph: "Z. B. 15 Pflanzen oder 2 kg",
+                plot_label: "Parzelle",
+                matures_in: "Reift in {d} Tagen",
+                mature_now: "Erntebereit",
+                dark_toggle: "Dunkelmodus umschalten",
+                meteo_loading: "Wetter wird geladen...",
+                sales_title: "💰 Verkäufe",
+                sales_cloud_off: "☁️ Cloud-Daten nicht verfügbar: Verkäufe bleiben nur auf diesem Gerät gespeichert.",
+                sales_product: "Produkt",
+                sales_qty: "Menge",
+                sales_price: "Stückpreis (€)",
+                sales_notes: "Notizen (optional)",
+                sales_add: "➕ Verkauf hinzufügen",
+                sales_kpi_total: "Gesamtumsatz",
+                sales_kpi_count: "Anz. Verkäufe",
+                sales_kpi_avg: "Ø Bon",
+                sales_kpi_top: "Top-Produkt",
+                sales_chart_days: "Umsatz pro Tag (letzte 30 Tage)",
+                sales_chart_products: "Umsatz nach Produkt",
+                sales_col_date: "Datum",
+                sales_col_product: "Produkt",
+                sales_col_qty: "Menge",
+                sales_col_price: "Preis",
+                sales_col_total: "Gesamt",
+                sales_col_notes: "Notizen",
+                sales_delete: "Löschen",
+                sales_empty: "Keine Verkäufe erfasst.",
+                sales_confirm_delete: "Diesen Verkauf löschen?",
+                sales_delete_failed: "Löschen fehlgeschlagen: erneut versuchen.",
+                sales_added: "Verkauf erfasst!",
+                sales_need_fields: "Produkt, Menge und Preis eingeben.",
+                sales_kpi_month: "Umsatz laufender Monat",
+                sales_kpi_month_vs: "vs Vormonat",
+                sales_kpi_month_new: "erster Monat mit Verkäufen",
+                sales_chart_months: "Umsatz pro Monat (letzte 12 Monate)",
+                sales_preset_today: "Heute",
+                sales_preset_7d: "7 Tage",
+                sales_preset_30d: "30 Tage",
+                sales_preset_all: "Alle",
+                sales_synced: "Offline-Verkäufe synchronisiert ☁️",
+            }
+        };
+
+        function t(key, param) {
+            const lang = dizionario[currentLang] || dizionario.it;
+            let s = (lang[key] !== undefined) ? lang[key] : (dizionario.it[key] || key);
+            if (param !== undefined) s = s.replace('{p}', param);
+            return s;
+        }
+
+        function applicaTraduzioni() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                el.textContent = t(el.getAttribute('data-i18n'));
+            });
+            if (currentEditingStrip) {
+                document.getElementById('modal-strip-title').innerText = `${t('manage_plot')} ${currentEditingStrip}`;
+            }
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                el.placeholder = t(el.getAttribute('data-i18n-ph'));
+            });
+            document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+                el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+            });
+            const summary = document.getElementById('cart-summary');
+            if (summary) summary.innerText = cart.size === 1 ? `1 ${t('item_selected')}` : `${cart.size} ${t('items_selected')}`;
+            const btn = document.getElementById('cart-toggle-btn');
+            if (btn) btn.innerText = isCartViewOpen ? t('hide_cart') : t('view_cart');
+            aggiornaEtichetteLati();
+        }
+
+        function normalizzaTesto(s) {
+            return (s || '').toLowerCase().replace(/[aeiou]$/, '');
+        }
+
+        // Sicurezza: i nomi prodotto sono testo libero inserito dall'admin via modal.
+        // Non devono mai diventare HTML o sorgente JS eseguibile: niente
+        // interpolazione di stringhe in onclick inline (le entity HTML come &#39;
+        // vengono decodificate dal parser PRIMA che JS veda l'attributo).
+        // Regola: dati utente -> data-* letti via dataset + escapeHtml in output.
+        function escapeHtml(s) {
+            return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+        function escapeAttr(s) {
+            return escapeHtml(s).replace(/`/g, '&#96;');
+        }
+
+        // "YYYY-MM-DD" -> mezzanotte locale. new Date("YYYY-MM-DD") e' UTC:
+        // nei fusi orari negativi la data slitta al giorno prima.
+        function parseDataLocale(iso) {
+            const s = String(iso || '');
+            return new Date(s.includes('T') ? s : s + 'T00:00:00');
+        }
+
+        function categoriaMeteo(code) {
+            if (code === 0) return 'sereno';
+            if (code <= 3) return 'nuvoloso';
+            if (code <= 48) return 'nebbia';
+            if (code <= 67) return 'pioggia';
+            if (code <= 77) return 'neve';
+            if (code <= 82) return 'rovesci';
+            return 'temporale';
+        }
+
+        const meteoDesc = {
+            it: { sereno: 'Sereno', nuvoloso: 'Poco nuvoloso', nebbia: 'Nebbia', pioggia: 'Pioggia', neve: 'Neve', rovesci: 'Rovesci', temporale: 'Temporale' },
+            en: { sereno: 'Clear', nuvoloso: 'Partly cloudy', nebbia: 'Fog', pioggia: 'Rain', neve: 'Snow', rovesci: 'Showers', temporale: 'Thunderstorm' },
+            de: { sereno: 'Klar', nuvoloso: 'Teils bewölkt', nebbia: 'Nebel', pioggia: 'Regen', neve: 'Schnee', rovesci: 'Schauer', temporale: 'Gewitter' }
+        };
+
+        const meteoIcone = { sereno: '☀️', nuvoloso: '⛅', nebbia: '🌫️', pioggia: '🌧️', neve: '❄️', rovesci: '🌦️', temporale: '⛈️' };
+
+        function localeData() {
+            return currentLang === 'de' ? 'de-DE' : currentLang === 'en' ? 'en-GB' : 'it-IT';
+        }
+
+        function formattaDataISO(iso) {
+            const d = parseDataLocale(iso);
+            if (isNaN(d)) return iso;
+            return d.toLocaleDateString(localeData(), { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        function traduceQuantita(q) {
+            return (q || '').replace(/\bpiante\b/gi, t('plants'));
+        }
+
+
+        function getGiorniMaturazioneStandard(nome) {
+            const n = nome.toLowerCase();
+            if (n.includes('carot')) return 75;   // ~75 giorni per le carote
+            if (n.includes('patat')) return 100;  // ~100 giorni per le patate
+            if (n.includes('cipoll')) return 90;  // ~90 giorni per le cipolle
+            if (n.includes('porro')) return 130;  // ~130 giorni per i porri
+            return 80;
+        }
+
+        function giorniAllaMaturazione(item) {
+            if(!item || !item.dataInserimento || !item.giorniMaturazione) return null;
+            const inizio = new Date(item.dataInserimento + 'T00:00:00');
+            if(isNaN(inizio.getTime())) return null;
+            const oggi = new Date(); oggi.setHours(0,0,0,0);
+            const passati = Math.floor((oggi - inizio) / 86400000);
+            return item.giorniMaturazione - passati;
+        }
+
+        function testoMaturazione(item) {
+            const g = giorniAllaMaturazione(item);
+            if(g === null) return '';
+            if(g <= 0) return '✅ ' + t('mature_now');
+            return '🌱 ' + t('matures_in').replace('{d}', g);
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if(!container) return;
+            const toast = document.createElement('div');
+            const isSuccess = type === 'success';
+            toast.className = `${isSuccess ? 'bg-emerald-600' : 'bg-rose-500'} text-white px-5 py-4 rounded-2xl shadow-xl flex items-center gap-3 text-lg font-bold toast-enter pointer-events-auto`;
+            // Il messaggio puo' contenere nomi prodotto inseriti dall'admin: escape obbligatorio
+            toast.innerHTML = `<span>${isSuccess ? '✓' : '✕'}</span> ${escapeHtml(message)}`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.classList.replace('toast-enter', 'toast-exit'); setTimeout(() => toast.remove(), 300); }, 3000);
+        }
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            archivioLocale.scrivi('theme', isDark ? 'dark' : 'light');
+            document.getElementById('dark-mode-icon').innerText = isDark ? '☀️' : '🌙';
+        }
+
+        function cambiaLingua(lang) {
+            currentLang = lang;
+            archivioLocale.scrivi('lang', lang);
+            document.documentElement.lang = lang;
+            document.getElementById('lang-selector').value = lang;
+            applicaTraduzioni();
+            renderMeteo();
+            renderHomeProducts(document.getElementById('search-bar').value.toLowerCase());
+            updateCartUI();
+        }
+
+        async function caricaMeteoArcisate() {
+            try {
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=45.85&longitude=8.86&current=temperature_2m,weather_code');
+                const data = await res.json();
+                ultimoMeteo = { temp: data.current.temperature_2m, code: data.current.weather_code };
+            } catch (e) {
+                ultimoMeteo = null;
+            }
+            renderMeteo();
+        }
+
+        function renderMeteo() {
+            const condEl = document.getElementById('meteo-cond');
+            const iconEl = document.getElementById('meteo-icon');
+            if (!condEl) return;
+            if (ultimoMeteo) {
+                const cat = categoriaMeteo(ultimoMeteo.code);
+                condEl.innerText = `Arcisate: ${ultimoMeteo.temp}°C, ${meteoDesc[currentLang][cat]}`;
+                if (iconEl) iconEl.innerText = meteoIcone[cat];
+            } else {
+                condEl.innerText = t('meteo_fallback');
+            }
+        }
+
+        function getEmoji(nome) {
+            const n = nome.toLowerCase();
+            if(n.includes('porro')) return '🧅';
+            if(n.includes('carot')) return '🥕';
+            if(n.includes('cipoll')) return '🧄';
+            if(n.includes('patat')) return '🥔';
+            return '🌱';
+        }
+
+        function getColor(nome) {
+            const n = nome.toLowerCase();
+            if (n.includes('carot')) return 'bg-orange-500 text-white border-orange-600';
+            if (n.includes('patat')) return 'bg-amber-600 text-white border-amber-700';
+            if (n.includes('cipoll')) return 'bg-purple-500 text-white border-purple-600';
+            return 'bg-emerald-500 text-white border-emerald-600'; 
+        }
+
+        function calcolaProgressoEDataRaccolto(dataSeminaStr, giorniMaturazione) {
+            const semina = parseDataLocale(dataSeminaStr);
+            if (isNaN(semina.getTime())) {
+                return { perc: '0', color: 'bg-slate-300', dataRaccoltoStr: String(dataSeminaStr || ''), pronto: false };
+            }
+            const raccolta = new Date(semina.getTime());
+            raccolta.setDate(raccolta.getDate() + giorniMaturazione);
+            
+            const oggi = new Date();
+            oggi.setHours(0,0,0,0);
+            
+            const trascorsi = Math.floor((oggi - semina) / (1000 * 60 * 60 * 24));
+            let perc = Math.max(0, Math.min(100, (trascorsi / giorniMaturazione) * 100));
+            let color = perc < 30 ? 'bg-rose-500' : perc >= 95 ? 'bg-emerald-500' : 'bg-amber-500';
+            
+            const options = { day: 'numeric', month: 'short', year: 'numeric' };
+            const dataRaccoltoFormattata = raccolta.toLocaleDateString(currentLang === 'de' ? 'de-DE' : currentLang === 'en' ? 'en-GB' : 'it-IT', options);
+            
+            return { 
+                perc: perc.toFixed(0), 
+                color, 
+                dataRaccoltoStr: dataRaccoltoFormattata,
+                pronto: trascorsi >= giorniMaturazione
+            };
+        }
+
+        function switchTab(tab) {
+            document.getElementById('content-orto').classList.toggle('hidden', tab !== 'orto');
+            document.getElementById('content-dispensa').classList.toggle('hidden', tab !== 'dispensa');
+            document.getElementById('tab-orto').className = tab === 'orto' ? "flex-1 py-3 text-lg font-bold rounded-xl bg-white dark:bg-slate-700 text-emerald-700 dark:text-emerald-400 shadow-sm" : "flex-1 py-3 text-lg font-bold rounded-xl text-slate-500 dark:text-slate-400";
+            document.getElementById('tab-dispensa').className = tab === 'dispensa' ? "flex-1 py-3 text-lg font-bold rounded-xl bg-white dark:bg-slate-700 text-emerald-700 dark:text-emerald-400 shadow-sm" : "flex-1 py-3 text-lg font-bold rounded-xl text-slate-500 dark:text-slate-400";
+        }
+
+        function clampMapScale(s) {
+            return Math.max(0.6, Math.min(2.5, s));
+        }
+
+        // Zoom ancorato a un punto: il contenuto sotto (centerX, centerY) resta fermo.
+        // La proprieta' CSS zoom ridimensiona anche il layout/scroll del contenitore,
+        // evitando lo spazio vuoto o il taglio che transform: scale() lasciava
+        // (il transform non modifica le dimensioni di layout usate dallo scroll).
+        function zoomMapTo(newScale, centerX, centerY) {
+            const container = document.getElementById('map-scroll-container');
+            const wrapper = document.getElementById('map-zoom-wrapper');
+            if(!container || !wrapper) return;
+            newScale = clampMapScale(newScale);
+            if(newScale === currentMapScale) return;
+            const rect = wrapper.getBoundingClientRect();
+            const lx = (centerX - rect.left) / currentMapScale;
+            const ly = (centerY - rect.top) / currentMapScale;
+            container.scrollLeft += lx * (newScale - currentMapScale);
+            container.scrollTop += ly * (newScale - currentMapScale);
+            currentMapScale = newScale;
+            wrapper.style.zoom = newScale;
+        }
+
+        window.zoomMapButton = function(delta) {
+            const container = document.getElementById('map-scroll-container');
+            const r = container.getBoundingClientRect();
+            zoomMapTo(currentMapScale + delta, r.left + r.width / 2, r.top + r.height / 2);
+        };
+
+        function initAdvancedTouchZoom() {
+            const container = document.getElementById('map-scroll-container');
+            const wrapper = document.getElementById('map-zoom-wrapper');
+            if(!container || !wrapper) return;
+
+            container.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 2) {
+                    initialPinchDistance = Math.hypot(
+                        e.touches[0].pageX - e.touches[1].pageX,
+                        e.touches[0].pageY - e.touches[1].pageY
+                    );
+                }
+            }, { passive: true });
+
+            container.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 2) {
+                    // Blocca lo zoom nativo del browser: il pinch vale solo per la mappa
+                    e.preventDefault();
+                    if (initialPinchDistance !== null) {
+                        const currentDistance = Math.hypot(
+                            e.touches[0].pageX - e.touches[1].pageX,
+                            e.touches[0].pageY - e.touches[1].pageY
+                        );
+
+                        const factor = currentDistance / initialPinchDistance;
+                        if (factor > 0) {
+                            // Punto medio del pinch: lo zoom resta ancorato alle dita,
+                            // non all'angolo in alto a sinistra
+                            const mx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                            const my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                            zoomMapTo(currentMapScale * factor, mx, my);
+                            initialPinchDistance = currentDistance;
+                        }
+                    }
+                }
+            }, { passive: false });
+
+            container.addEventListener('touchend', (e) => {
+                if (e.touches.length < 2) {
+                    initialPinchDistance = null;
+                }
+            }, { passive: true });
+
+            // Safari iOS: blocca il pinch-zoom nativo della pagina sulla mappa
+            container.addEventListener('gesturestart', (e) => e.preventDefault());
+            container.addEventListener('gesturechange', (e) => e.preventDefault());
+        }
+
+        window.handleSearch = function(e) {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => renderHomeProducts(e.target.value.toLowerCase()), 200);
+        };
+
+        window.mostraHome = function() {
+            document.getElementById('view-home').classList.remove('hidden');
+            document.getElementById('view-map').classList.add('hidden');
+            renderHomeProducts();
+        };
+
+        window.mostraMappa = function(targetStripId = null) {
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-map').classList.remove('hidden');
+            renderMappa();
+            
+            if(targetStripId) {
+                setTimeout(() => {
+                    const el = document.getElementById(`strip-${targetStripId}`);
+                    if(el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+                        el.classList.add('ring-8', 'ring-amber-400', 'scale-125');
+                        setTimeout(() => el.classList.remove('ring-8', 'ring-amber-400', 'scale-125'), 2000);
+                    }
+                }, 150);
+            }
+        };
+
+        function contaElementiNelCarrelloPerProdotto(nomeProdotto) {
+            let count = 0;
+            cart.forEach(id => {
+                if(ortoData[id] && ortoData[id].prodotto === nomeProdotto) count++;
+            });
+            return count;
+        }
+
+        function renderHomeProducts(filter = '') {
+            const container = document.getElementById('home-products-list');
+            container.innerHTML = '';
+            const agg = {};
+
+            for (const key in ortoData) {
+                const item = ortoData[key];
+                if (item.stato === 'disponibile' && normalizzaTesto(item.prodotto).includes(normalizzaTesto(filter))) {
+                    if (!agg[item.prodotto]) agg[item.prodotto] = { ...item, count: 0, ids: [] };
+                    agg[item.prodotto].count++;
+                    agg[item.prodotto].ids.push(item.id);
+                }
+            }
+
+            const arr = Object.values(agg);
+            if(arr.length === 0) {
+                container.innerHTML = `<div class="p-8 text-center text-slate-400 text-lg">${t('no_products')}</div>`;
+                return;
+            }
+
+            container.innerHTML = arr.map(prod => {
+                const datiMat = calcolaProgressoEDataRaccolto(prod.dataInserimento, prod.giorniMaturazione);
+                const emoji = getEmoji(prod.prodotto);
+                // Nome prodotto via data-* (dataset = stringa sicura) + escape in output.
+                const prodAttr = escapeAttr(prod.prodotto);
+                const prodHtml = escapeHtml(prod.prodotto);
+                const idsAttr = escapeAttr(prod.ids.join(','));
+                const qtyInCart = contaElementiNelCarrelloPerProdotto(prod.prodotto);
+                const quantitaTesto = prod.quantita ? `(${escapeHtml(traduceQuantita(prod.quantita))})` : '';
+                
+                const actionButtons = isAdminLoggedIn ? '' : `
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button data-prod="${prodAttr}" data-ids="${idsAttr}" onclick="event.stopPropagation(); rimuoviProdottoPerNome(this.dataset.prod, this.dataset.ids)" aria-label="${t('remove')} ${prodAttr}" class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300 font-black text-xl flex items-center justify-center hover:bg-rose-200 transition">-</button>
+                        <span class="text-xl font-black w-6 text-center dark:text-white">${qtyInCart}</span>
+                        <button data-prod="${prodAttr}" data-ids="${idsAttr}" onclick="event.stopPropagation(); aggiungiProdottoPerNome(this.dataset.prod, this.dataset.ids)" aria-label="${t('add_btn')} ${prodAttr}" class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 font-black text-xl flex items-center justify-center hover:bg-emerald-200 transition">+</button>
+                    </div>
+                `;
+
+                return `
+                    <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 shadow-md border border-slate-200 dark:border-slate-700 space-y-4">
+                        <div class="flex justify-between items-center gap-2 cursor-pointer" data-prod="${prodAttr}" onclick="vaiAllaMappaPerProdotto(this.dataset.prod)">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <span class="text-4xl shrink-0">${emoji}</span>
+                                <div class="min-w-0">
+                                    <h4 class="font-black text-xl text-slate-900 dark:text-white break-words">${prodHtml} <span class="text-base text-slate-400 font-normal">${quantitaTesto}</span></h4>
+                                    <span class="text-base text-emerald-600 font-bold">${t('field_hint', prod.count)}</span>
+                                </div>
+                            </div>
+                            ${actionButtons}
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-sm font-bold text-slate-500 dark:text-slate-400">
+                                <span>${t('sown')}: ${formattaDataISO(prod.dataInserimento)}</span>
+                                <span class="text-emerald-600 dark:text-emerald-400">${t('harvest_eta')} <strong>${datiMat.dataRaccoltoStr}</strong></span>
+                            </div>
+                            <div class="flex justify-between text-sm text-slate-400 mb-1 font-bold">
+                                <span>${t('maturation')}</span>
+                                <span>${datiMat.perc}%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                                <div class="${datiMat.color} h-2.5 rounded-full transition-all duration-500" style="width: ${datiMat.perc}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.vaiAllaMappaPerProdotto = function(nomeProdotto) {
+            for(let id in ortoData) {
+                if(ortoData[id].prodotto === nomeProdotto && ortoData[id].stato === 'disponibile') {
+                    mostraMappa(id);
+                    return;
+                }
+            }
+            mostraMappa();
+        };
+
+        window.aggiungiProdottoPerNome = function(nome, idsStr) {
+            const ids = idsStr.split(',');
+            const idDaAgg = ids.find(id => !cart.has(id));
+            if(idDaAgg) {
+                cart.add(idDaAgg);
+                updateCartUI();
+                renderHomeProducts(document.getElementById('search-bar').value.toLowerCase());
+                showToast(t('toast_added', nome), 'success');
+            } else {
+                showToast(t('toast_all_selected', nome), 'error');
+            }
+        };
+
+        window.rimuoviProdottoPerNome = function(nome, idsStr) {
+            const ids = idsStr.split(',');
+            const idDaRimuovere = ids.find(id => cart.has(id));
+            if(idDaRimuovere) {
+                cart.delete(idDaRimuovere);
+                updateCartUI();
+                renderHomeProducts(document.getElementById('search-bar').value.toLowerCase());
+                const rimasti = contaElementiNelCarrelloPerProdotto(nome);
+                showToast(t(rimasti > 0 ? 'toast_decremented' : 'toast_removed', nome), 'success');
+            } else {
+                showToast(t('toast_none_in_cart', nome), 'error');
+            }
+        };
+
+        // Prezzi dei prodotti dispensa: devono restare coerenti con le card nella tab Dispensa.
+        const PREZZI_DISPENSA = { 'Box Orto': 15, 'Passata Artigianale': 5, 'Pesto Genovese': 6, 'Miele Millefiori': 8 };
+
+        // ID dispensa = "DISPENSA_<timestamp>_<nome>": il nome puo' contenere "_"
+        function nomeDispensaDaId(id) {
+            return id.split('_').slice(2).join('_') || 'Prodotto Dispensa';
+        }
+
+        function prezzoDispensaDaId(id) {
+            const p = PREZZI_DISPENSA[nomeDispensaDaId(id)];
+            return (typeof p === 'number') ? p : 0;
+        }
+
+        // Totale dei soli prodotti dispensa (le strisce dell'orto non hanno prezzo unitario)
+        function totaleDispensa() {
+            let tot = 0;
+            cart.forEach(id => { if(!ortoData[id]) tot += prezzoDispensaDaId(id); });
+            return tot;
+        }
+
+        window.aggiungiDispensaAlCarrello = function(nome) {
+            cart.add(`DISPENSA_${Date.now()}_${nome}`);
+            updateCartUI();
+            showToast(t('toast_added', nome), 'success');
+        };
+
+        function maxIndiceStriscia(prefisso) {
+            let m = 60;
+            for (const k in ortoData) {
+                if (k.startsWith(prefisso)) {
+                    const n = parseInt(k.slice(prefisso.length), 10);
+                    if (!isNaN(n) && n > m) m = n;
+                }
+            }
+            return m;
+        }
+
+        // Aggiorna le etichette "LATO SINISTRO (L1 - Lxx)" quando l'admin
+        // aggiunge file oltre L60/R60 (rispetta la lingua corrente).
+        function aggiornaEtichetteLati() {
+            const cfg = { 'map-side-l-label': ['L', 'side_l'], 'map-side-r-label': ['R', 'side_r'] };
+            for (const id in cfg) {
+                const el = document.getElementById(id);
+                if (!el) continue;
+                const [pref, key] = cfg[id];
+                const m = maxIndiceStriscia(pref);
+                let base = t(key);
+                if (m > 60) base = base.replace(/\(\w1 - \w60\)/, `(${pref}1 - ${pref}${m})`);
+                el.textContent = base;
+            }
+        }
+
+        function renderMappa() {
+            const l = document.getElementById('grid-sinistra');
+            const r = document.getElementById('grid-destra');
+            if(!l || !r) return;
+            l.innerHTML = ''; r.innerHTML = '';
+            // Niente piu' ciclo fisso a 60: le file aggiunte dall'admin
+            // (L61+, R61+, ...) prima erano invisibili sulla mappa.
+            for (let i = 1; i <= maxIndiceStriscia('L'); i++) l.innerHTML += createCell(ortoData[`L${i}`]);
+            for (let i = 1; i <= maxIndiceStriscia('R'); i++) r.innerHTML += createCell(ortoData[`R${i}`]);
+            aggiornaEtichetteLati();
+        }
+
+        function createCell(item) {
+            if(!item) return '';
+            const isAvail = item.stato === 'disponibile';
+            const inCart = cart.has(item.id);
+            const emoji = getEmoji(item.prodotto);
+            let cls = "h-24 rounded-2xl border-2 flex flex-col items-center justify-center p-1 transition-all relative ";
+            
+            if(!isAvail) {
+                cls += "bg-slate-200 dark:bg-slate-800 border-slate-300 text-slate-400 opacity-40";
+            } else {
+                cls += getColor(item.prodotto) + " shadow-md hover:scale-105";
+                if(inCart) cls += " ring-4 ring-slate-900 dark:ring-white scale-105 z-10 font-black";
+            }
+
+            const clickAction = isAdminLoggedIn ? `onclick="apriModalAdmin(this.dataset.strip)"` : (isAvail ? `onclick="toggleCart(this.dataset.strip)"` : '');
+
+            return `
+                <button id="strip-${item.id}" data-strip="${escapeAttr(item.id)}" ${clickAction} class="${cls}">
+                    ${inCart ? '<span class="absolute top-1 right-2 text-xs font-black">✓</span>' : ''}
+                    <span class="text-xl leading-none">${emoji}</span>
+                    <span class="text-[10px] font-black mt-0.5">${escapeHtml(item.id)}</span>
+                    <span class="text-[11px] font-bold truncate max-w-[90%] px-1 bg-black/20 rounded mt-0.5 leading-tight">${escapeHtml(item.prodotto)}</span>
+                </button>
+            `;
+        }
+
+        window.toggleCart = function(id) {
+            if(isAdminLoggedIn) return;
+            if(cart.has(id)) cart.delete(id); else cart.add(id);
+            updateCartUI();
+            renderMappa();
+            renderHomeProducts(document.getElementById('search-bar').value.toLowerCase());
+        };
+
+        function updateCartUI() {
+            const waFloat = document.getElementById('wa-float');
+            if(waFloat) waFloat.classList.toggle('hidden', cart.size > 0 || isAdminLoggedIn);
+            const bar = document.getElementById('cart-bar');
+            const summary = document.getElementById('cart-summary');
+            const itemsList = document.getElementById('cart-items-list');
+
+            if(isAdminLoggedIn) {
+                bar.classList.add('translate-y-full');
+                document.getElementById('cart-details-panel').classList.add('hidden');
+                return;
+            }
+
+            if(cart.size > 0) {
+                bar.classList.remove('translate-y-full');
+                let htmlList = '';
+
+                cart.forEach(id => {
+                    if(ortoData[id]) {
+                        htmlList += `
+                            <div class="flex justify-between items-center bg-slate-50 dark:bg-slate-700/50 p-3 rounded-xl border dark:border-slate-600">
+                                <div>
+                                    <span class="font-bold">${t('plot_label')} ${escapeHtml(id)}:</span> ${escapeHtml(ortoData[id].prodotto)} (${escapeHtml(traduceQuantita(ortoData[id].quantita)) || t('standard_qty')})
+                                    <div class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-0.5">${testoMaturazione(ortoData[id])}</div>
+                                </div>
+                                <button data-id="${escapeAttr(id)}" onclick="rimuoviElementoCarrello(this.dataset.id)" class="bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300 font-bold px-3 py-1.5 rounded-lg text-sm">${t('remove')}</button>
+                            </div>
+                        `;
+                    } else {
+                        const nomeDispensa = nomeDispensaDaId(id);
+                        const prezzoDispensa = prezzoDispensaDaId(id);
+                        const prezzoHtml = prezzoDispensa > 0 ? ` <span class="font-black text-emerald-700 dark:text-emerald-300">\u00b7 ${euro(prezzoDispensa)}</span>` : '';
+                        htmlList += `
+                            <div class="flex justify-between items-center bg-slate-50 dark:bg-slate-700/50 p-3 rounded-xl border dark:border-slate-600">
+                                <div>
+                                    <span class="font-bold">${t('cart_dispensa_label')}</span> ${escapeHtml(nomeDispensa)}${prezzoHtml}
+                                </div>
+                                <button data-id="${escapeAttr(id)}" onclick="rimuoviElementoCarrello(this.dataset.id)" class="bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300 font-bold px-3 py-1.5 rounded-lg text-sm">${t('remove')}</button>
+                            </div>
+                        `;
+                    }
+                });
+
+                const totDispensa = totaleDispensa();
+                if(totDispensa > 0) {
+                    htmlList += `
+                        <div class="flex justify-between items-center bg-emerald-50 dark:bg-emerald-900/30 p-3 rounded-xl border border-emerald-200 dark:border-emerald-800">
+                            <span class="font-black">${t('cart_dispensa_total')}</span>
+                            <span class="font-black text-emerald-700 dark:text-emerald-300">${euro(totDispensa)}</span>
+                        </div>`;
+                }
+
+                summary.innerText = cart.size === 1 ? `1 ${t('item_selected')}` : `${cart.size} ${t('items_selected')}`;
+                itemsList.innerHTML = htmlList;
+            } else {
+                bar.classList.add('translate-y-full');
+                document.getElementById('cart-details-panel').classList.add('hidden');
+                isCartViewOpen = false;
+                document.getElementById('cart-toggle-btn').innerText = t('view_cart');
+                summary.innerText = `0 ${t('items_selected')}`;
+            }
+        }
+
+        window.rimuoviElementoCarrello = function(id) {
+            cart.delete(id);
+            updateCartUI();
+            renderMappa();
+            renderHomeProducts(document.getElementById('search-bar').value.toLowerCase());
+            showToast(t('toast_item_removed'), 'success');
+        };
+
+        window.toggleCartView = function() {
+            if(cart.size === 0) {
+                showToast(t('toast_cart_empty'), 'error');
+                return;
+            }
+            isCartViewOpen = !isCartViewOpen;
+            const panel = document.getElementById('cart-details-panel');
+            const btn = document.getElementById('cart-toggle-btn');
+
+            if(isCartViewOpen) {
+                panel.classList.remove('hidden');
+                btn.innerText = t('hide_cart');
+            } else {
+                panel.classList.add('hidden');
+                btn.innerText = t('view_cart');
+            }
+        };
+
+        // ===== CHECKOUT: riepilogo + validazione dati cliente =====
+        let ultimeNoteOrdine = '';
+        function righeOrdine() {
+            const righe = [];
+            cart.forEach(id => {
+                if(ortoData[id]) righe.push({ txt: 'Striscia ' + id + ': ' + ortoData[id].prodotto + ' (' + (ortoData[id].quantita || 'Standard') + ')', prezzo: 0 });
+                else {
+                    const nomeDisp = nomeDispensaDaId(id);
+                    const prezzoDisp = prezzoDispensaDaId(id);
+                    righe.push({ txt: nomeDisp, prezzo: prezzoDisp });
+                }
+            });
+            return righe;
+        }
+        function apriRiepilogo() {
+            const box = document.getElementById('riepilogo-righe');
+            if (box) {
+                box.innerHTML = righeOrdine().map(r =>
+                    '<div class="flex justify-between gap-3 border-b dark:border-slate-700 pb-2">' +
+                    '<span>' + escapeHtml(r.txt) + '</span>' +
+                    (r.prezzo > 0 ? '<span class="font-bold whitespace-nowrap">' + escapeHtml(euro(r.prezzo)) + '</span>' : '') +
+                    '</div>'
+                ).join('');
+            }
+            const totEl = document.getElementById('riepilogo-totale');
+            if (totEl) totEl.textContent = euro(totaleDispensa());
+            try {
+                const cli = JSON.parse(archivioLocale.leggi('orto_cliente') || '{}');
+                if (cli.nome) document.getElementById('co-nome').value = cli.nome;
+                if (cli.tel) document.getElementById('co-tel').value = cli.tel;
+            } catch (e) {}
+            const dataEl = document.getElementById('co-data');
+            if (dataEl && !dataEl.value) dataEl.value = dataLocaleISO();
+            const errBox = document.getElementById('riepilogo-errori');
+            if (errBox) { errBox.classList.add('hidden'); errBox.textContent = ''; }
+            document.getElementById('riepilogo-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            const f = document.getElementById('co-nome');
+            if (f) f.focus();
+        }
+        window.chiudiRiepilogo = function() {
+            document.getElementById('riepilogo-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        };
+        window.confermaRiepilogo = function() {
+            const nomeEl = document.getElementById('co-nome');
+            const telEl = document.getElementById('co-tel');
+            const dataEl = document.getElementById('co-data');
+            const noteEl = document.getElementById('co-note');
+            const nome = (nomeEl.value || '').trim();
+            const tel = (telEl.value || '').trim();
+            const data = dataEl.value || '';
+            const oggi = dataLocaleISO();
+            const errs = [];
+            let firstBad = null;
+            if (nome.length < 2) { errs.push(t('co_err_nome')); firstBad = firstBad || nomeEl; }
+            if (!/^[+\d][\d\s./-]{5,}$/.test(tel)) { errs.push(t('co_err_tel')); firstBad = firstBad || telEl; }
+            if (!data || data < oggi) { errs.push(t('co_err_data')); firstBad = firstBad || dataEl; }
+            const errBox = document.getElementById('riepilogo-errori');
+            if (errBox) { errBox.classList.add('hidden'); errBox.textContent = ''; }
+            if (errs.length) {
+                if (errBox) { errBox.textContent = errs.join(' '); errBox.classList.remove('hidden'); }
+                if (firstBad) firstBad.focus();
+                return;
+            }
+            ultimeNoteOrdine = (noteEl.value || '').trim();
+            try { archivioLocale.scrivi('orto_cliente', JSON.stringify({ nome: nome, tel: tel })); } catch (e) {}
+            window.chiudiRiepilogo();
+            document.getElementById('delivery-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            const firstBtn = document.querySelector('#delivery-modal button');
+            if (firstBtn) firstBtn.focus();
+        };
+        window.apriModalDelivery = function() {
+            if(cart.size === 0) return;
+            apriRiepilogo();
+        };
+
+        window.chiudiModalDelivery = function() {
+            document.getElementById('delivery-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        };
+
+        // Esc chiude il modal consegna (solo se aperto; non tocca gli altri modal)
+        document.addEventListener('keydown', function(e) {
+            if(e.key === 'Escape' && !document.getElementById('delivery-modal').classList.contains('hidden')) {
+                chiudiModalDelivery();
+            }
+            if(e.key === 'Escape' && !document.getElementById('riepilogo-modal').classList.contains('hidden')) {
+                chiudiRiepilogo();
+            }
+        });
+
+        window.confermaCheckout = function(modalitaConsegna) {
+            chiudiModalDelivery();
+            if(isCartViewOpen) toggleCartView();
+
+            let msg = [];
+            cart.forEach(id => {
+                if(ortoData[id]) msg.push(`- Striscia ${id}: ${ortoData[id].prodotto} (${ortoData[id].quantita || 'Standard'})`);
+                else {
+                    const nomeDisp = nomeDispensaDaId(id);
+                    const prezzoDisp = prezzoDispensaDaId(id);
+                    msg.push(prezzoDisp > 0 ? `- ${nomeDisp} (${euro(prezzoDisp)})` : `- ${nomeDisp}`);
+                }
+            });
+            const totDispensaMsg = totaleDispensa();
+            if(totDispensaMsg > 0) msg.push(`${t('cart_dispensa_total')}: ${euro(totDispensaMsg)}`);
+            let cliente = null;
+            try { cliente = JSON.parse(archivioLocale.leggi('orto_cliente') || 'null'); } catch (e) {}
+            const righeMsg = msg.slice();
+            if (cliente && cliente.nome) righeMsg.push('Nome: ' + cliente.nome + (cliente.tel ? ' (' + cliente.tel + ')' : ''));
+            const dataCo = document.getElementById('co-data');
+            if (dataCo && dataCo.value) righeMsg.push('Data: ' + dataCo.value);
+            if (ultimeNoteOrdine) righeMsg.push('Note: ' + ultimeNoteOrdine);
+            const text = encodeURIComponent(`Ciao! Vorrei ordinare:\n${righeMsg.join('\n')}\nModalità: ${modalitaConsegna}`);
+            registraOrdineLocale(modalitaConsegna, righeMsg);
+            window.open(`https://wa.me/39038376001?text=${text}`, '_blank');
+            showToast(t('toast_whatsapp'), 'success');
+        };
+
+        window.apriModalAdmin = function(id) {
+            currentEditingStrip = id;
+            const item = ortoData[id];
+            document.getElementById('modal-strip-title').innerText = `${t('manage_plot')} ${id}`;
+            document.getElementById('modal-product').value = item.prodotto;
+            document.getElementById('modal-quantity').value = item.quantita || '15 piante';
+            document.getElementById('modal-sowing-date').value = item.dataInserimento || '2026-09-01';
+            document.getElementById('modal-status').value = item.stato;
+            document.getElementById('admin-modal').classList.remove('hidden');
+        };
+
+        window.chiudiModalAdmin = function() {
+            document.getElementById('admin-modal').classList.add('hidden');
+            currentEditingStrip = null;
+        };
+
+        window.salvaZollaAdmin = function() {
+            if(!currentEditingStrip) return;
+            const idModificato = currentEditingStrip;
+            const nuovoProdotto = document.getElementById('modal-product').value;
+            ortoData[currentEditingStrip].prodotto = nuovoProdotto;
+            ortoData[currentEditingStrip].quantita = document.getElementById('modal-quantity').value;
+            ortoData[currentEditingStrip].dataInserimento = document.getElementById('modal-sowing-date').value;
+            ortoData[currentEditingStrip].giorniMaturazione = getGiorniMaturazioneStandard(nuovoProdotto);
+            ortoData[currentEditingStrip].stato = document.getElementById('modal-status').value;
+            
+            archivioLocale.scrivi('orto_db_v20_chiossa', JSON.stringify(ortoData));
+            cloudUpsertAppezzamenti([idModificato]);
+            chiudiModalAdmin();
+            renderMappa();
+            aggiornaDashboardAdmin();
+            renderHomeProducts();
+            showToast(t('toast_plot_saved'), 'success');
+        };
+
+        window.eliminaZollaAdmin = function() {
+            if(!currentEditingStrip) return;
+            ortoData[currentEditingStrip].stato = 'disponibile';
+            ortoData[currentEditingStrip].prodotto = 'Carote';
+            ortoData[currentEditingStrip].quantita = '20 piante';
+            ortoData[currentEditingStrip].dataInserimento = '2026-09-01';
+            ortoData[currentEditingStrip].giorniMaturazione = 75;
+            const idSvuotato = currentEditingStrip;
+
+            archivioLocale.scrivi('orto_db_v20_chiossa', JSON.stringify(ortoData));
+            cloudUpsertAppezzamenti([idSvuotato]);
+            chiudiModalAdmin();
+            renderMappa();
+            aggiornaDashboardAdmin();
+            renderHomeProducts();
+            showToast(t('toast_plot_cleared'), 'success');
+        };
+
+        window.toggleAdminLogin = function() {
+            document.getElementById('admin-panel').classList.toggle('hidden');
+        };
+
+        let pinTentativiFalliti = 0;
+        let pinBloccoFino = 0;
+
+        window.effettuaLogin = function() {
+            const pinInput = document.getElementById('admin-pin');
+            const loginBtn = document.getElementById('admin-login-btn');
+            if (Date.now() < pinBloccoFino) return; // blocco anti brute-force attivo
+            if(pinInput.value === 'admin123') {
+                pinTentativiFalliti = 0;
+                isAdminLoggedIn = true;
+                document.getElementById('admin-auth-box').classList.add('hidden');
+                document.getElementById('admin-dashboard-content').classList.remove('hidden');
+                document.getElementById('admin-box-content').value = boxOrtoContent;
+                updateCartUI();
+                aggiornaDashboardAdmin();
+                renderMappa();
+                renderHomeProducts();
+                renderVendite();
+                showToast(t('toast_admin_ok'), 'success');
+            } else {
+                pinInput.value = '';
+                pinTentativiFalliti++;
+                if (pinTentativiFalliti >= 5) {
+                    // 5 errori di fila: blocca il form per 60s (solo UI: il PIN e'
+                    // client-side perche' il sito e' statico senza backend, quindi
+                    // non e' un vero controllo accessi — ma frena i tentativi a caso)
+                    pinTentativiFalliti = 0;
+                    pinBloccoFino = Date.now() + 60000;
+                    pinInput.disabled = true;
+                    if (loginBtn) loginBtn.disabled = true;
+                    setTimeout(() => {
+                        pinInput.disabled = false;
+                        if (loginBtn) loginBtn.disabled = false;
+                    }, 60000);
+                }
+                showToast(t('toast_pin_wrong'), 'error');
+            }
+        };
+
+        window.salvaBoxOrto = function() {
+            boxOrtoContent = document.getElementById('admin-box-content').value;
+            document.getElementById('box-orto-desc').innerText = boxOrtoContent;
+            try { archivioLocale.scrivi('orto_box_contenuto', boxOrtoContent); } catch(e) {}
+            cloudSetConfig('box_contenuto', boxOrtoContent);
+            showToast(t('toast_box_saved'), 'success');
+        };
+
+        // ===== Sync cloud: appezzamenti <-> Supabase =====
+        function appezzamentoToCloud(id) {
+            const o = ortoData[id] || {};
+            return {
+                id: id,
+                prodotto: o.prodotto || '',
+                quantita: String(o.quantita == null ? '' : o.quantita),
+                stato: o.stato || 'disponibile',
+                data_inserimento: o.dataInserimento || null,
+                giorni_maturazione: (o.giorniMaturazione == null ? null : o.giorniMaturazione),
+                updated_at: new Date().toISOString()
+            };
+        }
+        function appezzamentoFromCloud(r) {
+            return {
+                id: r.id,
+                prodotto: r.prodotto || '',
+                quantita: (r.quantita == null ? '' : String(r.quantita)),
+                stato: r.stato || 'disponibile',
+                dataInserimento: r.data_inserimento || '',
+                giorniMaturazione: (r.giorni_maturazione == null ? 80 : r.giorni_maturazione)
+            };
+        }
+        // Upsert non bloccante: se il cloud non risponde, i dati restano in locale
+        function cloudUpsertAppezzamenti(ids) {
+            if (!cloudCfgValida || !ids || !ids.length) return;
+            sb('orto_appezzamenti?on_conflict=id', {
+                method: 'POST',
+                headers: { 'Prefer': 'resolution=merge-duplicates' },
+                body: JSON.stringify(ids.map(appezzamentoToCloud))
+            });
+        }
+        function cloudSetConfig(chiave, valore) {
+            if (!cloudCfgValida) return;
+            sb('orto_config?on_conflict=chiave', {
+                method: 'POST',
+                headers: { 'Prefer': 'resolution=merge-duplicates' },
+                body: JSON.stringify({ chiave: chiave, valore: valore, updated_at: new Date().toISOString() })
+            });
+        }
+        function setText(id, s) { const el = document.getElementById(id); if (el) el.textContent = s; }
+
+        // All'avvio: prova a leggere dal cloud; se la tabella e' vuota pusha i
+        // dati locali/default, se irraggiungibile usa localStorage come oggi.
+        async function sincronizzaCloud() {
+            if (!cloudCfgValida) return;
+            const righe = await sb('orto_appezzamenti?select=*&order=id');
+            if (righe && Array.isArray(righe)) {
+                cloudDisponibile = true;
+                if (righe.length > 0) {
+                    const dati = {};
+                    righe.forEach(r => { dati[r.id] = appezzamentoFromCloud(r); });
+                    ortoData = dati;
+                    try { archivioLocale.scrivi('orto_db_v20_chiossa', JSON.stringify(ortoData)); } catch(e) {}
+                } else if (Object.keys(ortoData).length > 0) {
+                    cloudUpsertAppezzamenti(Object.keys(ortoData));
+                }
+            }
+            let boxCloud = null;
+            const cfg = await sb('orto_config?chiave=eq.box_contenuto&select=valore');
+            if (cfg && cfg.length && cfg[0].valore) boxCloud = cfg[0].valore;
+            else { try { boxCloud = archivioLocale.leggi('orto_box_contenuto'); } catch(e) {} }
+            if (boxCloud) {
+                boxOrtoContent = boxCloud;
+                setText('box-orto-desc', boxOrtoContent);
+                const bi = document.getElementById('admin-box-content');
+                if (bi) bi.value = boxOrtoContent;
+            } else if (cloudDisponibile) {
+                cloudSetConfig('box_contenuto', boxOrtoContent);
+            }
+            await caricaVendite();
+            renderMappa();
+            aggiornaDashboardAdmin();
+            renderHomeProducts();
+            if (isAdminLoggedIn) renderVendite();
+        }
+
+        // ===== Vendite (solo admin) =====
+        function euro(n) { return (Number(n) || 0).toFixed(2) + ' €'; }
+
+        // Data odierna YYYY-MM-DD nel FUSO LOCALE del dispositivo (non UTC):
+        // toISOString() restituirebbe il giorno prima la sera/notte.
+        function dataLocaleISO(d) {
+            const x = d || new Date();
+            return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0');
+        }
+
+        // Totale riga: usa la colonna cloud se presente, altrimenti ricalcola
+        // da quantita x prezzo_unitario (colonna assente/null su righe vecchie).
+        function totaleVendita(v) {
+            const t = Number(v.totale);
+            if (t) return t;
+            const q = Number(v.quantita), p = Number(v.prezzo_unitario);
+            return (q > 0 && p >= 0) ? q * p : 0;
+        }
+
+        async function caricaVendite() {
+            let locali = [];
+            try {
+                const c = archivioLocale.leggi('orto_vendite_cache');
+                if (c) locali = JSON.parse(c).filter(v => String(v.id).indexOf('loc_') === 0);
+            } catch(e) {}
+            vendite = locali;
+            if (cloudCfgValida) {
+                const righe = await sb('orto_vendite?select=*&order=data.desc&order=id.desc');
+                if (righe && Array.isArray(righe)) {
+                    vendite = righe.concat(locali);
+                    try { archivioLocale.scrivi('orto_vendite_cache', JSON.stringify(vendite)); } catch(e) {}
+                }
+            }
+            // Vendite registrate offline (id loc_*): appena il cloud torna
+            // disponibile vengono caricate e sostituite dalla riga cloud,
+            // cosi' non restano mai intrappolate su un solo dispositivo.
+            if (cloudDisponibile) await sincronizzaVenditeLocali();
+        }
+
+        // Carica sul cloud le vendite salvate solo in locale (offline).
+        // Le righe caricate vengono sostituite dalla rappresentazione cloud
+        // (con id reale): niente duplicati nei caricamenti successivi.
+        function venditaCachePulita(v) {
+            const c = Object.assign({}, v);
+            delete c._sync;
+            return c;
+        }
+        async function sincronizzaVenditeLocali() {
+            let caricati = 0;
+            for (const v of vendite.slice()) {
+                if (String(v.id).indexOf('loc_') !== 0 || v._sync) continue;
+                v._sync = true;
+                const res = await sb('orto_vendite', {
+                    method: 'POST',
+                    headers: { 'Prefer': 'return=representation' },
+                    body: JSON.stringify({
+                        data: String(v.data || '').slice(0, 10),
+                        prodotto: v.prodotto || '',
+                        quantita: Number(v.quantita) || 0,
+                        unita: v.unita || 'kg',
+                        prezzo_unitario: Number(v.prezzo_unitario) || 0,
+                        note: v.note || ''
+                    })
+                });
+                if (res && res[0] && res[0].id) {
+                    const i = vendite.indexOf(v);
+                    if (i >= 0) vendite.splice(i, 1, res[0]);
+                    caricati++;
+                } else {
+                    v._sync = false; // fallito: riprova al prossimo avvio
+                }
+            }
+            if (caricati) {
+                try { archivioLocale.scrivi('orto_vendite_cache', JSON.stringify(vendite.map(venditaCachePulita))); } catch(e) {}
+                showToast(t('sales_synced'), 'success');
+                renderVendite();
+            }
+        }
+
+        window.aggiungiVendita = async function(btn) {
+            const dataEl = document.getElementById('v-data');
+            const prodEl = document.getElementById('v-prodotto');
+            const qtaEl = document.getElementById('v-qta');
+            const uniEl = document.getElementById('v-unita');
+            const przEl = document.getElementById('v-prezzo');
+            const noteEl = document.getElementById('v-note');
+            const prodotto = (prodEl.value || '').trim();
+            const quantita = parseFloat((qtaEl.value || '').replace(',', '.'));
+            const prezzo = parseFloat((przEl.value || '').replace(',', '.'));
+            if (!prodotto || !(quantita > 0) || isNaN(prezzo) || prezzo < 0) {
+                showToast(t('sales_need_fields'), 'error');
+                return;
+            }
+            // Anti doppio-click: il POST cloud e' asincrono, due tocchi veloci
+            // creerebbero due righe duplicate su Supabase.
+            if (btn) btn.disabled = true;
+            try {
+            const payload = {
+                data: dataEl.value || dataLocaleISO(),
+                prodotto: prodotto,
+                quantita: quantita,
+                unita: uniEl.value || 'kg',
+                prezzo_unitario: prezzo,
+                note: (noteEl.value || '').trim()
+            };
+            const salvaLocale = () => {
+                const loc = Object.assign({ id: 'loc_' + Date.now(), totale: quantita * prezzo, created_at: new Date().toISOString() }, payload);
+                vendite.unshift(loc);
+                try { archivioLocale.scrivi('orto_vendite_cache', JSON.stringify(vendite)); } catch(e) {}
+            };
+            if (cloudDisponibile) {
+                const res = await sb('orto_vendite', {
+                    method: 'POST',
+                    headers: { 'Prefer': 'return=representation' },
+                    body: JSON.stringify(payload)
+                });
+                if (res && res[0]) vendite.unshift(res[0]);
+                else {
+                    // POST cloud fallita (rete/RLS/validazione): salvo in locale e
+                    // mostro il banner "solo su questo dispositivo" invece del silenzio.
+                    cloudScritturaFallita = true;
+                    salvaLocale();
+                }
+            } else {
+                salvaLocale();
+            }
+            prodEl.value = ''; qtaEl.value = ''; przEl.value = ''; noteEl.value = '';
+            dataEl.value = dataLocaleISO();
+            renderVendite();
+            showToast(t('sales_added'), 'success');
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+        };
+
+        window.eliminaVendita = async function(id) {
+            if (!confirm(t('sales_confirm_delete'))) return;
+            const idS = String(id);
+            if (cloudDisponibile && idS.indexOf('loc_') !== 0) {
+                // sb() restituisce null sia su 204 No Content (DELETE riuscita) sia
+                // su errore di rete: verifico con una GET che la riga sia sparita.
+                await sb('orto_vendite?id=eq.' + encodeURIComponent(idS), { method: 'DELETE' });
+                const verifica = await sb('orto_vendite?id=eq.' + encodeURIComponent(idS) + '&select=id');
+                if (verifica && verifica.length) {
+                    showToast(t('sales_delete_failed'), 'error');
+                    renderVendite();
+                    return;
+                }
+            }
+            vendite = vendite.filter(v => String(v.id) !== idS);
+            try { archivioLocale.scrivi('orto_vendite_cache', JSON.stringify(vendite)); } catch(e) {}
+            renderVendite();
+        };
+
+        // Chart.js caricato solo quando serve (sezione Vendite)
+        function caricaChartJs() {
+            if (window.Chart) return Promise.resolve(true);
+            if (!chartJsPromise) {
+                chartJsPromise = new Promise(resolve => {
+                    const s = document.createElement('script');
+                    s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js';
+                    s.onload = () => resolve(true);
+                    s.onerror = () => resolve(false);
+                    document.head.appendChild(s);
+                });
+            }
+            return chartJsPromise;
+        }
+
+        async function disegnaGraficiVendite() {
+            const ok = await caricaChartJs();
+            if (!ok || !window.Chart) return;
+            if (chartVenditeGiorni) { chartVenditeGiorni.destroy(); chartVenditeGiorni = null; }
+            if (chartVenditeProdotti) { chartVenditeProdotti.destroy(); chartVenditeProdotti = null; }
+            if (chartVenditeSettimana) { chartVenditeSettimana.destroy(); chartVenditeSettimana = null; }
+            if (chartVenditeTop5) { chartVenditeTop5.destroy(); chartVenditeTop5 = null; }
+            if (chartVenditeMesi) { chartVenditeMesi.destroy(); chartVenditeMesi = null; }
+            const giorni = [], mappa = {};
+            const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
+            for (let i = 29; i >= 0; i--) {
+                const d = new Date(oggi.getTime() - i * 86400000);
+                const k = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+                giorni.push({ k: k, label: d.toLocaleDateString(localeData(), { day: 'numeric', month: 'numeric' }) });
+                mappa[k] = 0;
+            }
+            const perProd = {};
+            const listaV = venditeFiltrate();
+            listaV.forEach(v => {
+                const dk = String(v.data || '').slice(0, 10);
+                if (dk in mappa) mappa[dk] += totaleVendita(v);
+                const p = v.prodotto || '?';
+                perProd[p] = (perProd[p] || 0) + totaleVendita(v);
+            });
+            const cg = document.getElementById('chart-v-giorni');
+            if (cg) {
+                chartVenditeGiorni = new Chart(cg, {
+                    type: 'bar',
+                    data: {
+                        labels: giorni.map(g => g.label),
+                        datasets: [{ data: giorni.map(g => Math.round(mappa[g.k] * 100) / 100), backgroundColor: 'rgba(16,185,129,0.65)', borderRadius: 4 }]
+                    },
+                    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+                });
+            }
+            const cp = document.getElementById('chart-v-prodotti');
+            const nomi = Object.keys(perProd);
+            if (cp && nomi.length) {
+                chartVenditeProdotti = new Chart(cp, {
+                    type: 'doughnut',
+                    data: {
+                        labels: nomi,
+                        datasets: [{ data: nomi.map(p => Math.round(perProd[p] * 100) / 100), backgroundColor: nomi.map((_, i) => 'hsl(' + ((i * 47) % 360) + ',65%,55%)') }]
+                    },
+                    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+                });
+            }
+            // --- Distribuzione ricavi per giorno della settimana ---
+            const cs = document.getElementById('chart-v-settimana');
+            if (cs) {
+                const nomiG = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
+                const perG = [0, 0, 0, 0, 0, 0, 0];
+                listaV.forEach(v => {
+                    const d = new Date(String(v.data || '').slice(0, 10) + 'T12:00:00');
+                    if (!isNaN(d)) perG[d.getDay()] += totaleVendita(v);
+                });
+                const ordine = [1, 2, 3, 4, 5, 6, 0];
+                chartVenditeSettimana = new Chart(cs, {
+                    type: 'bar',
+                    data: {
+                        labels: ordine.map(i => nomiG[i]),
+                        datasets: [{ data: ordine.map(i => Math.round(perG[i] * 100) / 100), backgroundColor: 'rgba(59,130,246,0.65)', borderRadius: 4 }]
+                    },
+                    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+                });
+            }
+            // --- Top 5 prodotti per ricavo ---
+            const ct = document.getElementById('chart-v-top5');
+            const top5 = nomi.slice().sort((a, b) => perProd[b] - perProd[a]).slice(0, 5);
+            if (ct && top5.length) {
+                chartVenditeTop5 = new Chart(ct, {
+                    type: 'bar',
+                    data: {
+                        labels: top5,
+                        datasets: [{ data: top5.map(p => Math.round(perProd[p] * 100) / 100), backgroundColor: 'rgba(168,85,247,0.65)', borderRadius: 4 }]
+                    },
+                    options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } }
+                });
+            }
+            // --- Ricavi per mese (ultimi 12 mesi) ---
+            const cm = document.getElementById('chart-v-mesi');
+            if (cm) {
+                const mesiLbl = [], mesiMap = {};
+                for (let i = 11; i >= 0; i--) {
+                    const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - i);
+                    const k = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+                    mesiLbl.push({ k: k, label: d.toLocaleDateString(localeData(), { month: 'short' }) });
+                    mesiMap[k] = 0;
+                }
+                listaV.forEach(v => {
+                    const mk = String(v.data || '').slice(0, 7);
+                    if (mk in mesiMap) mesiMap[mk] += totaleVendita(v);
+                });
+                chartVenditeMesi = new Chart(cm, {
+                    type: 'bar',
+                    data: {
+                        labels: mesiLbl.map(m => m.label),
+                        datasets: [{ data: mesiLbl.map(m => Math.round(mesiMap[m.k] * 100) / 100), backgroundColor: 'rgba(20,184,166,0.65)', borderRadius: 4 }]
+                    },
+                    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+                });
+            }
+            // --- Tabella ricavo per prodotto (ordinata per ricavo) ---
+            const tpp = document.getElementById('vendite-perprod-tbody');
+            if (tpp) {
+                const qtaPerProd = {};
+                listaV.forEach(v => { const p = v.prodotto || '?'; qtaPerProd[p] = (qtaPerProd[p] || 0) + (Number(v.quantita) || 0); });
+                const ordinati = nomi.slice().sort((a, b) => perProd[b] - perProd[a]);
+                const totR = ordinati.reduce((s, p) => s + perProd[p], 0);
+                tpp.innerHTML = ordinati.length ? ordinati.map(p =>
+                    '<tr class="border-t dark:border-slate-600">' +
+                    '<td class="px-3 py-2 font-bold">' + escapeHtml(p) + '</td>' +
+                    '<td class="px-3 py-2">' + escapeHtml(String(Math.round(qtaPerProd[p] * 100) / 100)) + '</td>' +
+                    '<td class="px-3 py-2 font-bold text-emerald-600 dark:text-emerald-400">' + escapeHtml(euro(perProd[p])) + '</td>' +
+                    '<td class="px-3 py-2">' + (totR ? Math.round(perProd[p] / totR * 100) : 0) + '%</td>' +
+                    '</tr>'
+                ).join('') : '<tr><td colspan="4" class="px-3 py-4 text-center text-slate-400">' + escapeHtml(t('sales_empty')) + '</td></tr>';
+            }
+        }
+
+        // KPI "mese corrente": calcolato su TUTTE le vendite (non sul filtro periodo)
+        function aggiornaKpiMese() {
+            const meseK = dataLocaleISO().slice(0, 7);
+            const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - 1);
+            const precK = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+            let cur = 0, prec = 0;
+            vendite.forEach(v => {
+                const mk = String(v.data || '').slice(0, 7);
+                if (mk === meseK) cur += totaleVendita(v);
+                else if (mk === precK) prec += totaleVendita(v);
+            });
+            setText('v-kpi-mese', euro(cur));
+            const deltaEl = document.getElementById('v-kpi-mese-delta');
+            if (deltaEl) {
+                if (prec > 0) {
+                    const pct = (cur - prec) / prec * 100;
+                    deltaEl.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(1).replace('.', ',') + ' % ' + t('sales_kpi_month_vs');
+                    deltaEl.className = 'block text-sm font-bold ' + (pct >= 0 ? 'text-emerald-600' : 'text-rose-500');
+                } else {
+                    deltaEl.textContent = cur > 0 ? t('sales_kpi_month_new') : '';
+                    deltaEl.className = 'block text-sm font-bold text-slate-400';
+                }
+            }
+        }
+
+        // ===== FILTRO PERIODO + EXPORT CSV VENDITE =====
+        function venditeFiltrate() {
+            const daEl = document.getElementById('v-filtro-da');
+            const aEl = document.getElementById('v-filtro-a');
+            const da = daEl && daEl.value ? daEl.value : null;
+            const a = aEl && aEl.value ? aEl.value : null;
+            return vendite.filter(v => {
+                const d = String(v.data || '').slice(0, 10);
+                if (da && d < da) return false;
+                if (a && d > a) return false;
+                return true;
+            });
+        }
+        window.azzeraFiltroVendite = function() {
+            const da = document.getElementById('v-filtro-da');
+            const a = document.getElementById('v-filtro-a');
+            if (da) da.value = ''; if (a) a.value = '';
+            renderVendite();
+        };
+        // Scorciatoie periodo: oggi / ultimi 7 / ultimi 30 giorni / tutto
+        window.filtroVenditeRapido = function(giorni) {
+            const daEl = document.getElementById('v-filtro-da');
+            const aEl = document.getElementById('v-filtro-a');
+            if (giorni === null) {
+                if (daEl) daEl.value = ''; if (aEl) aEl.value = '';
+            } else {
+                const d = new Date(); d.setDate(d.getDate() - giorni);
+                if (daEl) daEl.value = dataLocaleISO(d);
+                if (aEl) aEl.value = dataLocaleISO();
+            }
+            renderVendite();
+        };
+        window.esportaCSVVendite = function() {
+            const lista = venditeFiltrate();
+            const righe = [['Data', 'Prodotto', 'Quantita', 'Unita', 'Prezzo unitario (EUR)', 'Totale (EUR)', 'Note']];
+            lista.forEach(v => righe.push([
+                String(v.data || '').slice(0, 10), v.prodotto || '', v.quantita || '',
+                v.unita || '', v.prezzo_unitario || '',
+                (Math.round(totaleVendita(v) * 100) / 100).toFixed(2), v.note || ''
+            ]));
+            const csv = '﻿' + righe.map(r => r.map(csvCell).join(';')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'vendite-orto-' + dataLocaleISO() + '.csv';
+            document.body.appendChild(a); a.click(); a.remove();
+            showToast(t('sales_csv_done'), 'success');
+        };
+
+        // Datalist prodotti: autocompletamento dai prodotti gia' venduti
+        function aggiornaDatalistProdotti() {
+            const dl = document.getElementById('v-prodotti-list');
+            if (!dl) return;
+            const nomi = {};
+            vendite.forEach(v => { const p = (v.prodotto || '').trim(); if (p) nomi[p.toLowerCase()] = p; });
+            dl.innerHTML = Object.keys(nomi).sort().map(k =>
+                '<option value="' + escapeAttr(nomi[k]) + '">'
+            ).join('');
+        }
+
+        // Se il prodotto e' gia' stato venduto, propone ultimo prezzo/unita'
+        window.suggerisciPrezzo = function() {
+            const prodEl = document.getElementById('v-prodotto');
+            const nome = (prodEl && prodEl.value || '').trim().toLowerCase();
+            if (!nome) return;
+            for (let i = 0; i < vendite.length; i++) {
+                const v = vendite[i];
+                if ((v.prodotto || '').trim().toLowerCase() === nome) {
+                    const przEl = document.getElementById('v-prezzo');
+                    const uniEl = document.getElementById('v-unita');
+                    if (przEl && !przEl.value && v.prezzo_unitario != null) przEl.value = v.prezzo_unitario;
+                    if (uniEl && v.unita) uniEl.value = v.unita;
+                    break;
+                }
+            }
+        };
+
+        async function renderVendite() {
+            const warn = document.getElementById('vendite-cloud-warning');
+            if (warn) warn.classList.toggle('hidden', cloudDisponibile && !cloudScritturaFallita);
+            const dataEl = document.getElementById('v-data');
+            if (dataEl && !dataEl.value) dataEl.value = dataLocaleISO();
+            const lista = venditeFiltrate();
+            const tot = lista.reduce((s, v) => s + totaleVendita(v), 0);
+            const n = lista.length;
+            const perProd = {};
+            lista.forEach(v => { const p = v.prodotto || '?'; perProd[p] = (perProd[p] || 0) + totaleVendita(v); });
+            const fi = document.getElementById('v-filtro-info');
+            if (fi) {
+                const daEl = document.getElementById('v-filtro-da'), aEl = document.getElementById('v-filtro-a');
+                const attivo = (daEl && daEl.value) || (aEl && aEl.value);
+                fi.textContent = attivo ? t('sales_filter_info', String(n)) : t('sales_filter_info_all');
+            }
+            let top = '—', topV = 0;
+            Object.keys(perProd).forEach(p => { if (perProd[p] > topV) { topV = perProd[p]; top = p; } });
+            setText('v-kpi-totale', euro(tot));
+            setText('v-kpi-numero', String(n));
+            setText('v-kpi-medio', n ? euro(tot / n) : euro(0));
+            setText('v-kpi-top', n ? top : '—');
+            aggiornaKpiMese();
+            const tb = document.getElementById('vendite-tbody');
+            if (tb) {
+                if (!n) {
+                    tb.innerHTML = '<tr><td colspan="7" class="px-3 py-4 text-center text-slate-400">' + escapeHtml(t('sales_empty')) + '</td></tr>';
+                } else {
+                    // Nota sicurezza: niente interpolazione di dati in onclick inline;
+                    // l'id viaggia in data-vid letto via dataset (stesso pattern del resto del sito)
+                    tb.innerHTML = lista.map(v =>
+                        '<tr class="border-t dark:border-slate-600">' +
+                        '<td class="px-3 py-2 whitespace-nowrap">' + escapeHtml(formattaDataISO(v.data)) + '</td>' +
+                        '<td class="px-3 py-2 font-bold">' + escapeHtml(v.prodotto) + '</td>' +
+                        '<td class="px-3 py-2 whitespace-nowrap">' + escapeHtml(String(v.quantita)) + ' ' + escapeHtml(v.unita || '') + '</td>' +
+                        '<td class="px-3 py-2 whitespace-nowrap">' + escapeHtml(euro(v.prezzo_unitario)) + '</td>' +
+                        '<td class="px-3 py-2 whitespace-nowrap font-bold text-emerald-600 dark:text-emerald-400">' + escapeHtml(euro(totaleVendita(v))) + '</td>' +
+                        '<td class="px-3 py-2">' + escapeHtml(v.note || '') + '</td>' +
+                        '<td class="px-3 py-2 text-right"><button data-vid="' + escapeAttr(String(v.id)) + '" onclick="eliminaVendita(this.dataset.vid)" class="bg-rose-500 hover:bg-rose-600 text-white text-sm font-bold px-3 py-1 rounded-lg">' + escapeHtml(t('sales_delete')) + '</button></td>' +
+                        '</tr>'
+                    ).join('');
+                }
+            }
+            disegnaGraficiVendite();
+            aggiornaDatalistProdotti();
+        }
+
+        // ===== I MIEI ORDINI (solo su questo dispositivo, nessun invio) =====
+        function leggiOrdiniLocali() {
+            try { const o = JSON.parse(archivioLocale.leggi('orto_ordini') || '[]'); return Array.isArray(o) ? o : []; } catch (e) { return []; }
+        }
+        function salvaOrdiniLocali(o) {
+            try { archivioLocale.scrivi('orto_ordini', JSON.stringify(o)); } catch (e) {}
+        }
+        function statoOrdineLabel(s) {
+            return { ricevuto: t('st_ricevuto'), preparazione: t('st_preparazione'), pronto: t('st_pronto'), completato: t('st_completato'), annullato: t('st_annullato') }[s] || s;
+        }
+        function statoOrdineColore(s) {
+            return { ricevuto: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300', preparazione: 'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300', pronto: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300', completato: 'bg-slate-200 text-slate-600 dark:bg-slate-700 dark:text-slate-300', annullato: 'bg-rose-100 text-rose-600 dark:bg-rose-900 dark:text-rose-300' }[s] || 'bg-slate-200 text-slate-600';
+        }
+        function registraOrdineLocale(modalita, righeMsg) {
+            const ordini = leggiOrdiniLocali();
+            ordini.unshift({
+                id: 'ord_' + Date.now(),
+                data: dataLocaleISO(),
+                righe: righeMsg,
+                modalita: modalita,
+                stato: 'ricevuto'
+            });
+            salvaOrdiniLocali(ordini);
+            renderMieiOrdini();
+        }
+        window.annullaOrdineLocale = function(id) {
+            if (!confirm(t('my_orders_cancel_confirm'))) return;
+            const ordini = leggiOrdiniLocali();
+            const o = ordini.find(x => String(x.id) === String(id));
+            if (o && (o.stato === 'ricevuto' || o.stato === 'preparazione')) o.stato = 'annullato';
+            salvaOrdiniLocali(ordini);
+            renderMieiOrdini();
+        };
+        window.segnaRitirato = function(id) {
+            const ordini = leggiOrdiniLocali();
+            const o = ordini.find(x => String(x.id) === String(id));
+            if (o && o.stato === 'pronto') o.stato = 'completato';
+            salvaOrdiniLocali(ordini);
+            renderMieiOrdini();
+        };
+        function renderMieiOrdini() {
+            const box = document.getElementById('miei-ordini-lista');
+            if (!box) return;
+            const ordini = leggiOrdiniLocali();
+            if (!ordini.length) {
+                box.innerHTML = '<p class="text-slate-400">' + escapeHtml(t('my_orders_empty')) + '</p>';
+                return;
+            }
+            box.innerHTML = ordini.map(o => {
+                const cancellabile = (o.stato === 'ricevuto' || o.stato === 'preparazione');
+                const ritirabile = (o.stato === 'pronto');
+                return '<div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 space-y-2">' +
+                    '<div class="flex justify-between items-center gap-2 flex-wrap">' +
+                    '<span class="font-black">' + escapeHtml(o.data) + ' · ' + escapeHtml(o.modalita || '') + '</span>' +
+                    '<span class="text-sm font-bold px-3 py-1 rounded-full ' + statoOrdineColore(o.stato) + '">' + escapeHtml(statoOrdineLabel(o.stato)) + '</span>' +
+                    '</div>' +
+                    '<ul class="text-slate-600 dark:text-slate-300 text-base space-y-1">' + (o.righe || []).map(r => '<li>' + escapeHtml(String(r)) + '</li>').join('') + '</ul>' +
+                    '<div class="flex gap-2 flex-wrap">' +
+                    (cancellabile ? '<button onclick="annullaOrdineLocale(\'' + escapeAttr(String(o.id)) + '\')" class="bg-rose-100 dark:bg-rose-900 text-rose-600 dark:text-rose-300 text-sm font-bold px-3 py-2 rounded-xl">' + escapeHtml(t('my_orders_cancel')) + '</button>' : '') +
+                    (ritirabile ? '<button onclick="segnaRitirato(\'' + escapeAttr(String(o.id)) + '\')" class="bg-emerald-600 text-white text-sm font-bold px-3 py-2 rounded-xl">' + escapeHtml(t('my_orders_picked')) + '</button>' : '') +
+                    '</div>' +
+                    '<p class="text-xs text-slate-400">' + escapeHtml(t('my_orders_status_note')) + '</p>' +
+                    '</div>';
+            }).join('');
+        }
+
+        function aggiornaDashboardAdmin() {
+            let libere = 0, prenotate = 0, resaTotale = 0;
+            for(let k in ortoData) {
+                if(ortoData[k].stato === 'disponibile') libere++;
+                else prenotate++;
+                resaTotale += 1.5;
+            }
+            document.getElementById('kpi-libere').innerText = libere;
+            document.getElementById('kpi-prenotate').innerText = prenotate;
+            document.getElementById('kpi-resa').innerText = resaTotale.toFixed(1) + ' kg';
+        }
+
+        window.aggiungiStrisciaDinamica = function() {
+            const lLen = Object.keys(ortoData).filter(k => k.startsWith('L')).length + 1;
+            const rLen = Object.keys(ortoData).filter(k => k.startsWith('R')).length + 1;
+            ortoData[`L${lLen}`] = { id: `L${lLen}`, prodotto: "Carote", quantita: "20 piante", stato: 'disponibile', dataInserimento: "2026-09-01", giorniMaturazione: 75 };
+            ortoData[`R${rLen}`] = { id: `R${rLen}`, prodotto: "Patate", quantita: "15 piante", stato: 'disponibile', dataInserimento: "2026-09-01", giorniMaturazione: 100 };
+            archivioLocale.scrivi('orto_db_v20_chiossa', JSON.stringify(ortoData));
+            cloudUpsertAppezzamenti([`L${lLen}`, `R${rLen}`]);
+            aggiornaDashboardAdmin();
+            renderMappa();
+            renderHomeProducts();
+            showToast(t('toast_rows_added'), 'success');
+        };
+
+        // CSV: neutralizza le formule (=, +, -, @ a inizio campo) per prevenire
+        // CSV-injection quando il report viene aperto in Excel/LibreOffice.
+        function csvCell(v) {
+            let s = String(v ?? '');
+            if (/^[=+\-@]/.test(s)) s = "'" + s;
+            return `"${s.replace(/"/g, '""')}"`;
+        }
+
+        window.esportaCSV = function() {
+            let csv = "ID,Prodotto,Quantita,DataSemina,Stato\n";
+            for(let k in ortoData) {
+                const o = ortoData[k];
+                csv += `${csvCell(o.id)},${csvCell(o.prodotto)},${csvCell(o.quantita || '')},${csvCell(o.dataInserimento)},${csvCell(o.stato)}\n`;
+            }
+            // BOM UTF-8: senza, Excel su Windows mostra le accentate come mojibake
+            const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', 'orto_report.csv');
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => window.URL.revokeObjectURL(url), 1000);
+            showToast(t('toast_csv'), 'success');
+        };
+
+        function initDatabase() {
+            try {
+                const saved = archivioLocale.leggi('orto_db_v20_chiossa');
+                if(saved) {
+                    ortoData = JSON.parse(saved);
+                    return;
+                }
+            } catch(e) {}
+            
+            const p = [
+                { nome: "Zucca bio", q: "12 piante" },
+                { nome: "Zucca bio intera", q: "20 piante" },
+                { nome: "Crema di zucca", q: "25 piante" },
+                { nome: "Semi di zucca tostati", q: "15 piante" }
+            ];
+            for (let i = 1; i <= 60; i++) {
+                let itemL = p[i % p.length];
+                let itemR = p[(i*2) % p.length];
+                ortoData[`L${i}`] = { id: `L${i}`, prodotto: itemL.nome, quantita: itemL.q, stato: i === 3 ? 'prenotato' : 'disponibile', dataInserimento: "2026-06-01", giorniMaturazione: getGiorniMaturazioneStandard(itemL.nome) };
+                ortoData[`R${i}`] = { id: `R${i}`, prodotto: itemR.nome, quantita: itemR.q, stato: i === 7 ? 'prenotato' : 'disponibile', dataInserimento: "2026-06-05", giorniMaturazione: getGiorniMaturazioneStandard(itemR.nome) };
+            }
+            archivioLocale.scrivi('orto_db_v20_chiossa', JSON.stringify(ortoData));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = archivioLocale.leggi('lang');
+            if (savedLang && dizionario[savedLang]) {
+                currentLang = savedLang;
+                document.getElementById('lang-selector').value = savedLang;
+            }
+            document.documentElement.lang = currentLang;
+            if (archivioLocale.leggi('theme') === 'dark' || (!archivioLocale.ha('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('dark-mode-icon').innerText = '☀️';
+            }
+            initDatabase();
+            sincronizzaCloud();
+            caricaMeteoArcisate();
+            initAdvancedTouchZoom();
+            mostraHome();
+            applicaTraduzioni();
+            renderMieiOrdini();
+        });
+    </script>
+</body>
+</html>

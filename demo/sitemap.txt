@@ -1,0 +1,34 @@
+# Sitemap demo Orto Digitale (QA)
+# generata il 2026-10-07 00:38 UTC
+# 30 demo
+
+demo/san-rocco/
+demo/ca-dulza/
+demo/bragotto/
+demo/guarisco/
+demo/fazenda-del-besa/
+demo/orto-di-fra/
+demo/res-naturae/
+demo/sogno-alto/
+demo/zia-berta/
+demo/de-agricultura/
+demo/luna-nuova/
+demo/comuna/
+demo/crisval/
+demo/vallazza/
+demo/barbarino/
+demo/adami/
+demo/corte-di-garofalo/
+demo/boffino/
+demo/brega/
+demo/campanini/
+demo/chiossa/
+demo/val-persane/
+demo/pontoia/
+demo/orto-di-una-volta/
+demo/lavinia/
+demo/pagani/
+demo/fattoria-paradello/
+demo/guss/
+demo/moraspina/
+demo/cascina-bullona/

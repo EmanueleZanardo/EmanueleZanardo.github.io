@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Scheda del letto — Al Bel Ort: cosa cresce in questo letto, stato delle colture e ordini via WhatsApp.">
+    <meta property="og:title" content="Scheda letto · Al Bel Ort">
+    <meta property="og:description" content="Inquadra il QR sul paletto e scopri cosa cresce in questo letto.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Al Bel Ort">
+    <meta name="theme-color" content="#56653a">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icona-al-bel-ort-32.png">
+    <link rel="apple-touch-icon" href="/icona-al-bel-ort-180.png">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <title>Scheda letto · Al Bel Ort</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { emerald: { 50:'#f3f4ea',100:'#e4e7d0',200:'#cbd1a8',300:'#aab47b',400:'#8a9758',500:'#6f7d44',600:'#56653a',700:'#47542f',800:'#3a4428',850:'#303823',900:'#2a311e',950:'#1a1f12' }, slate: { 50:'#faf3eb',100:'#f3e8dc',200:'#e6d8c7',300:'#d2bfa8',400:'#a8937a',500:'#7a6752',600:'#625242',700:'#4b3f33',800:'#362e26',900:'#262019',950:'#17130f' }, amber: { 50:'#fdf3ea',100:'#fbe3cf',200:'#f6c69f',300:'#f0a46e',400:'#e88c4c',500:'#e07b37',600:'#c4632a',700:'#a04e23',800:'#7e3e20',900:'#66341d',950:'#3a1a0d' }, rose: { 50:'#fbf0ec',100:'#f6dcd3',200:'#edb9a8',300:'#e09378',400:'#d07052',500:'#bc5838',600:'#a3472c',700:'#863a25',800:'#6e3122',900:'#5c2b1f',950:'#33140d' }, red: { 50:'#fbf0ec',100:'#f6dcd3',200:'#edb9a8',300:'#e09378',400:'#d07052',500:'#bc5838',600:'#a3472c',700:'#863a25',800:'#6e3122',900:'#5c2b1f',950:'#33140d' }, orto: { crema:'#f9efe6', terra:'#7e5a38' } } } } };
+        // Il canonical usa il dominio CORRENTE: se in futuro il sito cambia
+        // dominio, le schede letto (e i QR gia' stampati) restano validi su
+        // qualsiasi dominio collegato al progetto.
+        // Il codice del letto si ricava dal PERCORSO (/letti/L1, /l/L1):
+        // con le rewrite di Vercel l'URL visibile resta quello corto, quindi
+        // il parametro ?l= non e' visibile al browser (fallback per l'accesso
+        // diretto a letto.html?l=L1).
+        (function () {
+            var m = location.pathname.match(/\/(?:l|letti|letto)\/([a-zA-Z][0-9])\/?$/);
+            var codice = m ? m[1].toUpperCase() : (new URLSearchParams(location.search).get('l') || '').toUpperCase();
+            if (/^[LR][1-7]$/.test(codice)) {
+                var c = document.createElement('link');
+                c.rel = 'canonical';
+                c.href = location.origin + '/letti/' + codice;
+                document.head.appendChild(c);
+                document.title = 'Letto ' + codice + ' · Al Bel Ort';
+            }
+            var temaSalvato = null; try { temaSalvato = localStorage.getItem('theme'); } catch (e) { /* archivio bloccato */ }
+            if (temaSalvato === 'dark' || (!temaSalvato && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+</head>
+<body class="bg-emerald-50 dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-100 antialiased">
+    <header class="bg-emerald-700 dark:bg-emerald-900 text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
+            <a href="/" class="text-3xl" aria-label="Al Bel Ort — home">🥬</a>
+            <div class="flex-1 min-w-0">
+                <p class="font-black text-xl leading-tight">Al Bel Ort</p>
+                <p class="text-emerald-100 text-sm leading-tight">Verdura a KM 0 · Arcisate</p>
+            </div>
+            <a href="/" class="bg-white/15 hover:bg-white/25 transition font-bold px-3 py-2 rounded-xl text-sm">🏠 Sito</a>
+            <button id="admin-btn" onclick="toggleAdmin()" class="bg-white/15 hover:bg-white/25 transition font-bold px-3 py-2 rounded-xl text-sm">🔑 Admin</button>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 py-6 space-y-5">
+        <div id="admin-login-box" class="hidden bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 p-5 space-y-3">
+            <p class="font-bold text-lg">Accesso admin</p>
+            <p class="text-slate-500 dark:text-slate-400 text-sm">Inserisci il PIN (lo stesso del pannello admin del sito) per modificare il contenuto del letto da qui, direttamente in campo.</p>
+            <div class="flex gap-2">
+                <input type="password" id="admin-pin" placeholder="PIN" aria-label="PIN" onkeydown="if(event.key==='Enter')effettuaLoginLetto()" class="flex-1 min-w-0 text-xl border dark:border-slate-600 dark:bg-slate-700 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500">
+                <button onclick="effettuaLoginLetto()" class="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white text-xl px-6 py-3 rounded-2xl font-bold shadow-md">Entra</button>
+            </div>
+        </div>
+
+        <section class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 p-5 sm:p-6">
+            <div class="flex items-start gap-3 flex-wrap">
+                <div class="flex-1 min-w-[200px]">
+                    <h1 id="letto-titolo" class="text-3xl sm:text-4xl font-black text-emerald-700 dark:text-emerald-400">Letto …</h1>
+                    <p id="letto-sottotitolo" class="text-slate-500 dark:text-slate-400 font-bold mt-1">Caricamento…</p>
+                </div>
+                <div class="flex gap-2">
+                    <a id="nav-prev" href="#" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold" aria-label="Letto precedente">←</a>
+                    <a id="nav-next" href="#" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold" aria-label="Letto successivo">→</a>
+                </div>
+            </div>
+            <nav id="letti-chips" class="flex flex-wrap gap-1.5 mt-4" aria-label="Tutti i letti"></nav>
+            <p id="aggiornato" class="text-xs text-slate-400 mt-3"></p>
+        </section>
+
+        <div id="admin-bar" class="hidden bg-amber-50 dark:bg-amber-900/30 border border-amber-300 dark:border-amber-700 rounded-3xl p-4 flex flex-wrap gap-2 items-center">
+            <span class="font-black text-amber-700 dark:text-amber-300">Modalità admin attiva</span>
+            <a href="/qr-letti.html" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl text-sm">🔳 QR di tutti i letti</a>
+            <button id="btn-add-casella" onclick="aggiungiCasella()" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 font-bold px-3 py-2 rounded-xl text-sm">＋ Aggiungi postazione</button>
+            <button onclick="logoutAdmin()" class="bg-slate-200 dark:bg-slate-700 font-bold px-3 py-2 rounded-xl text-sm">Esci</button>
+        </div>
+
+        <div id="caselle" class="space-y-4"></div>
+
+        <div id="errore" class="hidden bg-rose-50 dark:bg-rose-900/30 border border-rose-300 dark:border-rose-700 rounded-3xl p-5 font-bold text-rose-700 dark:text-rose-300"></div>
+
+        <section class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 p-5 sm:p-6 space-y-3">
+            <h2 class="text-xl font-black text-emerald-700 dark:text-emerald-400">Come ordino?</h2>
+            <p class="text-slate-600 dark:text-slate-300">Tocca «Ordina su WhatsApp» sulla coltura che ti interessa, oppure passa a trovarci in orto. Ritiro in campo o consegna a domicilio in zona.</p>
+            <a href="/" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl">← Torna al sito e alla mappa dei letti</a>
+        </section>
+
+        <footer class="text-center text-sm text-slate-400 pb-6">
+            Al Bel Ort · Arcisate (VA) · <a class="underline" href="/" id="footer-host"></a>
+        </footer>
+    </main>
+
+    <div id="toast" class="hidden fixed left-1/2 -translate-x-1/2 bottom-6 z-50 px-5 py-3 rounded-2xl font-bold shadow-2xl text-white"></div>
+
+    <script>
+        // ===== Config condivisa col sito principale (stesso progetto Supabase) =====
+        const SUPABASE_URL = 'https://poyodlfqxoprmictvmaj.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBveW9kbGZxeG9wcm1pY3R2bWFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA5NzM2ODEsImV4cCI6MjEwNjU0OTY4MX0.pcOHsGfrQwEQ3XwldYOoqviw_BMg55aPsJ4R6lF_Ks0';
+        const WHATSAPP_NUMERO = '393451114337';
+        const LETTI = ['L1','L2','L3','L4','L5','L6','L7','R1','R2','R3','R4','R5','R6','R7'];
+        const STATI = {
+            disponibile:   { label: 'Disponibile',    badge: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200', dot: '🟢' },
+            in_maturazione:{ label: 'In maturazione', badge: 'bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200',       dot: '🟡' },
+            prenotato:     { label: 'Prenotato',      badge: 'bg-sky-100 text-sky-800 dark:bg-sky-900/50 dark:text-sky-200',                dot: '🔵' },
+            vuoto:         { label: 'Vuoto',          badge: 'bg-slate-200 text-slate-600 dark:bg-slate-700 dark:text-slate-300',          dot: '⚪' }
+        };
+
+        // Codice letto dal percorso visibile (/letti/L1 o /l/L1); il ?l=
+        // resta come fallback per l'accesso diretto a letto.html?l=L1.
+        function codiceDaUrl() {
+            const m = location.pathname.match(/\/(?:l|letti|letto)\/([a-zA-Z][0-9])\/?$/);
+            if (m) return m[1].toUpperCase();
+            return (new URLSearchParams(location.search).get('l') || '').toUpperCase();
+        }
+        const codiceLetto = codiceDaUrl();
+        let righeLetto = [];
+        let isAdmin = false; try { isAdmin = sessionStorage.getItem('albelort_admin') === '1'; } catch (e) { /* archivio bloccato */ }
+
+        function escapeHtml(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+        async function sb(path, opts) {
+            try {
+                const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, Object.assign({}, opts, {
+                    headers: Object.assign({
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+                        'Content-Type': 'application/json'
+                    }, (opts && opts.headers) || {})
+                }));
+                if (!res.ok) return null;
+                const txt = await res.text();
+                return txt ? JSON.parse(txt) : null;
+            } catch (e) { return null; }
+        }
+        function showToast(msg, ok) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = 'fixed left-1/2 -translate-x-1/2 bottom-6 z-50 px-5 py-3 rounded-2xl font-bold shadow-2xl text-white ' + (ok ? 'bg-emerald-600' : 'bg-rose-600');
+            clearTimeout(t._h);
+            t._h = setTimeout(() => t.classList.add('hidden'), 3200);
+        }
+        function dataIT(iso) {
+            if (!iso) return '';
+            const d = new Date(iso + 'T00:00:00');
+            return isNaN(d) ? '' : d.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+        function oggiISO() {
+            const d = new Date();
+            return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        }
+
+        // ===== Admin (stesso PIN del pannello principale; controllo client-side
+        // come nel resto del sito statico) =====
+        function toggleAdmin() {
+            if (isAdmin) { document.getElementById('admin-bar').scrollIntoView({ behavior: 'smooth' }); return; }
+            document.getElementById('admin-login-box').classList.toggle('hidden');
+            document.getElementById('admin-pin').focus();
+        }
+        function effettuaLoginLetto() {
+            const v = document.getElementById('admin-pin').value;
+            if (v === 'admin123') {
+                isAdmin = true;
+                try { sessionStorage.setItem('albelort_admin', '1'); } catch (e) { /* archivio bloccato */ }
+                document.getElementById('admin-login-box').classList.add('hidden');
+                applicaModoAdmin();
+                showToast('Accesso admin sbloccato', true);
+            } else {
+                document.getElementById('admin-pin').value = '';
+                showToast('PIN errato', false);
+            }
+        }
+        function logoutAdmin() {
+            isAdmin = false;
+            try { sessionStorage.removeItem('albelort_admin'); } catch (e) { /* archivio bloccato */ }
+            applicaModoAdmin();
+        }
+        function applicaModoAdmin() {
+            document.getElementById('admin-bar').classList.toggle('hidden', !isAdmin);
+            document.getElementById('admin-btn').textContent = isAdmin ? '🔓 Admin attivo' : '🔑 Admin';
+            renderCaselle();
+        }
+
+        // ===== Dati =====
+        async function caricaLetto() {
+            if (!LETTI.includes(codiceLetto)) {
+                document.getElementById('letto-titolo').textContent = 'Letto non trovato';
+                document.getElementById('letto-sottotitolo').textContent = 'Codice non valido. Torna alla mappa e riprova.';
+                document.getElementById('errore').classList.remove('hidden');
+                document.getElementById('errore').textContent = 'Questo QR non corrisponde a nessun letto. I letti vanno da L1 a L7 e da R1 a R7.';
+                return;
+            }
+            document.getElementById('letto-titolo').textContent = 'Letto ' + codiceLetto;
+            document.getElementById('letto-sottotitolo').textContent = (codiceLetto[0] === 'L' ? 'Lato sinistro' : 'Lato destro') + ' · cosa cresce in questo letto';
+            const idx = LETTI.indexOf(codiceLetto);
+            document.getElementById('nav-prev').href = '/letti/' + LETTI[(idx + LETTI.length - 1) % LETTI.length];
+            document.getElementById('nav-next').href = '/letti/' + LETTI[(idx + 1) % LETTI.length];
+            document.getElementById('letti-chips').innerHTML = LETTI.map(c =>
+                '<a href="/letti/' + c + '" class="px-2.5 py-1 rounded-lg text-sm font-bold ' +
+                (c === codiceLetto ? 'bg-emerald-600 text-white' : 'bg-slate-100 dark:bg-slate-700 hover:bg-emerald-100 dark:hover:bg-slate-600') + '">' + c + '</a>').join('');
+
+            const righe = await sb('orto_appezzamenti?select=*&id=like.' + encodeURIComponent(codiceLetto) + '*&order=id');
+            if (!righe || !Array.isArray(righe)) {
+                document.getElementById('errore').classList.remove('hidden');
+                document.getElementById('errore').textContent = 'Non riesco a caricare i dati del letto. Controlla la connessione e ricarica la pagina.';
+                return;
+            }
+            righeLetto = righe.filter(r => new RegExp('^' + codiceLetto + '[a-z]$').test(r.id));
+            const maxAgg = righeLetto.reduce((m, r) => (r.updated_at && r.updated_at > m ? r.updated_at : m), '');
+            if (maxAgg) {
+                document.getElementById('aggiornato').textContent = 'Contenuto aggiornato il ' + new Date(maxAgg).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+            }
+            renderCaselle();
+            applicaModoAdminVisibilita();
+        }
+        function applicaModoAdminVisibilita() {
+            document.getElementById('admin-bar').classList.toggle('hidden', !isAdmin);
+            document.getElementById('admin-btn').textContent = isAdmin ? '🔓 Admin attivo' : '🔑 Admin';
+        }
+
+        function barraMaturazione(r) {
+            if (r.stato !== 'in_maturazione' || !r.data_inserimento || !r.giorni_maturazione) return '';
+            const ini = new Date(r.data_inserimento + 'T00:00:00');
+            const giorni = Math.floor((Date.now() - ini.getTime()) / 86400000);
+            const pct = Math.max(0, Math.min(100, Math.round(giorni / r.giorni_maturazione * 100)));
+            const mancano = r.giorni_maturazione - giorni;
+            const nota = mancano > 0 ? 'Pronto tra circa ' + mancano + ' giorni' : 'Dovrebbe essere pronto: da verificare in campo';
+            return '<div class="mt-3"><div class="h-2.5 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden"><div class="h-full bg-amber-500 rounded-full" style="width:' + pct + '%"></div></div>' +
+                '<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Crescita stimata: ' + pct + '% · ' + nota + '</p></div>';
+        }
+
+        function renderCaselle() {
+            const box = document.getElementById('caselle');
+            if (!righeLetto.length) {
+                box.innerHTML = '<div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 p-6 font-bold text-slate-500">Nessuna postazione registrata per questo letto.</div>';
+                return;
+            }
+            box.innerHTML = righeLetto.map(r => {
+                const st = STATI[r.stato] || STATI.vuoto;
+                const lettera = r.id.slice(codiceLetto.length).toUpperCase();
+                let html = '<article class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 p-5 sm:p-6">';
+                html += '<div class="flex items-start gap-3 flex-wrap">';
+                html += '<span class="shrink-0 w-10 h-10 rounded-2xl bg-emerald-600 text-white font-black flex items-center justify-center text-lg">' + escapeHtml(lettera) + '</span>';
+                html += '<div class="flex-1 min-w-[180px]">';
+                if (r.stato === 'vuoto' || !r.prodotto) {
+                    html += '<h3 class="text-2xl font-black text-slate-400">Postazione libera</h3>';
+                    html += '<p class="text-slate-500 dark:text-slate-400">Qui al momento non cresce nulla: presto nuove semine.</p>';
+                } else {
+                    html += '<h3 class="text-2xl font-black">' + escapeHtml(r.prodotto) + '</h3>';
+                    html += '<p class="text-slate-500 dark:text-slate-400 font-bold">' + escapeHtml(r.quantita || '') + (r.data_inserimento ? ' · seminato/trapiantato il ' + dataIT(r.data_inserimento) : '') + '</p>';
+                }
+                html += '</div>';
+                html += '<span class="font-bold px-3 py-1.5 rounded-full text-sm ' + st.badge + '">' + st.dot + ' ' + st.label + '</span>';
+                html += '</div>';
+                html += barraMaturazione(r);
+                if (r.prodotto && r.stato !== 'vuoto') {
+                    const testo = r.stato === 'disponibile'
+                        ? 'Ciao! Ho inquadrato il QR del letto ' + codiceLetto + ' (' + r.prodotto + '): vorrei ordinarlo.'
+                        : 'Ciao! Ho inquadrato il QR del letto ' + codiceLetto + ': vorrei informazioni su ' + r.prodotto + '.';
+                    html += '<a target="_blank" rel="noopener" href="https://wa.me/' + WHATSAPP_NUMERO + '?text=' + encodeURIComponent(testo) + '" class="inline-block mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl">💬 ' + (r.stato === 'disponibile' ? 'Ordina su WhatsApp' : 'Chiedi su WhatsApp') + '</a>';
+                }
+                if (isAdmin) html += formAdmin(r);
+                html += '</article>';
+                return html;
+            }).join('');
+            const addBtn = document.getElementById('btn-add-casella');
+            if (addBtn) addBtn.style.display = righeLetto.length >= 4 ? 'none' : '';
+        }
+
+        function formAdmin(r) {
+            const opzioni = Object.keys(STATI).map(k =>
+                '<option value="' + k + '"' + (r.stato === k ? ' selected' : '') + '>' + STATI[k].label + '</option>').join('');
+            return '<div class="mt-5 pt-4 border-t border-dashed border-slate-300 dark:border-slate-600 space-y-3">' +
+                '<p class="font-black text-amber-700 dark:text-amber-300 text-sm">✏️ Modifica postazione ' + escapeHtml(r.id) + '</p>' +
+                '<div class="grid sm:grid-cols-2 gap-3">' +
+                '<label class="block"><span class="text-sm font-bold text-slate-500">Prodotto</span>' +
+                '<input id="f-prodotto-' + r.id + '" type="text" value="' + escapeHtml(r.prodotto || '') + '" placeholder="Es. Porri" class="w-full border rounded-xl px-3 py-2 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500"></label>' +
+                '<label class="block"><span class="text-sm font-bold text-slate-500">Quantità</span>' +
+                '<input id="f-quantita-' + r.id + '" type="text" value="' + escapeHtml(r.quantita || '') + '" placeholder="Es. 20 piante" class="w-full border rounded-xl px-3 py-2 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500"></label>' +
+                '<label class="block"><span class="text-sm font-bold text-slate-500">Data semina/trapianto</span>' +
+                '<input id="f-data-' + r.id + '" type="date" value="' + escapeHtml(r.data_inserimento || '') + '" class="w-full border rounded-xl px-3 py-2 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500"></label>' +
+                '<label class="block"><span class="text-sm font-bold text-slate-500">Stato</span>' +
+                '<select id="f-stato-' + r.id + '" class="w-full border rounded-xl px-3 py-2 dark:bg-slate-700 dark:border-slate-600 outline-none focus:ring-2 focus:ring-emerald-500">' + opzioni + '</select></label>' +
+                '</div>' +
+                '<div class="flex gap-2 flex-wrap">' +
+                '<button onclick="salvaCasella(\'' + r.id + '\')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl">Salva</button>' +
+                '<button onclick="svuotaCasella(\'' + r.id + '\')" class="bg-rose-500 hover:bg-rose-600 text-white font-bold px-4 py-2 rounded-xl">Svuota (sradicato)</button>' +
+                '</div></div>';
+        }
+
+        async function upsertCasella(row) {
+            const res = await sb('orto_appezzamenti?on_conflict=id', {
+                method: 'POST',
+                headers: { 'Prefer': 'resolution=merge-duplicates' },
+                body: JSON.stringify([row])
+            });
+            return res !== null;
+        }
+        async function salvaCasella(id) {
+            const prodotto = (document.getElementById('f-prodotto-' + id).value || '').trim();
+            const stato = document.getElementById('f-stato-' + id).value;
+            if (stato !== 'vuoto' && !prodotto) { showToast('Scrivi il nome del prodotto (o imposta lo stato su Vuoto)', false); return; }
+            const vecchia = righeLetto.find(r => r.id === id) || {};
+            const row = {
+                id: id,
+                prodotto: stato === 'vuoto' ? '' : prodotto,
+                quantita: document.getElementById('f-quantita-' + id).value || '',
+                stato: stato,
+                data_inserimento: document.getElementById('f-data-' + id).value || null,
+                giorni_maturazione: vecchia.giorni_maturazione == null ? 80 : vecchia.giorni_maturazione,
+                updated_at: new Date().toISOString()
+            };
+            if (await upsertCasella(row)) {
+                showToast('Postazione ' + id + ' aggiornata', true);
+                await caricaLetto();
+            } else {
+                showToast('Salvataggio non riuscito: controlla la connessione', false);
+            }
+        }
+        async function svuotaCasella(id) {
+            const row = { id: id, prodotto: '', quantita: '', stato: 'vuoto', data_inserimento: oggiISO(), giorni_maturazione: 80, updated_at: new Date().toISOString() };
+            if (await upsertCasella(row)) {
+                showToast('Postazione ' + id + ' svuotata', true);
+                await caricaLetto();
+            } else {
+                showToast('Operazione non riuscita: controlla la connessione', false);
+            }
+        }
+        async function aggiungiCasella() {
+            const usate = righeLetto.map(r => r.id.slice(codiceLetto.length));
+            const lettera = ['a', 'b', 'c', 'd'].find(l => !usate.includes(l));
+            if (!lettera) return;
+            const row = { id: codiceLetto + lettera, prodotto: '', quantita: '', stato: 'vuoto', data_inserimento: oggiISO(), giorni_maturazione: 80, updated_at: new Date().toISOString() };
+            if (await upsertCasella(row)) {
+                showToast('Postazione ' + row.id + ' creata: compilala qui sotto', true);
+                await caricaLetto();
+            } else {
+                showToast('Creazione non riuscita: controlla la connessione', false);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Il nome del dominio mostrato in pagina e' quello corrente:
+            // nessun dominio e' scritto nel codice, cosi' un futuro cambio
+            // di dominio non richiede modifiche alle pagine ne' ai QR.
+            document.getElementById('footer-host').textContent = location.host;
+            caricaLetto();
+        });
+    </script>
+</body>
+</html>

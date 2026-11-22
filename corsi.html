@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Al Bel Ort — corsi per imparare a coltivare: il pacchetto base per principianti è gratuito, poi corsi a pagamento per tipo di pianta, serra, letti, acqua, suolo e dispensa. Video lezioni, slide e schede scaricabili.">
+    <link rel="canonical" href="https://emanuelezanardo.github.io/corsi.html">
+    <meta property="og:title" content="Al Bel Ort — Corsi per imparare a coltivare">
+    <meta property="og:description" content="Il primo pacchetto per principianti è gratuito. Poi: coltivare per tipo di pianta, costruire la serra, i letti, l'impianto d'acqua, il suolo e la dispensa.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://emanuelezanardo.github.io/corsi.html">
+    <meta property="og:site_name" content="Al Bel Ort">
+    <meta property="og:image" content="https://emanuelezanardo.github.io/og-image.png">
+    <meta name="theme-color" content="#f9efe6">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icona-al-bel-ort-32.png">
+    <link rel="apple-touch-icon" href="/icona-al-bel-ort-180.png">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap">
+    <title>Corsi per imparare a coltivare — Al Bel Ort</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { emerald: { 50:'#f3f4ea',100:'#e4e7d0',200:'#cbd1a8',300:'#aab47b',400:'#8a9758',500:'#6f7d44',600:'#56653a',700:'#47542f',800:'#3a4428',850:'#303823',900:'#2a311e',950:'#1a1f12' }, slate: { 50:'#faf3eb',100:'#f3e8dc',200:'#e6d8c7',300:'#d2bfa8',400:'#a8937a',500:'#7a6752',600:'#625242',700:'#4b3f33',800:'#362e26',900:'#262019',950:'#17130f' }, amber: { 50:'#fdf3ea',100:'#fbe3cf',200:'#f6c69f',300:'#f0a46e',400:'#e88c4c',500:'#e07b37',600:'#c4632a',700:'#a04e23',800:'#7e3e20',900:'#66341d',950:'#3a1a0d' }, rose: { 50:'#fbf0ec',100:'#f6dcd3',200:'#edb9a8',300:'#e09378',400:'#d07052',500:'#bc5838',600:'#a3472c',700:'#863a25',800:'#6e3122',900:'#5c2b1f',950:'#33140d' }, red: { 50:'#fbf0ec',100:'#f6dcd3',200:'#edb9a8',300:'#e09378',400:'#d07052',500:'#bc5838',600:'#a3472c',700:'#863a25',800:'#6e3122',900:'#5c2b1f',950:'#33140d' }, orto: { crema:'#f9efe6', terra:'#7e5a38' } } } } }
+    </script>
+    <style>
+        /* Titoli con un serif in tinta con il logo (Fraunces) */
+        h1, h2, h3, h4, .titolo-serif { font-family: "Fraunces", Georgia, "Times New Roman", serif; letter-spacing: -0.01em; }
+        h2.font-black, h3.font-black, h4.font-black { font-weight: 800; }
+        :focus-visible { outline: 3px solid #8a9758; outline-offset: 2px; border-radius: 4px; }
+        html, body { overflow-x: clip; }
+    </style>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('theme');
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            try {
+                localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+                document.getElementById('dark-mode-icon').innerText = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+            } catch (e) {}
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            var el = document.getElementById('dark-mode-icon');
+            if (el && document.documentElement.classList.contains('dark')) el.innerText = '☀️';
+        });
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 font-sans antialiased transition-colors duration-300 text-xl">
+
+    <header class="bg-orto-crema text-emerald-800 border-b border-emerald-200 dark:bg-slate-900 dark:text-emerald-100 dark:border-slate-700 shadow-md sticky top-0 z-50 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+            <a href="index.html" class="leading-none"><img src="/logo-al-bel-ort-chiaro.png" alt="Al Bel Ort — Sapori dal nostro orto" width="634" height="218" class="h-11 sm:h-14 w-auto dark:hidden"><img src="/logo-al-bel-ort-scuro.png" alt="Al Bel Ort — Sapori dal nostro orto" width="634" height="218" class="h-11 sm:h-14 w-auto hidden dark:block"></a>
+            <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                <button onclick="toggleDarkMode()" class="p-2.5 rounded-full hover:bg-emerald-100 dark:hover:bg-slate-800 transition" aria-label="Dark Mode">
+                    <span id="dark-mode-icon" class="text-2xl">🌙</span>
+                </button>
+                <a href="per-coltivatori.html" class="text-lg px-4 py-2 rounded-xl border border-emerald-300 dark:border-slate-600 hover:bg-emerald-100 dark:hover:bg-slate-800 transition font-bold">Per i coltivatori</a>
+                <a href="index.html" class="text-lg px-4 py-2 rounded-xl border border-emerald-300 dark:border-slate-600 hover:bg-emerald-100 dark:hover:bg-slate-800 transition font-bold">Vai al sito</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-8 pb-16">
+
+        <!-- Hero -->
+        <div class="bg-gradient-to-br from-emerald-600 to-emerald-800 text-white rounded-3xl p-8 sm:p-12 shadow-xl text-center">
+            <h1 class="text-4xl sm:text-5xl font-black mb-4">📚 Impara a coltivare, passo dopo passo</h1>
+            <p class="text-xl text-emerald-100 leading-relaxed max-w-2xl mx-auto mb-6">
+                Non un corso generico: un percorso pratico, da zero fino al raccolto e alla dispensa.
+                Il <strong>pacchetto base per principianti è gratuito</strong>: lo leggi e lo usi subito, senza pagare niente e senza lasciare dati.
+                Gli approfondimenti sono a pagamento, un corso alla volta, solo se ti servono.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#corso-base" class="bg-white text-emerald-800 font-black text-lg px-8 py-4 rounded-2xl shadow-lg transition transform hover:scale-105">🎁 Inizia gratis dal corso base</a>
+                <a href="#prezzi" class="bg-emerald-700 hover:bg-emerald-800 text-white font-black text-lg px-8 py-4 rounded-2xl shadow-lg transition">Vedi prezzi e pacchetto completo</a>
+            </div>
+            <p class="mt-6 text-emerald-100 text-lg">Video lezioni + slide + schede PDF scaricabili + checklist da portare nell'orto.</p>
+        </div>
+
+        <!-- Come funziona -->
+        <section aria-label="Come funzionano i corsi" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-6">Come funzionano</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div><p class="font-black text-xl mb-1">🎥 Video lezioni brevi</p><p class="text-slate-500 dark:text-slate-400">Ogni lezione dura 5–15 minuti e mostra il lavoro vero: mani nella terra, attrezzi, misure. Niente teoria astratta: vedi cosa fare e poi lo rifai.</p></div>
+                <div><p class="font-black text-xl mb-1">📄 Slide e schede PDF</p><p class="text-slate-500 dark:text-slate-400">Ogni corso ha slide riassuntive e schede da stampare: calendario semine, dosi, distanze di trapianto, checklist stagionali. Le tieni nell'orto, non sullo schermo.</p></div>
+                <div><p class="font-black text-xl mb-1">✅ Checklist passo passo</p><p class="text-slate-500 dark:text-slate-400">Per ogni lavoro c'è una lista di controllo: attrezzi, materiali, passaggi in ordine, errori da evitare. Se segui la lista, il lavoro riesce anche la prima volta.</p></div>
+                <div><p class="font-black text-xl mb-1">💬 Domande su WhatsApp</p><p class="text-slate-500 dark:text-slate-400">Se qualcosa non ti riesce, scrivi su WhatsApp al <strong>+39 345 111 4337</strong>: ti rispondiamo con indicazioni pratiche, non con un bot.</p></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 mt-6">Per iniziare un corso a pagamento scrivi su WhatsApp indicando il corso: ti mandiamo il link di accesso e le istruzioni di pagamento. Pagamento una tantum per corso, nessun abbonamento, nessun rinnovo automatico.</p>
+        </section>
+
+        <!-- Video lezioni -->
+        <section id="video-lezioni" aria-label="Video lezioni" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">🎬 Le video lezioni: sì, e fatte così</h2>
+            <p class="text-slate-500 dark:text-slate-400 mb-4">Sì, sono utili, e sono il formato principale dei corsi a pagamento (il Corso 0 resta scritto, gratuito e completo, così lo usi subito anche senza video). Ma non saranno video con una persona finta che parla in camera: niente presentatore inventato, niente deepfake.</p>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300">
+                <li><strong>Voce narrante + animazioni:</strong> una voce chiara racconta mentre sullo schermo si muovono diagrammi animati, schemi e presentazioni: strati del suolo, profondità di semina, potatura, montaggio della goccia, costruzione di un letto. Vedi il gesto, non una faccia.</li>
+                <li><strong>Belle e leggibili:</strong> grafiche pulite, testi grandi, didascalie sempre attive, capitoli cliccabili. Si guardano bene anche col telefono in mano, tra un letto e l'altro.</li>
+                <li><strong>Brevi e pratiche:</strong> 5–10 minuti a lezione, un solo lavoro per video, con la checklist finale da spuntare. Se un passaggio non ti riesce, torni indietro di 30 secondi e lo riguardi.</li>
+                <li><strong>Slide e schede abbinate:</strong> ogni video ha la sua presentazione scaricabile e la scheda PDF: il video ti fa capire, la scheda ti fa ricordare quando sei nell'orto senza schermo.</li>
+            </ul>
+            <p class="text-slate-500 dark:text-slate-400 mt-4">Perché funzionano meglio del solo testo: nell'orto il 90% degli errori è un gesto sbagliato (semina troppo profonda, potatura nel punto sbagliato, tubo montato al contrario). Vederlo fare, anche animato, evita quegli errori molto più di una pagina scritta.</p>
+        </section>
+
+        <!-- Indice -->
+        <section aria-label="Indice dei corsi" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4">Tutti i corsi, in ordine</h2>
+            <ol class="space-y-2 list-none">
+                <li><a href="#corso-base" class="underline hover:text-emerald-600 font-bold">Corso 0 — Base principianti</a> — <strong class="text-emerald-700 dark:text-emerald-400">GRATUITO</strong>, 40 capitoli completi qui sotto.</li>
+                <li><a href="#corso-piante" class="underline hover:text-emerald-600 font-bold">Corso A — Coltivare per tipo di pianta</a> — 39 €</li>
+                <li><a href="#corso-serra" class="underline hover:text-emerald-600 font-bold">Corso B — Costruire la serra</a> — 49 €</li>
+                <li><a href="#corso-letti" class="underline hover:text-emerald-600 font-bold">Corso C — Letti e bancali</a> — 29 €</li>
+                <li><a href="#corso-acqua" class="underline hover:text-emerald-600 font-bold">Corso D — Acqua e irrigazione</a> — 39 €</li>
+                <li><a href="#corso-suolo" class="underline hover:text-emerald-600 font-bold">Corso E — Suolo, compost e difesa naturale</a> — 39 €</li>
+                <li><a href="#corso-dispensa" class="underline hover:text-emerald-600 font-bold">Corso F — Dal raccolto alla dispensa</a> — 29 €</li>
+                <li><a href="#prezzi" class="underline hover:text-emerald-600 font-bold">Pacchetto completo (tutti i corsi A–F)</a> — <strong>149 €</strong> invece di 224 €</li>
+            </ol>
+        </section>
+
+        <!-- CORSO 0 GRATUITO: lezioni complete -->
+        <section id="corso-base" aria-label="Corso base gratuito" class="bg-emerald-600 dark:bg-emerald-850 text-white rounded-3xl p-6 sm:p-10 shadow-xl">
+            <h2 class="text-3xl font-black mb-2">🎁 Corso 0 — Base principianti: GRATUITO</h2>
+            <p class="text-emerald-100 text-lg mb-6">Quaranta capitoli completi, da leggere qui e applicare subito: costruire l'orto, coltivare, raccogliere, conservare e anche gestire i clienti se vuoi vendere. Se fai solo questo, il primo orto parte già bene. Nessun pagamento, nessuna registrazione.</p>
+
+            <div class="space-y-6 text-slate-900 dark:text-slate-100">
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 1 — Dove mettere l'orto</h3>
+                    <p class="text-slate-500 dark:text-slate-400 mb-3">Sole, acqua vicina, terreno che non resta allagato. La posizione vale più di qualsiasi attrezzo.</p>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li><strong>Sole:</strong> almeno 6 ore di sole diretto al giorno per pomodori, zucchine, peperoni e insalate. Sotto le 4 ore, meglio solo aromatiche e insalate da taglio.</li>
+                        <li><strong>Acqua:</strong> un punto d'acqua raggiungibile con un tubo da giardino. Portare annaffiatoi su e giù per una stagione stanca chiunque.</li>
+                        <li><strong>Drenaggio:</strong> dopo una pioggia forte, l'acqua non deve restare in pozze per più di qualche ora. Se resta, serve un letto rialzato (vedi Corso C).</li>
+                        <li><strong>Vento e ombra:</strong> evita il fondo di una conca fredda e l'ombra di muri alti a sud. Un frangivento di siepe o canne aiuta le piante tenere.</li>
+                        <li><strong>Accesso:</strong> vialetti larghi abbastanza per una carriola (almeno 60 cm). Se non ci arrivi comodo, non ci vai.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 2 — Il suolo in 30 minuti</h3>
+                    <p class="text-slate-500 dark:text-slate-400 mb-3">Non serve un laboratorio: bastano mani, occhi e un barattolo.</p>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li><strong>Test del barattolo:</strong> terra + acqua in un barattolo, agita, lascia riposare 24 ore. Sabbia sotto, limo in mezzo, argilla sopra: così vedi che suolo hai.</li>
+                        <li><strong>Struttura:</strong> una zolla umida che si sbriciola tra le dita è buona. Se resta un cordone appiccicoso, è argillosa: serve compost e pacciamatura, non sabbia da sola.</li>
+                        <li><strong>Compost:</strong> 3–5 cm di compost maturo stesi in superficie ogni anno, senza rivoltare il suolo in profondità, migliorano quasi tutti i terreni.</li>
+                        <li><strong>pH:</strong> la maggior parte degli ortaggi sta bene tra 6 e 7. Un kit da giardino da pochi euro basta per il primo anno.</li>
+                        <li><strong>Mai lavorare la terra bagnata:</strong> si compatta e diventa cemento. Aspetta che non si attacchi più agli stivali.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 3 — Progettare i letti e la rotazione</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li><strong>Misure che funzionano:</strong> letti larghi 100–120 cm (ci arrivi da entrambi i lati senza calpestarli) e vialetti di 45–60 cm.</li>
+                        <li><strong>Non calpestare mai il letto:</strong> il suolo compattato soffoca le radici. Si lavora sempre dal vialetto.</li>
+                        <li><strong>Rotazione in 4 gruppi:</strong> non rimettere la stessa famiglia nello stesso letto per 3–4 anni. Schema semplice: 1) legumi, 2) foglie e cavoli, 3) frutti (pomodori, zucchine), 4) radici (carote, cipolle, patate).</li>
+                        <li><strong>Consociazioni facili per iniziare:</strong> carote + cipolle, pomodori + basilico, lattuga tra le file di piante lente.</li>
+                        <li><strong>Disegnalo su carta prima di scavare:</strong> un foglio con letti, vialetti e punto acqua evita di rifare tutto a metà stagione.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 4 — Semina e trapianto</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li><strong>Profondità:</strong> regola pratica, circa 2 volte il diametro del seme. Troppo profondo = non nasce; troppo in superficie = secca.</li>
+                        <li><strong>Semina diretta o in vasetto:</strong> diretta per piselli, fagioli, carote, insalate; in vasetto per pomodori, peperoni, zucchine e cavoli, da trapiantare quando hanno 4–6 foglie vere.</li>
+                        <li><strong>Diradamento:</strong> è il passaggio che tutti saltano e tutti rimpiangono. Piante troppo fitte restano piccole e si ammalano: lascia le distanze indicate sulla bustina.</li>
+                        <li><strong>Temperatura:</strong> pomodori e peperoni vogliono caldo (sopra i 15 °C di notte) per andare fuori; insalate, piselli e spinaci sopportano il fresco primaverile.</li>
+                        <li><strong>Acqua dopo la semina:</strong> mantieni umido, non fradicio, finché non spunta. Un velo di pacciamatura leggera aiuta.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 5 — Acqua: quanto e quando</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li><strong>Meglio poco spesso che poco ogni giorno:</strong> un'annaffiatura profonda 2–3 volte a settimana spinge le radici in profondità; un goccio al giorno le tiene in superficie e la pianta soffre al primo caldo.</li>
+                        <li><strong>Orario:</strong> mattina presto o sera, mai a mezzogiorno col sole forte sulle foglie bagnate.</li>
+                        <li><strong>Il test del dito:</strong> infila un dito 3–4 cm nel suolo. Secco = annaffia; umido = aspetta.</li>
+                        <li><strong>Pacciamatura:</strong> 5–8 cm di paglia, foglie secche o cippato tengono umido, frenano le erbacce e nutrono il suolo. È il trucco più economico che esista.</li>
+                        <li><strong>Segnali di sete:</strong> foglie afflosciate la mattina presto = acqua subito; foglie afflosciate solo a mezzogiorno = spesso è solo caldo, controlla il suolo prima di annaffiare.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 6 — Le prime 10 colture facili</h3>
+                    <p class="text-slate-500 dark:text-slate-400 mb-3">Se parti da zero, comincia da queste: perdonano quasi tutto e danno soddisfazione in fretta.</p>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li><strong>Insalate da taglio</strong> — pronte in 4–6 settimane, si riseminano ogni 2–3 settimane.</li>
+                        <li><strong>Zucchine</strong> — 1–2 piante bastano per una famiglia; vogliono sole, acqua e spazio (almeno 1 m).</li>
+                        <li><strong>Pomodori</strong> — in pieno sole, con tutore e potatura dei getti laterali; annaffia alla base, non sulle foglie.</li>
+                        <li><strong>Piselli e fagiolini</strong> — fissano azoto e migliorano il suolo per la coltura dopo.</li>
+                        <li><strong>Carote</strong> — suolo soffice e senza sassi, diradamento obbligatorio.</li>
+                        <li><strong>Cipolle e aglio</strong> — poco lavoro, si conservano mesi.</li>
+                        <li><strong>Patate</strong> — rincalza la terra man mano che crescono; raccogli quando la pianta secca.</li>
+                        <li><strong>Erbe aromatiche</strong> (basilico, prezzemolo, rosmarino, salvia) — vicino alla cucina, in vaso o in un angolo dedicato.</li>
+                        <li><strong>Spinaci e bietole</strong> — bene anche a mezz'ombra e col fresco, raccolto scalare foglia per foglia.</li>
+                        <li><strong>Cavoli e broccoli</strong> — proteggili con una rete anti-insetto fin da piccoli contro la cavolaia.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 7 — I 10 errori da evitare</h3>
+                    <ol class="list-decimal pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Partire troppo grande: meglio 10 m² curati che 100 m² abbandonati a luglio.</li>
+                        <li>Seminare tutto lo stesso giorno: semina a scalare, altrimenti raccogli tutto insieme e butti via metà.</li>
+                        <li>Calpestare i letti.</li>
+                        <li>Annaffiare poco e ogni giorno.</li>
+                        <li>Non diradare per "peccato" di togliere piantine: restano tutte piccole.</li>
+                        <li>Mettere i pomodori all'ombra o troppo fitti.</li>
+                        <li>Lasciare il suolo nudo d'estate: pacciama sempre.</li>
+                        <li>Concimare a occhio con concime fresco: brucia le radici. Solo compost maturo o concimi dosati.</li>
+                        <li>Ignorare le erbacce finché vanno a seme: 10 minuti a settimana bastano, se sei costante.</li>
+                        <li>Arrendersi al primo attacco di afidi o lumache: quasi sempre si recupera (vedi Corso E).</li>
+                    </ol>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 8 — Calendario mese per mese (nord Italia e Ticino)</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li><strong>Gennaio–febbraio:</strong> progetti, ordini semi, semine in casa di pomodori e peperoni da fine febbraio.</li>
+                        <li><strong>Marzo:</strong> piselli, fave, insalate, spinaci e cipolle fuori; prepara i letti con compost.</li>
+                        <li><strong>Aprile:</strong> patate, carote, bietole; trapianti di cavoli e insalate.</li>
+                        <li><strong>Maggio:</strong> dopo l'ultima gelata, pomodori, zucchine, peperoni, fagioli e basilico.</li>
+                        <li><strong>Giugno–luglio:</strong> raccolta, pacciamatura, semine scalari di insalate e fagiolini.</li>
+                        <li><strong>Agosto:</strong> semina autunnale: spinaci, insalate, ravanelli, cavoli invernali.</li>
+                        <li><strong>Settembre–ottobre:</strong> aglio e cipolle autunnali, sovescio sui letti liberi, raccolta e conservazione.</li>
+                        <li><strong>Novembre–dicembre:</strong> copri i letti con foglie o compost, ripara attrezzi, studia il piano dell'anno dopo.</li>
+                    </ul>
+                    <p class="text-slate-500 dark:text-slate-400 mt-3">Le date sono indicative: in montagna sposta tutto di 2–3 settimane avanti in primavera e indietro in autunno; in pianura calda, anticipa.</p>
+                </article>
+            </div>
+                <h3 class="font-black text-2xl text-white mt-8 mb-2">Parte 2 — Costruire l'orto (capitoli 9–16)</h3>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 9 — Attrezzi essenziali (e quelli inutili)</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Il kit minimo: vanga, forca, zappa, rastrello, annaffiatoio, forbici da potatura, guanti, secchio, carriola. Con questi fai il 95% del lavoro.</li>
+                        <li>Compra pochi attrezzi buoni, non un set da 30 pezzi: manici in legno, lame in acciaio, peso bilanciato sulla tua altezza.</li>
+                        <li>Evita all'inizio: motocoltivatori, attrezzi elettrici costosi, gadget da catalogo. Prima impara il gesto a mano, poi meccanizza solo ciò che ti fa davvero risparmiare tempo.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 10 — Misurare, picchettare e livellare</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Picchetti, spago e metro: traccia letti e vialetti a terra prima di scavare, e controlla che i vialetti restino dritti e larghi.</li>
+                        <li>Una lieve pendenza (1–2%) aiuta l'acqua a defluire senza ristagnare; in piano perfetto, prevedi un punto di scolo.</li>
+                        <li>Segna il punto acqua, il compost e il deposito attrezzi sul disegno: sono i tre punti che userai ogni giorno.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 11 — Drenaggio e suolo bagnato</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Se l'acqua ristagna: letto rialzato di 20–30 cm, vialetti in ghiaia o legno, mai buche che trattengono acqua sotto le radici.</li>
+                        <li>Suolo argilloso: compost in superficie ogni anno, niente sabbia da sola (con argilla fa cemento), pacciamatura pesante d'inverno.</li>
+                        <li>Il test della buca: scava 30 cm, riempi d'acqua. Se dopo 4 ore è ancora piena, serve drenaggio o rialzo.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 12 — Vialetti, bordi e accessi</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Vialetti 45–60 cm, uno principale da 80–90 cm per la carriola. Bordi in legno, pietra o metallo per tenere la terra dentro il letto.</li>
+                        <li>Materiali: cippato o paglia (economici, da rabboccare), ghiaia (dura, ma calda d'estate), prato falciato (bello, ma da tagliare).</li>
+                        <li>Tieni un vialetto asciutto fino al compost e uno fino al punto acqua: sono i percorsi che fai con le mani occupate.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 13 — La compostiera: dove e come</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Posto: mezz'ombra, vicino ai letti ma non in vista dal vialetto principale, su terra nuda (non cemento) così i lombrichi entrano.</li>
+                        <li>Due scomparti sono meglio di uno: uno si riempie, l'altro matura. Rivolta ogni 3–4 settimane e tieni umido come una spugna strizzata.</li>
+                        <li>Sì: scarti vegetali, foglie, erba secca, fondi di caffè, cartone non patinato. No: carne, pesce, latticini, piante malate, erbacce con semi maturi.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 14 — Recinzioni e protezione da animali</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Reti anti-uccelli su fragole e cavoli; rete anti-insetto fine sui cavoli fin da piccoli contro la cavolaia.</li>
+                        <li>Contro lumache: bordi in rame o cenere (da rinnovare dopo la pioggia), trappole con birra, raccolta serale. Contro caprioli e lepri: recinzione alta almeno 120–150 cm.</li>
+                        <li>Proteggi le semine fresche con teli o tunnel bassi: un attacco in una notte può azzerare una semina.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 15 — Serre, tunnel e cassoni freddi</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Il tunnel basso (archetti + telo) costa poco e anticipa semine e raccolti di 2–4 settimane; il cassone freddo con vecchi telai vetrati fa lo stesso in piccolo.</li>
+                        <li>Regola d'oro: aprire di giorno e chiudere la sera, altrimenti dentro si cuoce tutto o si condensa troppo.</li>
+                        <li>La serra vera è il passo dopo (vedi Corso B): prima impara con tunnel e cassoni, poi decidi misura e materiale con esperienza.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 16 — Manutenzione attrezzi e rimessaggio</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Dopo l'uso: togli la terra, asciuga, un filo d'olio sulle lame. Manici scheggiati: carteggia. Lame smussate: lima o pietra.</li>
+                        <li>Un angolo asciutto e appeso, non a terra in un angolo umido: gli attrezzi durano il doppio e non arrugginiscono.</li>
+                        <li>A fine stagione: pulizia completa, inventario, lista di cosa manca per l'anno dopo. Costa un'ora, ne risparmia dieci.</li>
+                    </ul>
+                </article>
+
+                <h3 class="font-black text-2xl text-white mt-8 mb-2">Parte 3 — Coltivare sul serio (capitoli 17–26)</h3>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 17 — Semine in casa e semenzaio</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Contenitori con fori di drenaggio, terriccio da semina fine (non terra dell'orto), luce forte vicino a una finestra a sud o una lampada semplice.</li>
+                        <li>Etichetta tutto con nome e data: dopo due settimane non ricordi più cosa hai seminato dove.</li>
+                        <li>Annaffia dal basso o con nebulizzatore: un getto forte sposta i semi e compatta il terriccio.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 18 — Trapianto e ambientamento</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Prima di trapiantare fuori, abitua le piantine: qualche ora fuori al giorno per una settimana (irrobustimento), altrimenti il sole e il vento le bruciano.</li>
+                        <li>Trapianta la sera o con cielo coperto, annaffia subito e pacciama attorno. I primi 3–4 giorni sono quelli critici.</li>
+                        <li>Profondità: al colletto, come stava nel vasetto. Solo i pomodori si possono interrare più profondi: fanno radici anche dal fusto.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 19 — Annaffiare bene: quantità, orari, metodi</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Regola pratica: bagna fino a 15–20 cm di profondità, poi lascia asciugare i primi centimetri prima di tornare. Il test del dito resta il metodo più affidabile.</li>
+                        <li>Piante diverse, sete diversa: insalate e cavoli vogliono suolo sempre umido; pomodori e aromatiche sopportano asciutto tra un'annaffiatura e l'altra.</li>
+                        <li>Annaffia alla base, non a pioggia sulle foglie, soprattutto la sera: foglie bagnate tutta la notte invitano le malattie fungine.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 20 — Pacciamatura avanzata</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Paglia per ortaggi estivi, foglie secche per l'autunno, cippato per vialetti e piante perenni (mai a contatto diretto col fusto).</li>
+                        <li>Spessore 5–8 cm, rabbocco quando si assottiglia. Sotto la pacciamatura il suolo resta umido, fresco e pieno di vita.</li>
+                        <li>Attenzione: pacciamatura fresca e non compostata può rubare azoto in superficie; per le semine giovani usa compost maturo o paglia ben secca.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 21 — Concimare senza bruciare</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Base: compost maturo in superficie ogni anno. Integrazioni solo se serve: stallatico maturo, farine, macerati. Mai concime fresco a contatto con radici o semi.</li>
+                        <li>Segnali di fame: foglie gialle dal basso (azoto), crescita stentata, foglie viola (fosforo col freddo). Prima verifica acqua e suolo, poi concima: spesso il problema non è la fame.</li>
+                        <li>Dosare poco e osservare due settimane: raddoppiare la dose non raddoppia il raccolto, ma può bruciare le piante.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 22 — Tutori, legature e potature</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Pomodori: tutore robusto e legatura morbida a 8, mai filo stretto che strozza il fusto. Getti laterali (femminelle) tolti quando sono piccoli.</li>
+                        <li>Piselli e fagioli rampicanti: reti o canne a capanna, messe prima che le piante si allunghino.</li>
+                        <li>Potatura base: togli foglie secche e malate, arieggia il centro della pianta, disinfetta le forbici tra una pianta malata e l'altra.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 23 — Diradamento, cimatura e raccolta scalare</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Dirada in due tempi: prima a metà distanza, poi a distanza finale. Le piantine tolte di insalata e ravanello si mangiano.</li>
+                        <li>Cimare (tagliare la punta) serve a far ramificare basilico, peperoni e zucche: fallo sopra una foglia sana, con forbici pulite.</li>
+                        <li>Semina a scalare ogni 2–3 settimane per insalate, ravanelli, fagiolini: raccogli poco e spesso invece di un'ondata sola.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 24 — Rotazioni e consociazioni, piano su 4 anni</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Disegna 4 gruppi e ruotali ogni anno: legumi → foglie/cavoli → frutti → radici. Segna su un foglio cosa hai messo dove, ogni anno.</li>
+                        <li>Consociazioni che funzionano: carote + cipolle (si proteggono a vicenda), pomodori + basilico, cavoli + sedano, lattuga tra piante lente.</li>
+                        <li>Da evitare vicini: cipolle con piselli e fagioli, patate con pomodori (stesse malattie), cavoli sempre nello stesso letto.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 25 — Difesa: riconoscere il problema prima di intervenire</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Prima diagnosi, poi rimedio: foglie bucate (lumache, altiche, cavolaia), foglie accartocciate (afidi), muffa bianca (oidio), macchie scure (peronospora).</li>
+                        <li>Interventi in ordine: togliere a mano, acqua a pressione, trappole, reti, e solo dopo prodotti naturali. La pianta sana e il suolo vivo sono la prima difesa.</li>
+                        <li>Non trattare a mezzogiorno col sole, non mischiare rimedi a caso, rispetta sempre i tempi di sicurezza prima della raccolta.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 26 — Erbacce: 10 minuti a settimana</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Estirpa quando sono piccole e il suolo è umido: vengono via con la radice e fai in fretta.</li>
+                        <li>Pacciamatura + zappettatura superficiale settimanale tengono a bada quasi tutto. Lascia andare a seme una sola erbaccia e l'anno dopo ne hai cento.</li>
+                        <li>Distingui le utili: alcune "erbacce" (tarassaco, ortica giovane) sono commestibili o ottime per macerati, ma solo se le riconosci con sicurezza.</li>
+                    </ul>
+                </article>
+
+                <h3 class="font-black text-2xl text-white mt-8 mb-2">Parte 4 — Raccogliere e conservare (capitoli 27–32)</h3>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 27 — Raccogliere al momento giusto</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Ogni coltura ha il suo segnale: pomodori completamente colorati e morbidi, zucchine piccole e tenere (non lasciarle diventare mazze), insalate prima che vadano a seme, patate quando la pianta secca.</li>
+                        <li>Raccogli la mattina, col fresco: le verdure sono più croccanti e durano di più.</li>
+                        <li>Raccogli spesso: più raccogli zucchine, fagiolini e insalate, più la pianta produce. Lasciare tutto sulla pianta ferma la produzione.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 28 — Dopo la raccolta: lavare, asciugare, conservare fresco</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Lava solo ciò che mangi subito o che vendi lavato: l'acqua accorcia la conservazione di insalate e piccoli frutti.</li>
+                        <li>Asciuga bene prima di mettere in frigo: un'insalata asciutta in un contenitore con un panno dura giorni in più.</li>
+                        <li>Cantina fresca e buia per patate, cipolle, aglio e zucche: controlla ogni settimana e togli subito ciò che marcisce, altrimenti contagia il resto.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 29 — Essiccazione: erbe, pomodori, frutta</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Erbe: mazzetti appesi all'ombra, in luogo ventilato, finché si sbriciolano. Poi barattoli chiusi, al buio.</li>
+                        <li>Pomodori e frutta: fette sottili e regolari, essiccatore o forno a bassa temperatura con sportello socchiuso, finché sono secchi ma pieghevoli.</li>
+                        <li>Controllo: se dopo un giorno nel barattolo si forma condensa, non sono ancora secchi: rimettili a essiccare.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 30 — Fermentazione: crauti e verdure fermentate</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Base: verdura + 2% di sale in peso, pressata finché è coperta dal suo liquido, peso sopra, contenitore pulito.</li>
+                        <li>Tempi: 5–14 giorni a temperatura ambiente, assaggiando ogni giorno. Schiuma bianca in superficie: si toglie. Muffa colorata o odore cattivo: si butta.</li>
+                        <li>Dopo la fermentazione: frigo, dove si conserva settimane. Non è una conserva da dispensa: va tenuta al freddo.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 31 — Conserve in sicurezza</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Solo ricette collaudate, con acidità e tempi di bollitura indicati: sottaceti e salse acide sono sicuri, le conserve poco acide fatte a occhio no.</li>
+                        <li>Barattoli e coperchi sterilizzati, riempimento a caldo, controllo del sottovuoto (coperchio che non fa "clic"). Un barattolo che non ha fatto il vuoto si consuma subito o si butta.</li>
+                        <li>Etichetta con contenuto e data, conserva al buio e al fresco, e in caso di dubbio (gonfiore, odore strano, muffa) butta senza assaggiare.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 32 — Semi: raccoglierli e conservarli</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Lascia andare a seme le piante più sane e vigorose, non le prime che capitano: stai selezionando l'orto dell'anno dopo.</li>
+                        <li>Semi secchi, puliti, in bustine di carta etichettate con nome, varietà e anno, in luogo fresco e asciutto.</li>
+                        <li>Attenzione agli incroci: zucche, zucchine e mais si incrociano facilmente tra varietà vicine; pomodori e fagioli quasi mai.</li>
+                    </ul>
+                </article>
+
+                <h3 class="font-black text-2xl text-white mt-8 mb-2">Parte 5 — Vendere e gestire i clienti (capitoli 33–40)</h3>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 33 — Quanto produrre se vuoi vendere</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Parti dai clienti, non dai letti: 10 clienti fissi che comprano ogni settimana valgono più di 100 m² senza sbocco.</li>
+                        <li>Calcola a ritroso: se ogni cliente prende 3 kg a settimana, ti servono 30 kg a settimana, e sai quante piante e letti ti servono per coltura.</li>
+                        <li>Il primo anno vendi solo ciò che sai produrre bene: meglio poche colture affidabili che un catalogo che non riesci a mantenere.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 34 — Prezzi: coprire i costi senza svendersi</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Conta tutto: semi, piantine, compost, acqua, attrezzi, imballaggi, tempo di raccolta e consegna, spostamenti. Il prezzo che non copre il tempo è un hobby, non un lavoro.</li>
+                        <li>Prezzo al kg o al pezzo, chiaro e uguale per tutti, scritto sul listino. Sconti solo su quantità o abbonamenti, mai a voce cliente per cliente.</li>
+                        <li>Confronta coi mercati vicini, ma non inseguire il prezzo più basso: la vendita diretta vale per freschezza, fiducia e storia, non per essere il più economico.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 35 — Ordini su WhatsApp, senza perdere niente</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Un modulo d'ordine chiaro batte dieci messaggi vocali: prodotti, quantità, nome, giorno di ritiro o consegna. Così l'ordine arriva già scritto e non si perde.</li>
+                        <li>Finestra d'ordine fissa (es. entro il mercoledì per il sabato): tu sai cosa raccogliere e il cliente sa quando aspettarsi la risposta.</li>
+                        <li>Conferma sempre l'ordine ricevuto e avvisa se qualcosa manca, prima del giorno di consegna: un "non c'è più" detto in anticipo è accettato, detto all'arrivo no.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 36 — Ritiri, consegne e box settimanali</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Ritiro in orto: giorni e orari fissi, punto preciso, cartello. Consegna a domicilio: solo in giorni e zone raggruppate, con un minimo d'ordine che copra il viaggio.</li>
+                        <li>Il box settimanale (es. 5–7 kg di stagione a prezzo fisso) semplifica tutto: tu decidi cosa c'è dentro in base al raccolto, il cliente scopre prodotti nuovi.</li>
+                        <li>Imballaggi: cassette riutilizzabili o sacchetti di carta, con reso delle cassette. Etichetta con nome del cliente sull'ordine: evita scambi e discussioni.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 37 — Gestire i clienti e tenerli</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Una lista clienti con nome, telefono, preferenze e allergie/intolleranze: sembra burocrazia, ma è ciò che ti fa ricordare che la signora Rossi non mangia cipolle.</li>
+                        <li>Comunica ogni settimana: cosa c'è di fresco, cosa sta per finire, una ricetta semplice con il prodotto della settimana. Chi sa cosa cucinare, compra di più.</li>
+                        <li>Se qualcosa va storto (ordine sbagliato, prodotto rovinato), risolvi subito con un rimborso o una sostituzione: un cliente perso per 3 euro di insalata costa molto di più.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 38 — Stagionalità, buchi di produzione e come riempirli</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Ogni orto ha buchi (luglio pieno, novembre vuoto): pianifica semine autunnali, conservazioni e prodotti lavorati (salse, essiccati) per non sparire per mesi.</li>
+                        <li>Avvisa i clienti in anticipo quando cambia la stagione: "da sabato finiscono i pomodori, arrivano cavoli e zucche" è una notizia, non una delusione.</li>
+                        <li>Un piccolo prodotto fuori stagione (erbe essiccate, conserve) tiene vivo il contatto anche quando l'orto riposa.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 39 — Contabilità semplice e gestionale</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Segna ogni vendita e ogni spesa, anche piccola: senza numeri non sai se stai guadagnando o regalando verdura.</li>
+                        <li>Un gestionale come Al Bel Ort ti fa arrivare gli ordini scritti su WhatsApp e ti mostra vendite, prodotto più venduto e andamenti: meno telefonate, meno errori, più tempo nei campi.</li>
+                        <li>Fine mese, 30 minuti: totale incassato, spese, prodotto più venduto, clienti nuovi e persi. Da lì decidi cosa seminare di più l'anno dopo.</li>
+                    </ul>
+                </article>
+
+                <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow">
+                    <h3 class="font-black text-2xl mb-2">Capitolo 40 — Crescere senza bruciarsi</h3>
+                    <ul class="list-disc pl-6 space-y-1 text-slate-600 dark:text-slate-300">
+                        <li>Cresci di un passo alla volta: prima clienti fissi, poi superficie, poi nuovi prodotti. Raddoppiare tutto in un anno è il modo più veloce per mollare tutto.</li>
+                        <li>Metti un tetto alle ore: l'orto che ti mangia tutte le sere e le domeniche non dura. Automatizza acqua e ordini prima di allargarti.</li>
+                        <li>Piano annuale su una pagina: cosa semini, quanto, per chi, quando raccogli, quando riposi. Se non è scritto, non esiste.</li>
+                    </ul>
+                </article>
+
+            <p class="text-emerald-100 mt-6 text-lg">Finito il corso base? Il passo dopo è scegliere un approfondimento qui sotto, oppure scrivere su WhatsApp dicendo cosa vuoi coltivare: ti indichiamo il corso giusto.</p>
+        </section>
+
+        <!-- CORSI A PAGAMENTO -->
+        <section id="corso-piante" aria-label="Corso A" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Corso A — Coltivare per tipo di pianta <span class="text-emerald-700 dark:text-emerald-400">39 €</span></h2>
+            <p class="text-slate-500 dark:text-slate-400 mb-4">6 moduli, 24 lezioni video + schede per coltura. Per ogni tipo di pianta: esigenze, tempi, distanze, rese indicative, problemi tipici e come risolverli senza chimica di sintesi.</p>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300">
+                <li><strong>Modulo A1 — Foglie:</strong> lattughe, spinaci, bietole, cavoli, rucola. Semine scalari, raccolta foglia per foglia, protezione da lumache e cavolaia, perché vanno a seme col caldo e come evitarlo.</li>
+                <li><strong>Modulo A2 — Frutti:</strong> pomodori, peperoni, melanzane, zucchine, cetrioli, zucche. Tutori, potatura, impollinazione, marciume apicale, peronospora: prevenzione prima che cura.</li>
+                <li><strong>Modulo A3 — Radici e bulbi:</strong> carote, patate, cipolle, aglio, ravanelli, barbabietole. Suolo soffice, rincalzo, raccolta e conservazione in cantina o sabbia.</li>
+                <li><strong>Modulo A4 — Legumi:</strong> piselli, fave, fagioli, ceci. Sostegni, raccolta scalare, perché migliorano il suolo e dove metterli nella rotazione.</li>
+                <li><strong>Modulo A5 — Aromatiche:</strong> basilico, prezzemolo, rosmarino, salvia, timo, menta (sempre in vaso, invade tutto). Essiccazione e conservazione degli aromi.</li>
+                <li><strong>Modulo A6 — Piccoli frutti:</strong> fragole, lamponi, ribes, more. Pacciamatura, potatura, rinnovo delle piante, reti anti-uccelli.</li>
+            </ul>
+            <a href="https://wa.me/393451114337?text=Ciao!%20Vorrei%20il%20Corso%20A%20(coltivare%20per%20tipo%20di%20pianta%2C%2039%20euro)" target="_blank" rel="noopener" class="inline-block mt-5 bg-[#25D366] hover:bg-[#1fb857] text-white font-black text-lg px-6 py-3 rounded-2xl shadow">💬 Richiedi il Corso A — 39 €</a>
+        </section>
+
+        <section id="corso-serra" aria-label="Corso B" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Corso B — Costruire la serra <span class="text-emerald-700 dark:text-emerald-400">49 €</span></h2>
+            <p class="text-slate-500 dark:text-slate-400 mb-4">5 moduli, 20 lezioni video + disegni, lista materiali e costi. Dalla scelta del tipo alla prima stagione dentro la serra, con gli errori che costano di più.</p>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300">
+                <li><strong>Modulo B1 — Che serra scegliere:</strong> tunnel in film plastico, policarbonato alveolare, vetro, serra addossata al muro. Pro e contro, durata, luce, grandine, vento, costi indicativi per fascia (piccola 6–12 m², media 15–30 m²).</li>
+                <li><strong>Modulo B2 — Fondazioni e struttura:</strong> posizionamento e orientamento, livellamento, plinti o cordolo, fissaggio anti-vento, porte e finestre. Misure, attrezzi, sicurezza.</li>
+                <li><strong>Modulo B3 — Ventilazione e ombreggiamento:</strong> aperture alte e basse, ventilatori, teli ombreggianti, perché d'estate una serra chiusa cuoce tutto in un pomeriggio.</li>
+                <li><strong>Modulo B4 — Caldo senza bollette:</strong> massa termica (bidoni d'acqua, muri, pietre), compost caldo, chiusura notturna, cosa coltivare d'inverno e cosa no.</li>
+                <li><strong>Modulo B5 — Prima stagione in serra:</strong> calendario semine anticipate, irrigazione dentro la serra, manutenzione del telo e delle guarnizioni, errori classici del primo anno.</li>
+            </ul>
+            <a href="https://wa.me/393451114337?text=Ciao!%20Vorrei%20il%20Corso%20B%20(costruire%20la%20serra%2C%2049%20euro)" target="_blank" rel="noopener" class="inline-block mt-5 bg-[#25D366] hover:bg-[#1fb857] text-white font-black text-lg px-6 py-3 rounded-2xl shadow">💬 Richiedi il Corso B — 49 €</a>
+        </section>
+
+        <section id="corso-letti" aria-label="Corso C" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Corso C — Letti e bancali <span class="text-emerald-700 dark:text-emerald-400">29 €</span></h2>
+            <p class="text-slate-500 dark:text-slate-400 mb-4">4 moduli, 16 lezioni video + schemi di costruzione. Per chi ha suolo difficile, schiena delicata o poco spazio.</p>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300">
+                <li><strong>Modulo C1 — Letto rialzato in legno:</strong> legni adatti e legni da evitare (niente legno trattato con sostanze tossiche a contatto col suolo coltivato), altezze 20–40 cm, assemblaggio, durata.</li>
+                <li><strong>Modulo C2 — Bancali in pietra, mattoni e ferro:</strong> drenaggio, stabilità, costi, cosa scegliere in base a pendenza e clima.</li>
+                <li><strong>Modulo C3 — No-dig (senza vangare):</strong> cartone, compost e pacciamatura a strati. Come partire da un prato senza togliere l'erba con la vanga.</li>
+                <li><strong>Modulo C4 — Riempimento e manutenzione:</strong> strati dal basso (ramaglie, foglie, compost, terra), quanto si abbassa il primo anno, quando rabboccare, vialetti e bordi.</li>
+            </ul>
+            <a href="https://wa.me/393451114337?text=Ciao!%20Vorrei%20il%20Corso%20C%20(letti%20e%20bancali%2C%2029%20euro)" target="_blank" rel="noopener" class="inline-block mt-5 bg-[#25D366] hover:bg-[#1fb857] text-white font-black text-lg px-6 py-3 rounded-2xl shadow">💬 Richiedi il Corso C — 29 €</a>
+        </section>
+
+        <section id="corso-acqua" aria-label="Corso D" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Corso D — Acqua e irrigazione <span class="text-emerald-700 dark:text-emerald-400">39 €</span></h2>
+            <p class="text-slate-500 dark:text-slate-400 mb-4">5 moduli, 20 lezioni video + schemi d'impianto e calcoli semplici. Smetti di annaffiare a mano ogni sera.</p>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300">
+                <li><strong>Modulo D1 — Da dove viene l'acqua:</strong> acquedotto, pozzo, cisterna per pioggia, portata e pressione: come misurarle con un secchio e un cronometro.</li>
+                <li><strong>Modulo D2 — Goccia a goccia:</strong> ala gocciolante, gocciolatori, filtri, pressione di lavoro, come posarla su letti e file senza sprechi.</li>
+                <li><strong>Modulo D3 — Aspersione e microirrigazione:</strong> quando ha senso e quando no, copertura, vento, perdite per evaporazione.</li>
+                <li><strong>Modulo D4 — Pompe e cisterne:</strong> scegliere la pompa (portata e prevalenza spiegate semplici), galleggianti, troppo-pieno, tubi e raccordi che non perdono.</li>
+                <li><strong>Modulo D5 — Programmazione e inverno:</strong> centraline e timer, quanta acqua per coltura e stagione, svuotamento antigelo, manutenzione filtri e pulizia fine stagione.</li>
+            </ul>
+            <a href="https://wa.me/393451114337?text=Ciao!%20Vorrei%20il%20Corso%20D%20(acqua%20e%20irrigazione%2C%2039%20euro)" target="_blank" rel="noopener" class="inline-block mt-5 bg-[#25D366] hover:bg-[#1fb857] text-white font-black text-lg px-6 py-3 rounded-2xl shadow">💬 Richiedi il Corso D — 39 €</a>
+        </section>
+
+        <section id="corso-suolo" aria-label="Corso E" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Corso E — Suolo, compost e difesa naturale <span class="text-emerald-700 dark:text-emerald-400">39 €</span></h2>
+            <p class="text-slate-500 dark:text-slate-400 mb-4">5 moduli, 20 lezioni video + ricette e calendari. Il suolo sano è la vera difesa: piante forti si ammalano meno.</p>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300">
+                <li><strong>Modulo E1 — Compost fatto bene:</strong> compost caldo e freddo, rapporto carbonio/azoto spiegato semplice, cosa mettere e cosa mai mettere, quando è maturo e come usarlo.</li>
+                <li><strong>Modulo E2 — Lombricoltura e tè di compost:</strong> vermicompost in poco spazio, uso per semine e piante in vaso.</li>
+                <li><strong>Modulo E3 — Sovescio e rotazioni:</strong> trifoglio, veccia, senape, facelia: quando seminarli, quando interrarli, rotazione completa su 4 anni con esempio disegnato.</li>
+                <li><strong>Modulo E4 — Consociazioni e insetti amici:</strong> piante che si aiutano, fiori per attrarre impollinatori e predatori, siepi e angoli selvatici.</li>
+                <li><strong>Modulo E5 — Difesa senza chimica di sintesi:</strong> afidi, lumache, cavolaia, peronospora, oidio: riconoscimento, rimedi meccanici e naturali, quando intervenire e quando lasciare stare. Con le dosi e i tempi di sicurezza.</li>
+            </ul>
+            <a href="https://wa.me/393451114337?text=Ciao!%20Vorrei%20il%20Corso%20E%20(suolo%2C%20compost%20e%20difesa%20naturale%2C%2039%20euro)" target="_blank" rel="noopener" class="inline-block mt-5 bg-[#25D366] hover:bg-[#1fb857] text-white font-black text-lg px-6 py-3 rounded-2xl shadow">💬 Richiedi il Corso E — 39 €</a>
+        </section>
+
+        <section id="corso-dispensa" aria-label="Corso F" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Corso F — Dal raccolto alla dispensa <span class="text-emerald-700 dark:text-emerald-400">29 €</span></h2>
+            <p class="text-slate-500 dark:text-slate-400 mb-4">4 moduli, 16 lezioni video + ricette collaudate. Perché il raccolto non finisca nel compost a settembre.</p>
+            <ul class="space-y-3 text-slate-600 dark:text-slate-300">
+                <li><strong>Modulo F1 — Raccogliere al momento giusto:</strong> segni di maturazione per coltura, raccolta del mattino, conservazione in frigo e cantina, cosa dura quanto.</li>
+                <li><strong>Modulo F2 — Essiccazione:</strong> erbe, pomodori, funghi, frutta: essiccatore, forno e aria aperta, umidità e conservazione in barattolo.</li>
+                <li><strong>Modulo F3 — Fermentazione:</strong> crauti e verdure lattofermentate passo passo, sale, contenitori, tempi, quando buttare e quando è solo "vivo".</li>
+                <li><strong>Modulo F4 — Conserve in sicurezza:</strong> sottaceti e salse con ricette collaudate, sterilizzazione di barattoli e coperchi, acidità e tempi di bollitura. Per le conserve a basso contenuto acido, solo ricette testate: la sicurezza viene prima del fai-da-te.</li>
+            </ul>
+            <a href="https://wa.me/393451114337?text=Ciao!%20Vorrei%20il%20Corso%20F%20(dal%20raccolto%20alla%20dispensa%2C%2029%20euro)" target="_blank" rel="noopener" class="inline-block mt-5 bg-[#25D366] hover:bg-[#1fb857] text-white font-black text-lg px-6 py-3 rounded-2xl shadow">💬 Richiedi il Corso F — 29 €</a>
+        </section>
+
+        <!-- Prezzi -->
+        <section id="prezzi" aria-label="Prezzi" class="bg-emerald-600 dark:bg-emerald-850 text-white rounded-3xl p-8 sm:p-10 shadow-xl">
+            <h2 class="text-2xl font-black mb-6">Prezzi: paghi una volta, niente abbonamento</h2>
+            <div class="space-y-3 text-lg">
+                <p class="flex justify-between gap-4 border-b border-emerald-500 pb-2"><span>🎁 Corso 0 — Base principianti (40 capitoli)</span><strong>GRATIS</strong></p>
+                <p class="flex justify-between gap-4 border-b border-emerald-500 pb-2"><span>Corso A — Per tipo di pianta</span><strong>39 €</strong></p>
+                <p class="flex justify-between gap-4 border-b border-emerald-500 pb-2"><span>Corso B — Costruire la serra</span><strong>49 €</strong></p>
+                <p class="flex justify-between gap-4 border-b border-emerald-500 pb-2"><span>Corso C — Letti e bancali</span><strong>29 €</strong></p>
+                <p class="flex justify-between gap-4 border-b border-emerald-500 pb-2"><span>Corso D — Acqua e irrigazione</span><strong>39 €</strong></p>
+                <p class="flex justify-between gap-4 border-b border-emerald-500 pb-2"><span>Corso E — Suolo, compost e difesa naturale</span><strong>39 €</strong></p>
+                <p class="flex justify-between gap-4 border-b border-emerald-500 pb-2"><span>Corso F — Dal raccolto alla dispensa</span><strong>29 €</strong></p>
+                <p class="flex justify-between gap-4 pt-2 text-xl"><span>📦 Pacchetto completo A–F</span><strong>149 € <span class="font-normal text-emerald-200">(invece di 224 €)</span></strong></p>
+            </div>
+            <p class="text-emerald-100 mt-6">Chi ha già il gestionale Al Bel Ort o lo acquista insieme al pacchetto corsi, scrive su WhatsApp: componiamo un'offerta dedicata. I prezzi sono una tantum: una volta acquistato, il corso resta tuo.</p>
+            <a href="https://wa.me/393451114337?text=Ciao!%20Vorrei%20il%20pacchetto%20completo%20corsi%20orto%20(149%20euro)" target="_blank" rel="noopener" class="inline-block mt-6 bg-[#25D366] hover:bg-[#1fb857] text-white font-black text-lg px-8 py-4 rounded-2xl shadow-lg transition transform hover:scale-105">💬 Richiedi il pacchetto completo — 149 €</a>
+        </section>
+
+        <!-- FAQ -->
+        <section aria-label="Domande frequenti" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 dark:border-slate-700">
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-6">Domande frequenti</h2>
+            <div class="space-y-6">
+                <div><p class="font-black text-xl mb-1">Non ho mai coltivato niente. Da dove comincio?</p><p class="text-slate-500 dark:text-slate-400">Dal Corso 0 gratuito qui sopra, in ordine. Poi, se vuoi, dal Corso A. Non serve nient'altro per partire.</p></div>
+                <div><p class="font-black text-xl mb-1">Quanto durano i corsi?</p><p class="text-slate-500 dark:text-slate-400">Ogni corso ha 16–24 lezioni brevi (5–15 minuti ciascuna): in totale 3–5 ore di video, più slide e schede. Li guardi quando vuoi, senza scadenze.</p></div>
+                <div><p class="font-black text-xl mb-1">Devo comprare attrezzi costosi?</p><p class="text-slate-500 dark:text-slate-400">No. Per il corso base bastano vanga, zappa, rastrello, annaffiatoio e un paio di guanti. Ogni corso indica attrezzi e materiali con alternative economiche.</p></div>
+                <div><p class="font-black text-xl mb-1">Funzionano anche in balcone o in poco spazio?</p><p class="text-slate-500 dark:text-slate-400">Il Corso 0 e il Corso A indicano per ogni coltura se va bene in vaso. Per balconi e terrazzi, i moduli su aromatiche, insalate e piccoli frutti sono i più adatti; serra e irrigazione su larga scala sono pensati per un orto a terra.</p></div>
+                <div><p class="font-black text-xl mb-1">Come pago e come ricevo il corso?</p><p class="text-slate-500 dark:text-slate-400">Scrivi su WhatsApp indicando il corso. Ti mandiamo istruzioni e link di accesso dopo il pagamento. Pagamento una tantum, nessun abbonamento.</p></div>
+                <div><p class="font-black text-xl mb-1">E se un corso non mi convince?</p><p class="text-slate-500 dark:text-slate-400">Scrivicelo su WhatsApp entro 7 giorni dall'acquisto, spiegando cosa non ha funzionato: valutiamo caso per caso un cambio corso o un rimborso.</p></div>
+            </div>
+        </section>
+
+        <!-- CTA finale -->
+        <section aria-label="Contatti" class="bg-gradient-to-br from-emerald-600 to-emerald-800 text-white rounded-3xl p-8 sm:p-10 shadow-xl text-center">
+            <h2 class="text-2xl font-black mb-3">Comincia gratis, oggi stesso</h2>
+            <p class="text-emerald-100 text-lg mb-6 max-w-2xl mx-auto">Leggi il Corso 0 qui sopra e, se vuoi un consiglio su da che corso partire, scrivici su WhatsApp al <strong>+39 345 111 4337</strong> dicendo cosa vorresti coltivare.</p>
+            <a href="https://wa.me/393451114337?text=Ciao!%20Vorrei%20informazioni%20sui%20corsi%20per%20coltivare" target="_blank" rel="noopener" class="inline-block bg-[#25D366] hover:bg-[#1fb857] text-white font-black text-lg px-8 py-4 rounded-2xl shadow-lg transition transform hover:scale-105">💬 Scrivici su WhatsApp</a>
+        </section>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto px-6 pb-10 text-center">
+        <p class="text-slate-400 dark:text-slate-500 text-base">🌱 Al Bel Ort — <a href="index.html" class="underline hover:text-emerald-600">torna al sito</a> · <a href="per-coltivatori.html" class="underline hover:text-emerald-600">gestionale per coltivatori</a></p>
+    </footer>
+
+</body>
+</html>
