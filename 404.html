@@ -152,7 +152,7 @@
                 }
                 if (!res.ok) return null;
                 const txt = await res.text();
-                return txt ? JSON.parse(txt) : null;
+                return txt ? JSON.parse(txt) : []; // 201/204 senza corpo = successo
             } catch (e) { return null; }
         }
         function showToast(msg, ok) {
